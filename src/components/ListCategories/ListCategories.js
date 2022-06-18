@@ -33,17 +33,27 @@ class ListCategories extends Component {
     render() {
         return (
             <div className="">
-                <div className="flex flex-col sm:flex-row">
+                <div>
+                    <h1>test</h1>
+                </div>
+                <div className="flex flex-col sm:flex-row m-5">
 
                     {this.state.categories.length > 0 && this.state.categories.map((category, index) => (
-                        <div key={category.id} className="bg-gray-100 p-10 border border-solid border-blue-600 w-full sm:1/2">
-                            <h2 style={{ fontFamily: "'Roboto Condensed', sans-serif", fontSize: '24pt' }}>{category.name}</h2>
-                            <div className="progress-bar">
-                                <div className="h-2 bg-red-800" style={{ width: (category.finishedProblems / category.totalProblems * 100) + '%' }}></div>
+                        <div key={category.id} className="bg-gray-50 p-10 rounded-lg  w-full  m-2 border">
+                            <span class="flex items-center text-base font-normal text-gray-900 rounded-lg">
+                                <span class="flex-1 whitespace-nowrap font-bold text-xl">{category.name}</span>
+                            </span>
+                            <div className="">
+                                {/*<div className="h-2 bg-red-800" style={{ width: (category.finishedProblems / category.totalProblems * 100) + '%' }}></div>*/}
+                                <div className="h-2 bg-blue-500 my-2" style={{ width: (75) + '%' }}></div>
                                 <p className="p-small-text">You have completed {category.finishedProblems} ({(category.finishedProblems / category.totalProblems * 100).toFixed(2)}%) out of the {category.totalProblems} available problems.</p>
                             </div>
                             <div className="pt-2">
-                                <Link to={{ pathname: "/practise/" + textToLowerCaseNoSpaces(category.name), state: { categoryId: category.id } }}><input type="submit" className="px-2 py-1  border border-amber-400" value="Explore problems" /></Link>
+                                <Link to={{
+                                    pathname: "/practise/" + textToLowerCaseNoSpaces(category.name),
+                                    state: { categoryId: category.id }
+                                }}><input type="submit" className="px-2 py-1 border rounded-sm  border-solid border-blue-600"
+                                    value="Explore problems" /></Link>
                             </div>
                         </div>
                     ))}

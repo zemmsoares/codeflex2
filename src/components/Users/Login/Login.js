@@ -26,7 +26,7 @@ class Login extends Component {
 
 
     handleChange(e) {
-        this.setState({ [e.target.className]: e.target.value });
+        this.setState({ [e.target.id]: e.target.value });
     }
 
     login() {
@@ -138,7 +138,7 @@ class Login extends Component {
             } else if (this.state.isSigninUp) {
                 this.setState({ isLoggingIn: true, isSigninUp: false });
             }
-        } else if (e.target.value === 'Sign Up') {
+        } else if (e.target.value === 'Create account') {
             if (this.state.isSigninUp) {
                 this.register();
             } else if (this.state.isLoggingIn) {
@@ -150,15 +150,56 @@ class Login extends Component {
     renderLoginOrSignup() {
         if (this.state.isLoggingIn) {
             return (<div>
-                <input className="password" type="password" onChange={this.handleChange} placeholder="Password" required />
+                {/*<input className="password" type="password" onChange={this.handleChange} placeholder="Password" required />*/}
+
+                <label for="password" class="block mb-2 text-sm font-medium text-gray-900 pt-2">Your Password</label>
+                <div class="relative">
+                    <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                        <svg class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"></path><path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"></path></svg>
+                    </div>
+                    <input className="password" type="password" onChange={this.handleChange} placeholder="Password" required id="password" class="w-96 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block pl-10 p-2.5" />
+                </div>
+
+
             </div>);
         } else if (this.state.isSigninUp) {
             return (<div>
-                <input key="1" className="email" type="email" onChange={this.handleChange} placeholder="Email" required />
+                {/*<input key="1" id='email' className="email" type="email" onChange={this.handleChange} placeholder="Email" required />*/}
 
-                <input key="2" className="password" type="password" onChange={this.handleChange} placeholder="Password" required />
+                <label for="email" class="block mb-2 text-sm font-medium text-gray-900 pt-2">Your email</label>
+                <div class="relative">
+                    <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                        <svg class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"></path><path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"></path></svg>
+                    </div>
+                    <input key="1" id='email' className="email" type="email" onChange={this.handleChange} placeholder="Email" required class="w-96 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block pl-10 p-2.5" />
+                </div>
 
-                <input key="3" className="passwordConfirmation" type="password" onChange={this.handleChange} placeholder="Confirm password" required />
+
+                {/*<input key="2" id='password' className="password" type="password" onChange={this.handleChange} placeholder="Password" required />*/}
+
+
+                <label for="password" class="block mb-2 text-sm font-medium text-gray-900 pt-2">Your password</label>
+                <div class="relative">
+                    <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                        <svg class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"></path><path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"></path></svg>
+                    </div>
+                    <input key="2" id='password' className="password" type="password" onChange={this.handleChange} placeholder="Password" required class="w-96 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block pl-10 p-2.5" />
+                </div>
+
+
+
+                {/*<input key="3" id='passwordConfirmation' className="passwordConfirmation" type="password" onChange={this.handleChange} placeholder="Confirm password" required />*/}
+
+                <label for="passwordConfirmation" class="block mb-2 text-sm font-medium text-gray-900 pt-2">Confirm password</label>
+                <div class="relative">
+                    <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                        <svg class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"></path><path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"></path></svg>
+                    </div>
+                    <input key="3" id='passwordConfirmation' className="passwordConfirmation" type="password" onChange={this.handleChange} placeholder="Confirm password" required class="w-96 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block pl-10 p-2.5" />
+                </div>
+
+
+
             </div>);
         }
     }
@@ -169,14 +210,28 @@ class Login extends Component {
 
         return (
 
-            <div className="pl-80">
-                <div className="col-md-12 cont">
-                    <h2 id="create-account-text">Login or create your Codefle account today!</h2>
+            <div className="my-16">
+                <div className="ml-6">
+                    <h1 className='text-md font-bold text-gray-400 uppercase'>Start for free</h1>
+                    <h1 className='text-3xl font-bold text-gray-700'>Login or create your Codeflex account today!</h1>
                     <form className="login-container">
-                        <img id="img-user" src={require('../../images/login_icon.png')} alt="User flat image" />
+                        {/*<img id="img-user" src={require('../../images/login_icon.png')} alt="User flat image" />*/}
                         <div>
-                            <h4>Account Details</h4>
-                            <input key="0" className="username" type="text" onChange={this.handleChange} placeholder="Username" required />
+                            <h4 className='my-8'>Account Details</h4>
+                            {/*<input key="0" className="username" type="text" onChange={this.handleChange} placeholder="Username" required />*/}
+
+
+
+                            <label for="username" class="block mb-2 text-sm font-medium text-gray-900">Your username</label>
+                            <div class="relative">
+                                <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                                    <svg class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"></path><path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"></path></svg>
+                                </div>
+                                <input key="0" className="username" type="text" id="username" class="w-96 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full pl-10 p-2.5" onChange={this.handleChange} placeholder="Username" required />
+                            </div>
+
+
+
                         </div>
 
                         {loginOrSignup}
@@ -194,9 +249,11 @@ class Login extends Component {
                             style={{ fontFamily: "'Roboto', sans-serif", fontSize: '12pt', letterSpacing: '1px' }}
                         />
 
-                        <div className="buttons-container">
-                            <input type="button" className="btn btn-success" value="Login" onClick={this.handleSubmit} />
-                            <input type="button" className="btn btn-success" value="Sign Up" onClick={this.handleSubmit} />
+
+
+                        <div className="my-8">
+                            <input type="button" className="w-40 text-white bg-gray-500 hover:bg-blue-800 focus:outline-none font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:hover:bg-blue-700 " value="Login" onClick={this.handleSubmit} />
+                            <input type="button" className="w-40 text-white bg-blue-700 hover:bg-blue-800 focus:outline-none font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:hover:bg-blue-700" value="Create account" onClick={this.handleSubmit} />
                         </div>
                     </form>
                 </div>

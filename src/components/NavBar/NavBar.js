@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { parseLocalJwt, splitUrl } from '../commons/Utils'
 import '../../App.css'
 
-function NavBar() {
+function NavBar({ isSidebar }) {
     const [page, setPage] = useState("");
     const [count, setCount] = useState(0);
     const [url, setUrl] = useState(splitUrl(window.location.pathname)[0]);
@@ -30,14 +30,15 @@ function NavBar() {
     }
 
     return (
-        <nav className="w-64 h-screen bg-gray-50">
+        <nav className="">
             <div className="overflow-y-auto py-4 px-3  rounded dark:bg-gray-800">
-                <a href="https://flowbite.com" class="flex items-center pl-2.5 mb-5">
-                    <img src="https://flowbite.com/docs/images/logo.svg" class="h-6 mr-3 sm:h-7" alt="Flowbite Logo" />
-                    <span class="self-center text-xl font-semibold whitespace-nowrap dark:text-white">Codeflex</span>
-                </a>
+
                 {logged ?
                     <div>
+                        <a href="https://flowbite.com" class="flex items-center pl-2.5 mb-5">
+                            <img src="https://flowbite.com/docs/images/logo.svg" class="h-6 mr-3 sm:h-7" alt="Flowbite Logo" />
+                            <span class="self-center text-xl font-semibold whitespace-nowrap dark:text-white">Codeflex</span>
+                        </a>
                         {/* USER IS LOGGED IN */}
                         <div className="" id="myNavbar">
                             <ul className="">
@@ -114,19 +115,12 @@ function NavBar() {
                     :
                     <div>
                         {/* USER IS LOGGED OUT */}
-                        <div className="" id="myNavbar">
-                            <ul className="">
-
-                            </ul>
-                            <ul className="">
-                                <li>
-                                    <a href="#" class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
-                                        <svg class="flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"></path></svg>
-                                        <span className={'ml-3'}><Link to="/login"><p>Login</p></Link></span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
+                        <span className="flex" id="myNavbar">
+                            <a href="https://flowbite.com" class="flex items-center pl-2.5 mb-5">
+                                <img src="https://flowbite.com/docs/images/logo.svg" class="h-6 mr-3 sm:h-7" alt="Flowbite Logo" />
+                                <span class="self-center text-xl font-semibold whitespace-nowrap">Codeflex</span>
+                            </a>
+                        </span>
                     </div >
                 }
             </div>

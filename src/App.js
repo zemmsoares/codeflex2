@@ -44,7 +44,7 @@ export class App extends Component {
       return (
         <main class="flex">
           <Router>
-            <div className="flex flex-col justify-between w-fit h-screen" >
+            <div className="w-64 h-screen bg-gray-50">
               <NavBar />
             </div>
             <div className="flex flex-col justify-between w-screen ">
@@ -70,15 +70,17 @@ export class App extends Component {
       )
     } else {
       return (
-        <main class="flex">
+        <main class="">
           <Router>
-            <div className="flex flex-col justify-between w-fit h-screen" >
-              <NavBar />
+            <div className="w-screen h-16" >
+              <div className="w-screen">
+                <NavBar />
+              </div>
             </div>
-            <div className="flex flex-col justify-between w-screen bg-red-400">
+            <div className=" w-screen">
               <Routes>
                 {/*<Route exact path="/" component={PageWrapper(LandingPage)} />*/}
-                <Route path="/" element={<LandingPage />} />
+                <Route path="/" element={<Login />} />
 
                 {/*<Route exact path="/login" component={PageWrapper(Login)} />*/}
                 <Route path="/login" element={<Login />} />
