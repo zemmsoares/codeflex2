@@ -10,6 +10,7 @@ import ProfilePage from "./components/Users/ProfilePage/ProfilePage";
 import { parseLocalJwt, splitUrl, getAuthorization } from './components/commons/Utils';
 import Dashboard from "./components/Dashboard/Dashboard";
 import ListCategories from "./components/ListCategories/ListCategories";
+import ListProblems from "./components/ListProblems/ListProblems";
 
 export class App extends Component {
   constructor(props) {
@@ -50,6 +51,9 @@ export class App extends Component {
             <div className="flex flex-col justify-between w-screen ">
               <Routes>
 
+
+
+                <Route path="/practise/:categoryName" element={<ListProblems />} />
 
                 {/* <Route exact path="/" component={PageWrapper(LandingPage)} /> */}
                 <Route path="/" element={<Dashboard />} />
