@@ -61,36 +61,32 @@ function ListProblems() {
 
 
     return (
-        <div className="m-10">
-            <div className="">
-                {/*<PathLink path={this.props.location.pathname} title={splitUrl(this.props.match.url)[1]} />*/}
-                <div className="">
-
-                    {filteredProblems.sort((a, b) => a.id - b.id).map((problem, index) => (
-
-                        <div className="flex h-20 bg-gray-700">
-                            <div>
-                                <p id="problem-name">
-                                    {problem.name}
-                                </p>
-                                <p id="problem-difficulty">
-                                    {problem.difficulty.name}
-                                </p>
-                            </div>
-                            <div id="button-container">
-                                <Link to={{
-                                    pathname: location.pathname + '/' + textToLowerCaseNoSpaces(problem.name), state: {
-                                        problemId: problem.id,
-                                        problemName: problem.name
-                                    }
-                                }}><input type="submit" className="" /></Link>
-                            </div>
+        <div className='mx-7 my-7'>
+            {filteredProblems.sort((a, b) => a.id - b.id).map((problem, index) => (
+                <div className='flex border rounded-lg border-blue-100'>
+                    <h1 className='m-4 w-1/3'>{problem.name}</h1>
+                    <div className='w-full flex justify-between'>
+                        <h1 className='m-4 font-bold text-blue-500e'>{problem.difficulty.name}</h1>
+                        <div id="button-container" className='m-4'>
+                            <Link to={{
+                                pathname: location.pathname + '/' + textToLowerCaseNoSpaces(problem.name), state: {
+                                    problemId: problem.id,
+                                    problemName: problem.name
+                                }
+                            }}><input type="submit" className="" /></Link>
                         </div>
-                    ))}
+                    </div>
                 </div>
-
-            </div>
+            ))}
         </div>
+
+
+
+
+
+
+
+
     )
 }
 

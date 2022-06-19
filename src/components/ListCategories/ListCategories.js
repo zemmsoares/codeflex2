@@ -39,7 +39,7 @@ class ListCategories extends Component {
                 <div className="flex flex-col sm:flex-row m-5">
 
                     {this.state.categories.length > 0 && this.state.categories.map((category, index) => (
-                        <div key={category.id} className="bg-gray-50 p-10 rounded-lg  w-full  m-2 border">
+                        <div key={category.id} className="bg-gray-50 p-10 rounded-lg m-2 w-full border">
                             <span class="flex items-center text-base font-normal text-gray-900 rounded-lg">
                                 <span class="flex-1 whitespace-nowrap font-bold text-xl">{category.name}</span>
                             </span>

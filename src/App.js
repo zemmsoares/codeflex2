@@ -11,6 +11,7 @@ import { parseLocalJwt, splitUrl, getAuthorization } from './components/commons/
 import Dashboard from "./components/Dashboard/Dashboard";
 import ListCategories from "./components/ListCategories/ListCategories";
 import ListProblems from "./components/ListProblems/ListProblems";
+import Problem from "./components/Problem/Problem";
 
 export class App extends Component {
   constructor(props) {
@@ -52,6 +53,8 @@ export class App extends Component {
               <Routes>
 
 
+                {/*<Route exact path="/practise/:categoryName/:problemName" component={PageWrapper(Problem)} />*/}
+                <Route path="/practise/:categoryName/:problemName" element={<Problem />} />
 
                 <Route path="/practise/:categoryName" element={<ListProblems />} />
 
