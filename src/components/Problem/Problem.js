@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import { useLocation, useParams, Link, Navigate } from 'react-router-dom';
 import { getAuthorization, parseLocalJwt, splitUrl, textToLowerCaseNoSpaces, dateWithDay } from '../commons/Utils';
 import { URL } from '../commons/Constants';
@@ -7,6 +7,12 @@ import Parser from 'html-react-parser';
 import draftToHtml from 'draftjs-to-html';
 import AceEditor from 'react-ace';
 import Submissions from '../Submissions/Submissions';
+
+import $ from 'jquery';
+
+import './Problem.css'
+import Leaderboard from './Leaderboard/Leaderboard';
+import PathLink from '../PathLink/PathLink';
 
 function Problem() {
     const [registered, setRegistered] = useState(false);
@@ -42,8 +48,10 @@ function Problem() {
     const location = useLocation();
     const { problemName } = useParams()
 
+
     console.log("location : " + location);
 
+    const mounted = useRef();
 
     useEffect(() => {
         let url = splitUrl(location.pathname);
@@ -67,16 +75,53 @@ function Problem() {
         });
 
         if (localStorage.getItem('problem-page') != null) {
-            setPage({ page: JSON.parse(localStorage.getItem('problem-page')) })
+            setPage(JSON.parse(localStorage.getItem('problem-page')))
         } else {
             localStorage.setItem('problem-page', JSON.stringify(page));
         }
 
         if (localStorage.getItem("code") != null) {
+
             setCode(localStorage.getItem("code"));
         }
+
+        return () => {
+            // Anything in here is fired on component unmount.
+            localStorage.setItem("code", code);
+        }
+
     }, [])
 
+
+
+    useEffect(() => {
+        if (!mounted.current) {
+            // do componentDidMount logic
+            mounted.current = true;
+        } else {
+            // do componentDidUpdate logic
+            let MathJax = $(window)[0].MathJax;
+
+            try {
+                console.log("dnhoqwdhoqwidjoqwidjqiwodjqowidjqowidjqoiw")
+                console.log(MathJax);
+                MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
+
+                <div id="anchor-remove-mathjax"></div>
+                // removes the duplicates creadted by MathJax, not the best solution.
+                if (page.problem) {
+                    while (typeof $('#problem-statement').prev()[0] !== 'undefined') {
+                        $('#problem-statement').prev()[0].remove();
+                    }
+                } else {
+                    $('.problem-description-container').children('.MathJax_CHTML').remove();
+                }
+
+            } catch (err) {
+
+            }
+        }
+    });
 
     function setOpenedProblem(p) {
         const durationsData = {
@@ -109,17 +154,14 @@ function Problem() {
 
         if (e.target.name === 'language') {
             selectedItem = displayLanguages.filter(l => l.compilerName === selectedItem)[0];
-            {/*this.setState({ [e.target.name]: { mode: selectedItem.mode, name: selectedItem.name } })*/ }
             setLanguage({ [e.target.name]: { mode: selectedItem.mode, name: selectedItem.name } })
 
         } else {
-            {/*this.setState({ [e.target.name]: selectedItem });*/ }
             setLanguage({ [e.target.name]: selectedItem });
         }
     }
 
     function submitSubmission() {
-        {/*this.setState({ sentSubmission: { submitting: true }, results: { result: [], error: '' } })*/ }
         setSentSubmission({ submitting: true })
         setResults({ result: [], error: '' });
 
@@ -143,7 +185,7 @@ function Problem() {
 
             setSentSubmission({ submitting: true, waitingForResults: true, submission: data })
             window.secondsWaiting = new Date().getTime();
-            window.resultsListener = setInterval(this.fetchForResults, 1000);
+            window.resultsListener = setInterval(fetchForResults, 1000);
         });
 
     }
@@ -222,6 +264,7 @@ function Problem() {
     }
 
     function onPageClick(e) {
+
         let newPage = page;
         for (let property in newPage) {
             if (property === e.target.innerHTML.toLowerCase()) {
@@ -231,7 +274,11 @@ function Problem() {
             }
         }
         setPage(newPage)
+
         localStorage.setItem('problem-page', JSON.stringify(newPage));
+
+        // FIX FIX FIX FIX FIX FIX FIX FIX FIX FIX FIX FIX FIX FIX FIX FIX FIX FIX FIX FIX FIX FIX FIX FIX FIX FIX FIX FIX FIX FIX FIX FIX FIX FIX FIX FIX FIX FIX FIX FIX 
+        window.location.reload();
     }
 
     function handleScriptLoad() {
@@ -270,8 +317,9 @@ function Problem() {
 
 
         return (
-            <div>
-                <div className="col-sm-10 problem-description-container" id="problem-section">
+            <div className='flex flex-col'>
+                <div className=" bg-orange-400" id="problem-section">
+
                     <div id="anchor-remove-mathjax"></div>
 
                     <h3 id="problem-statement" className="problem-section-h3">Problem Statement</h3>
@@ -315,7 +363,8 @@ function Problem() {
                     }) : ''}
 
                 </div>
-                {problemInformation}
+                {/* REMOVED PROBLEM INFORMATION */}
+                {/*{problemInformation}*/}
                 <div className="col-sm-12 ace-editor-container">
                     <div className="ace-editor">
                         <div className="ace-editor-navbar">
@@ -361,7 +410,7 @@ function Problem() {
                     <div className="loader"></div>
                 </div>
         } else {
-            showLoading = <div className="button-container" style={{ marginTop: '-15px' }}>
+            showLoading = <div className=" bg-blue-400">
                 <input type="submit" className="btn btn-codeflex" value="Submit your code!" onClick={submitSubmission} />
             </div>
         }
@@ -405,31 +454,33 @@ function Problem() {
         </div>)
     }
 
+    function getLeaderboardSection() {
+        return (<div>
+            <div className="problem-description-container">
+                <div id="anchor-remove-mathjax"></div>
+                <Leaderboard pathname={location.pathname} />
+            </div>
+        </div>);
+    }
+
+    function getSubmissionSection() {
+        return (<div>
+            <div className="problem-description-container ">
+                <div id="anchor-remove-mathjax"></div>
+                {/*<Submissions pathname={location.pathname} />*/}
+            </div>
+        </div>);
+    }
+
     function testa() {
-        const submissionSection =
-            <div>
-                <div className="col-sm-12 problem-description-container ">
-                    <div id="anchor-remove-mathjax"></div>
-                    <Submissions pathname={location.pathname} />
-                </div>
-            </div>;
 
-        const leaderboardSection =
-            <div>
-                <div className="col-sm-12 problem-description-container">
-                    <div id="anchor-remove-mathjax"></div>
-                    {/*<Leaderboard pathname={location.pathname} />*/}
-                </div>
-            </div>;
-
-        let sectionToRender = "";
         if (page.submissions) {
-            sectionToRender = submissionSection;
+            return getSubmissionSection();
         } else if (page.leaderboard) {
-            sectionToRender = leaderboardSection;
+            return getLeaderboardSection();
         } else {
             if (problemLoaded) {
-                sectionToRender = getProblemSection();
+                return getProblemSection();
             }
         }
     }
@@ -445,22 +496,20 @@ function Problem() {
                         // PROBLEMA NAO NULO
                         <div>
 
-
-                            {testa}
-
-
-                            <div className="container" >
-                                <div className="row">
-                                    {/*<PathLink path={this.props.location.pathname} title={this.state.problem.name} />*/}
-                                    <div className="problem-nav">
-                                        <ul onClick={onPageClick}>
+                            <div className="" >
+                                <div className="flex flex-col">
+                                    <PathLink path={location.pathname} title={problem.name} />
+                                    <div className=" bg-green-500">
+                                        <ul onClick={onPageClick} className="m-0">
                                             <li className={page.problem ? 'active' : ''}>Problem</li>
                                             <li className={page.submissions ? 'active' : ''}>Submissions</li>
                                             <li className={page.leaderboard ? 'active' : ''}>Leaderboard</li>
                                         </ul>
                                     </div>
 
-                                    {getProblemSection()}
+                                    {console.log("PAGE.SUBMISSIONS" + page.submissions)}
+
+                                    {testa()}
 
                                     <ToastContainer
                                         position="top-right"

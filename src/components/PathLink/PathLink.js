@@ -2,12 +2,9 @@ import React from 'react'
 import { Link } from 'react-router-dom';
 import { splitUrl } from '../commons/Utils';
 
-class PathLink extends React.Component {
-    constructor(props) {
-        super(props);
-    }
+function PathLink(props) {
 
-    createPath(path, index) {
+    function createPath(path, index) {
         path.map((p, i) => {
             if (i <= index) {
                 return p + "/"
@@ -15,61 +12,53 @@ class PathLink extends React.Component {
         });
     }
 
-    buildPath(pathname, index) {
+    function buildPath(pathname, index) {
         let finalPath = '/';
         for (let i = 0; i <= index; i++) {
             finalPath += pathname[i];
 
-            if (this.props.removePath.includes[i]) {
+            {/* CHECK CHECKCHECKCHECKCHECKCHECKCHECKCHECKCHECKCHECKCHECKCHECKCHECKCHECKCHECKCHECKVV
+            if (props.removePath.includes[i]) {
                 return "";
             }
+            */}
 
             if (i < index) {
                 finalPath += '/';
             }
         }
+        console.log(finalPath)
         return finalPath;
     }
 
 
-    render() {
-        let pathname = splitUrl(this.props.path);
+    let pathname = splitUrl(props.path);
 
-        let title = this.props.title;
-        if (typeof title !== 'undefined') {
-            title.replace('-', ' ');
-        }
-
-        return (
-            <div>
-                <div className="header-link-container">
-                    {pathname.map((p, index) => (
-                        <div key={index}>
-                            <Link key={index} to={{ pathname: this.buildPath(pathname, index) }}>
-                                <p style={{ display: 'inline-block', fontFamily: "'Roboto Condensed', sans-serif" }}>
-                                    {p}
-                                </p>
-                            </Link>
-                            {index < pathname.length - 1 ? <i className="material-icons">keyboard_arrow_right</i> : ''}
-                        </div>
-                    ))}
-                    <div>
-                    </div>
-                </div>
-                <div className="page-title-container">
-                    <h2 className="page-title">{title}</h2>
-                    <hr id="pathlink-hr" />
-                </div>
-            </div>
-        )
-
+    let titleCheck = props.title;
+    if (typeof titleCheck !== 'undefined') {
+        titleCheck.replace('-', ' ');
     }
+
+
+    return (
+        <div>
+            <span>
+                {pathname.map((p, index) => (
+                    <div key={index} className='inline-flex'>
+                        <Link key={index} to={{ pathname: buildPath(pathname, index) }}>
+                            <p >
+                                {p}
+                            </p>
+                        </Link>
+                        {index < pathname.length - 0 ? <i className=" ">
+                            <span className='px-2'>></span>
+                        </i> : ''
+                        }
+                    </div >
+                ))}
+            </span>
+        </div>
+    )
 }
 
-PathLink.defaultProps = {
-    removeHyphen: true,
-    removePath: []
-}
-
-export default PathLink;
-
+export default PathLink

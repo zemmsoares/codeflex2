@@ -52,21 +52,14 @@ export class App extends Component {
             <div className="flex flex-col justify-between w-screen ">
               <Routes>
 
-
-                {/*<Route exact path="/practise/:categoryName/:problemName" component={PageWrapper(Problem)} />*/}
-                <Route path="/practise/:categoryName/:problemName" element={<Problem />} />
-
-                <Route path="/practise/:categoryName" element={<ListProblems />} />
-
-                {/* <Route exact path="/" component={PageWrapper(LandingPage)} /> */}
                 <Route path="/" element={<Dashboard />} />
+                <Route path="/user/:username" element={<ProfilePage />} />
 
+                <Route path="/practise/:categoryName/:problemName" element={<Problem />} />
+                <Route path="/practise/:categoryName" element={<ListProblems />} />
                 <Route path="/practise" element={<ListCategories />} />
 
-                {/* <Route exact path="/404" component={PageWrapper(PageNotFound)} /> */}
                 <Route path="/404" element={<PageNotFound />} />
-
-                {/* <Route component={PageWrapper(PageNotFound)} /> */}
                 <Route path="*" element={<PageNotFound />} />
 
               </Routes>

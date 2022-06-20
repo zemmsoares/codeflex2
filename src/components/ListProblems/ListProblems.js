@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import { URL } from '../commons/Constants';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useParams } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import { splitUrl, getAuthorization, textToLowerCaseNoSpaces, parseLocalJwt } from '../commons/Utils';
+import PathLink from '../PathLink/PathLink';
 
 
 function ListProblems() {
@@ -12,7 +13,7 @@ function ListProblems() {
     const [filteredProblems, setFilteredProblems] = useState([]);
     const [difficulties, setDifficulties] = useState([]);
 
-
+    const [problemName2, setProblemName2] = useState('');
 
     const location = useLocation();
 
@@ -20,7 +21,6 @@ function ListProblems() {
     useEffect(() => {
         const url = splitUrl(location.pathname);
 
-        console.log(url)
 
         if (url[0] === 'practise') {
             console.log('practise')
@@ -61,7 +61,8 @@ function ListProblems() {
 
 
     return (
-        <div className='mx-7 my-7'>
+        <div className=''>
+            <PathLink path={location.pathname} title={''} />
             {filteredProblems.sort((a, b) => a.id - b.id).map((problem, index) => (
                 <div className='flex border rounded-lg border-blue-100'>
                     <h1 className='m-4 w-1/3'>{problem.name}</h1>
