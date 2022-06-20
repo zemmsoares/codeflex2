@@ -6,12 +6,14 @@ import { splitUrl, getAuthorization, textToLowerCaseNoSpaces, parseLocalJwt } fr
 import PathLink from '../PathLink/PathLink';
 
 
-function ListProblems() {
+function ListProblems(props) {
 
     const [registered, setRegistered] = useState(false);
     const [problems, setProblems] = useState([]);
     const [filteredProblems, setFilteredProblems] = useState([]);
     const [difficulties, setDifficulties] = useState([]);
+
+    const [tournament, setTournament] = useState({});
 
     const [problemName2, setProblemName2] = useState('');
 
@@ -27,7 +29,7 @@ function ListProblems() {
             fetchProblemsByCategory();
         } else if (url[0] === 'compete') {
             console.log('compete')
-            //isUserRegisteredInTournament();
+            isUserRegisteredInTournament();
         }
         fetch(URL + '/api/database/difficulty/view', {
             headers: {
@@ -36,6 +38,44 @@ function ListProblems() {
         })
             .then(res => res.json()).then(data => { setDifficulties(data) })
     }, []);
+
+    function isUserRegisteredInTournament() {
+        fetch(URL + '/api/database/Rating/isUserRegisteredInTournamentTest/' + parseLocalJwt().username + "/" + this.props.match.params.tournamentName, {
+            headers: { ...getAuthorization() }
+        }).then(res => {
+            if (res.status === 200) {
+                setRegistered(true);
+                fetchTournament();
+                fetchProblemsByTournament();
+
+            } else {
+                setRegistered(false);
+            }
+        })
+
+    }
+
+    function fetchTournament() {
+        fetch(URL + '/api/database/Tournament/viewByName/' + this.props.match.params.tournamentName, {
+            headers: { ...getAuthorization() }
+        }).then(res => res.json()
+        ).then(data => {
+            setTournament(data);
+        })
+
+    }
+    function fetchProblemsByTournament() {
+        const currentTournament = splitUrl(location.pathname)[1];
+        fetch(URL + '/api/database/tournament/getAllProblemsByName/' + currentTournament + "/" + parseLocalJwt().username, {
+            headers: {
+                ...getAuthorization()
+            }
+        }).then(res => res.json())
+            .then(data => {
+                setProblems(data);
+                setFilteredProblems(data);
+            })
+    }
 
 
     function fetchProblemsByCategory() {

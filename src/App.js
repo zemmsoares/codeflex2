@@ -12,6 +12,7 @@ import Dashboard from "./components/Dashboard/Dashboard";
 import ListCategories from "./components/ListCategories/ListCategories";
 import ListProblems from "./components/ListProblems/ListProblems";
 import Problem from "./components/Problem/Problem";
+import GlobalLeaderboard from "./components/GlobalLeaderboard/GlobalLeaderboard";
 
 export class App extends Component {
   constructor(props) {
@@ -53,12 +54,11 @@ export class App extends Component {
               <Routes>
 
                 <Route path="/" element={<Dashboard />} />
+                <Route path="/leaderboard" element={<GlobalLeaderboard />} />
                 <Route path="/user/:username" element={<ProfilePage />} />
-
                 <Route path="/practise/:categoryName/:problemName" element={<Problem />} />
                 <Route path="/practise/:categoryName" element={<ListProblems />} />
                 <Route path="/practise" element={<ListCategories />} />
-
                 <Route path="/404" element={<PageNotFound />} />
                 <Route path="*" element={<PageNotFound />} />
 
