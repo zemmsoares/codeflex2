@@ -4,6 +4,7 @@ import { Link, useLocation, useParams } from 'react-router-dom';
 import { dateWithHoursAndDay, getAuthorization, textToLowerCaseNoSpaces } from '../../commons/Utils';
 
 import PathLink from '../../PathLink/PathLink'
+import GithubCalendar from './GithubCalendar/GithubCalendar';
 
 function ProfilePage() {
 
@@ -13,8 +14,8 @@ function ProfilePage() {
     const [userLoaded, setUserLoaded] = useState(false);
     const [categories, setCategories] = useState([]);
 
+    const location = useLocation();
 
-    const { location } = useLocation();
     const { username } = useParams()
 
     useEffect(() => {
@@ -91,7 +92,7 @@ function ProfilePage() {
                         <div>
                             <div className="container" >
                                 <div className="row">
-                                    {/* <PathLink path={location.pathname} title="Profile" />*/}
+                                    <PathLink path={location.pathname} title="Profile" />
 
                                 </div>
                                 <div className="row">
@@ -107,7 +108,7 @@ function ProfilePage() {
                                     <div className="col-sm-8 no-padding profile-user-stats">
                                         <div className="profile-page-border">
                                             <h3>Activity</h3>
-                                            {/*<GithubCalendar submissions={submissions} />*/}
+                                            <GithubCalendar submissions={submissions} />
 
                                         </div>
                                         <br />
