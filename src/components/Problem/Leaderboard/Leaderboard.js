@@ -1,10 +1,9 @@
 import React from 'react';
-import ReactTable from 'react-table';
 import './Leaderboard.css';
 
 import { URL } from '../../commons/Constants';
 import { splitUrl, msToTime, getAuthorization, parseLocalJwt } from '../../commons/Utils';
-import '../../commons/react-table.css';
+
 
 class Leaderboard extends React.Component {
     constructor(props) {
@@ -34,7 +33,7 @@ class Leaderboard extends React.Component {
 
             console.log('leaderboard')
             console.log(this.state.leaderboard);
-
+            {/* 
             toRender =
                 <ReactTable
                     noDataText="There is no one on the leaderboard"
@@ -88,6 +87,7 @@ class Leaderboard extends React.Component {
                     showPagination={Math.min(this.state.leaderboard.length, 20) >= 20 ? true : false}
                     className="-highlight"
                 />
+                */}
         }
 
         return (

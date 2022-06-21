@@ -1,5 +1,4 @@
 import React from 'react';
-import ReactTable from 'react-table';
 import { Router, Link } from 'react-router-dom';
 import { URL } from '../commons/Constants';
 import { splitUrl, dateWithHoursAndDay, parseLocalJwt, getAuthorization } from '../commons/Utils'
@@ -32,6 +31,7 @@ class Submissions extends React.Component {
                 <div className="row">
 
                     {this.state.results.length > 0 ?
+                        {/*
                         <ReactTable
                             noDataText="You haven't submitted solutions to this problem"
                             data={this.state.results.sort((a, b) => new Date(b.date) - new Date(a.date))}
@@ -79,7 +79,7 @@ class Submissions extends React.Component {
                             }}
                             showPagination={Math.min(this.state.results.length, 20) >= 20 ? true : false}
                             className="-highlight"
-                        /> : <h3 className="no-data-h3">You have not submitted solutions to this problem.</h3>}
+                        /> */} : <h3 className="no-data-h3">You have not submitted solutions to this problem.</h3>}
 
 
                 </div>

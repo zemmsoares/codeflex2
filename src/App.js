@@ -13,6 +13,14 @@ import ListCategories from "./components/ListCategories/ListCategories";
 import ListProblems from "./components/ListProblems/ListProblems";
 import Problem from "./components/Problem/Problem";
 import GlobalLeaderboard from "./components/GlobalLeaderboard/GlobalLeaderboard";
+import ManageProblems from "./components/ManageProblems/ManageProblems";
+import AddProblem from "./components/Problem/AddProblem/AddProblem";
+import CreateTournament from './components/CreateTournament/CreateTournament'
+import ManageTestCases from './components/ManageTestCases/ManageTestCases'
+import ListTournaments from './components/ListTournaments/ListTournaments'
+import ManageTournaments from './components/ManageTournaments/ManageTournaments'
+import ManageContent from "./components/ManageContent/ManageContent";
+import ManageCategories from './components/ManageCategories/ManageCategories';
 
 export class App extends Component {
   constructor(props) {
@@ -61,6 +69,34 @@ export class App extends Component {
                 <Route path="/practise" element={<ListCategories />} />
                 <Route path="/404" element={<PageNotFound />} />
                 <Route path="*" element={<PageNotFound />} />
+
+
+                <Route path="/compete/manage-tournaments/:tournamentName/:problemName/test-cases" element={<ManageTestCases />} />
+                <Route path="/compete/manage-tournaments/:tournamentName/:problemName/edit" element={<AddProblem />} />
+                <Route path="/compete/manage-tournaments/:tournamentName/edit" element={<CreateTournament />} />
+                <Route path="/compete/manage-tournaments/:tournamentName/add" element={<AddProblem />} />
+                <Route path="/compete/manage-tournaments/:tournamentName" element={<ManageProblems />} />
+                <Route path="/compete/create-tournament" element={<CreateTournament />} />
+                <Route path="/compete/manage-tournaments" element={<ManageTournaments />} />
+                <Route path="/compete" element={<ListTournaments />} />
+
+                {/* REACT.FRAGMENT is breaking the switch */}
+                {this.manageSectionControl() ? <Route path="/manage" element={<ManageContent />} /> : ''}
+                {this.manageSectionControl() ? <Route path="/manage/problems" element={<ManageProblems />} /> : ''}
+                {this.manageSectionControl() ? <Route path="/manage/problems/add" element={<AddProblem />} /> : ''}
+                {this.manageSectionControl() ? <Route path="/manage/problems/:problemName/edit" element={<AddProblem />} /> : ''}
+                {this.manageSectionControl() ? <Route path="/manage/problems/:problemName/test-cases" element={<ManageTestCases />} /> : ''}
+                {this.manageSectionControl() ? <Route path="/manage/tournaments" element={<ManageTournaments />} /> : ''}
+                {this.manageSectionControl() ? <Route path="/manage/tournaments/add" element={<CreateTournament />} /> : ''}
+                {this.manageSectionControl() ? <Route path="/manage/tournaments/:tournamentName/edit" element={<CreateTournament />} /> : ''}
+                {this.manageSectionControl() ? <Route path="/manage/tournaments/:tournamentName/add" element={<AddProblem />} /> : ''}
+                {this.manageSectionControl() ? <Route path="/manage/tournaments/:tournamentName" element={<ManageProblems />} /> : ''}
+                {this.manageSectionControl() ? <Route path="/manage/tournaments/:tournamentName/:problemName" element={<ManageProblems />} /> : ''}
+                {this.manageSectionControl() ? <Route path="/manage/tournaments/:tournamentName/:problemName/edit" element={<AddProblem />} /> : ''}
+                {this.manageSectionControl() ? <Route path="/manage/tournaments/:tournamentName/:problemName/test-cases" element={<ManageTestCases />} /> : ''}
+                {this.manageSectionControl() ? <Route path="/manage/categories" element={<ManageCategories />} /> : ''}
+
+
 
               </Routes>
             </div>
