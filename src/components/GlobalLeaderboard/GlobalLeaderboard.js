@@ -23,9 +23,6 @@ function GlobalLeaderboard() {
             })
     }, [])
 
-    console.log(users);
-
-
     const formattedUsers = useMemo(
         () =>
             users.map(user => {

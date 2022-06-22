@@ -41,18 +41,23 @@ function PathLink(props) {
 
 
     return (
-        <div>
+        <div className='px-8 py-8'>
+            <h1 className='text-2xl upp font-bold capitalize'>{pathname}</h1>
+            <p className='text-gray-600'>Practise by solving exercices</p>
+
+            <div className='pt-4 mt-4 space-y-2 border-t border-gray-200 dark:border-gray-700'></div>
             <span>
+                <span className='text-gray-400 uppercase text-sm pr-2'>></span>
                 {pathname.map((p, index) => (
                     <div key={index} className='inline-flex'>
                         <Link key={index} to={{ pathname: buildPath(pathname, index) }}>
-                            <p >
+                            <p className='text-gray-400 uppercase text-sm'>
                                 {p}
                             </p>
                         </Link>
-                        {index < pathname.length - 0 ? <i className=" ">
-                            <span className='px-2'>></span>
-                        </i> : ''
+                        {index < pathname.length - 0 ?
+                            <span className='text-gray-400 uppercase text-sm px-2'>></span>
+                            : ''
                         }
                     </div >
                 ))}

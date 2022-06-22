@@ -55,10 +55,10 @@ export class App extends Component {
       return (
         <main class="flex">
           <Router>
-            <div className="w-64 h-screen bg-gray-50">
+            <div className="fixed w-64 min-w-fit max-w-xs h-screen bg-white invisible md:visible ">
               <NavBar />
             </div>
-            <div className="flex flex-col justify-between w-screen ">
+            <div className="justify-between ml-0 md:ml-64 bg-gray-50 w-screen">
               <Routes>
 
                 <Route path="/" element={<Dashboard />} />
@@ -108,11 +108,13 @@ export class App extends Component {
       return (
         <main class="">
           <Router>
+            {/*  REMOVED NAVBAR ON LOGOUT AND PADDING
             <div className="w-screen h-16" >
               <div className="w-screen">
                 <NavBar />
               </div>
             </div>
+            */}
             <div className=" w-screen">
               <Routes>
                 {/*<Route exact path="/" component={PageWrapper(LandingPage)} />*/}

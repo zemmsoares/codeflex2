@@ -1,4 +1,5 @@
 import React from "react";
+import userAvatar from '../images/user_placeholder.png';
 
 export default function UserTable(props) {
     function handleChange(e) {
@@ -6,8 +7,8 @@ export default function UserTable(props) {
     }
 
     return (
-        <div className="bg-gray-300 p-4 flex justify-center">
-            <div className="inline-block">
+        <div className="px-8 flex justify-cente ">
+            <div className="inline-block w-full">
                 <div className="flex justify-end">
                     <label>
                         <span className="text-gray-700">Status: </span>
@@ -34,7 +35,7 @@ export default function UserTable(props) {
                     </label>
                 </div>
                 <div className="flex justify-center">
-                    <table className="table-auto bg-gray-100 shadow-lg rounded text-left w-full">
+                    <table className="table-auto bg-gray-200 shadow-lg rounded text-left w-full">
                         <thead>
                             <tr className="border-b-2 border-gray-200 uppercase text-xs text-gray-700 tracking-wider">
                                 <th className="p-2 pl-4" />
@@ -48,7 +49,7 @@ export default function UserTable(props) {
                                 <tr key={user.id} className="border-b border-gray-200">
                                     <td className="py-1 px-4">
                                         <img
-                                            src={user.avatar}
+                                            src={userAvatar}
                                             alt={user.name}
                                             className="block w-8 h-8 rounded-full"
                                         />

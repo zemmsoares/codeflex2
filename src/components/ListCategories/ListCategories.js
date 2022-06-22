@@ -22,29 +22,27 @@ function ListCategories() {
     }, [])
 
     return (
-        <div className="">
+        <div>
             <PathLink path={location.pathname} title="Categories" />
-            <div className="flex flex-col sm:flex-row">
+            <div>
 
-                {categories.length > 0 && categories.map((category, index) => (
-                    <div key={category.id} className="bg-gray-50 p-10 rounded-lg w-full border">
-                        <span class="flex items-center text-base font-normal text-gray-900 rounded-lg">
-                            <span class="flex-1 whitespace-nowrap font-bold text-xl">{category.name}</span>
-                        </span>
-                        <div className="">
-                            {/*<div className="h-2 bg-red-800" style={{ width: (category.finishedProblems / category.totalProblems * 100) + '%' }}></div>*/}
-                            <div className="h-2 bg-blue-500 my-2" style={{ width: (75) + '%' }}></div>
-                            <p className="p-small-text">You have completed {category.finishedProblems} ({(category.finishedProblems / category.totalProblems * 100).toFixed(2)}%) out of the {category.totalProblems} available problems.</p>
-                        </div>
-                        <div className="pt-2">
-                            <Link to={{
-                                pathname: "/practise/" + textToLowerCaseNoSpaces(category.name),
-                                state: { categoryId: category.id }
-                            }}><input type="submit" className="px-2 py-1 border rounded-sm  border-solid border-blue-600"
-                                value="Explore problems" /></Link>
+
+
+                <div id="main" class="grid sm:grid-col-1 md:grid-cols-2 xl:grid-cols-3 justify-evenly p-4 gap-1">
+                    <div class="w-26 h-32">
+                        <div className='w-full h-full rounded-lg bg-cyan-400'>
+                            <p>dqwdqw</p>
                         </div>
                     </div>
-                ))}
+                    <div class="bg-green-500 w-26 h-12">2</div>
+                    <div class="bg-green-300 w-26 h-12">3</div>
+                    <div class="bg-green-700 w-26 h-12">4</div>
+                    <div class="bg-green-500 w-26 h-12">5</div>
+                    <div class="bg-green-300 w-26 h-12">6</div>
+                </div>
+
+
+
             </div>
         </div>
     )
