@@ -23,7 +23,7 @@ function ListCategories() {
 
     return (
         <div>
-            <PathLink path={location.pathname} title="Categories" />
+            <PathLink path={location.pathname} title="Practise by solving exercices" />
             <div>
 
 
