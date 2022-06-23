@@ -132,10 +132,10 @@ function ListTournaments() {
     );
 
     return (
-        <div className="container">
-            <div className="row">
-                <PathLink path={location.pathname} title="Tournaments" />
-                <div className="col-sm-12 both-categories-container">
+        <div>
+            <PathLink path={location.pathname} title="Practise by solving exercices" />
+            <div>
+                <div className="both-categories-container">
                     <br />
                     <div style={{ float: 'right', textAlign: 'right', marginTop: '-30px' }}>
                         {displayInputCode ? <div className="private-code">

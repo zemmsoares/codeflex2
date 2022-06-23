@@ -47,9 +47,9 @@ function GlobalLeaderboard() {
     }
 
     return (
-        <div className="container">
-            <div className="row">
-                <PathLink path={location.pathname} title="Overall Leaderboard" />
+        <div>
+            <PathLink path={location.pathname} title="Practise by solving exercices" />
+            <div>
                 {renderTables()}
             </div>
         </div>

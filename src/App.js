@@ -58,7 +58,7 @@ export class App extends Component {
             <div className="fixed w-64 min-w-fit max-w-xs h-screen bg-white invisible md:visible ">
               <NavBar />
             </div>
-            <div className="justify-between ml-0 md:ml-64 bg-gray-50 w-screen">
+            <div className="justify-between ml-0 md:ml-64 bg-gray-50 w-full">
               <Routes>
 
                 <Route path="/" element={<Dashboard />} />
