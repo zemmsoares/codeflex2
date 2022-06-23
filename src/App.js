@@ -21,6 +21,7 @@ import ListTournaments from './components/ListTournaments/ListTournaments'
 import ManageTournaments from './components/ManageTournaments/ManageTournaments'
 import ManageContent from "./components/ManageContent/ManageContent";
 import ManageCategories from './components/ManageCategories/ManageCategories';
+import Home from './components/Home/Home';
 
 export class App extends Component {
   constructor(props) {
@@ -61,7 +62,8 @@ export class App extends Component {
             <div className="justify-between ml-0 md:ml-64 bg-gray-50 w-full">
               <Routes>
 
-                <Route path="/" element={<Dashboard />} />
+                <Route path="/" element={<Home />} />
+                <Route path="/dashboard" element={<Dashboard />} />
                 <Route path="/leaderboard" element={<GlobalLeaderboard />} />
                 <Route path="/user/:username" element={<ProfilePage />} />
                 <Route path="/practise/:categoryName/:problemName" element={<Problem />} />

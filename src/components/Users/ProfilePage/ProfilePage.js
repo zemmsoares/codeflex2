@@ -90,42 +90,51 @@ function ProfilePage() {
                     {userExists ? (
                         //userExists = true
                         <div>
-                            <div className="container" >
-                                <div className="row">
+                            <div className="" >
+                                <div className="">
                                     <PathLink path={location.pathname} title="Profile" />
-
                                 </div>
-                                <div className="row">
-                                    <div className="col-sm-3 profile-user-info no-padding no-margin">
-                                        <div className="profile-page-border">
-                                            <img id="img-profile-placeholder" src={require('../../images/user_placeholder.png')} alt="User flat image" />
-                                            <h3 style={{ textAlign: 'center' }}>{username}</h3>
+
+                                <div className='px-8'>
+
+                                    <div className='bg-gray-100 mb-4'>
+                                        <div class="flex-1 flex flex-row justify-start space-x-2">
+                                            <div class="relative inline-block">
+                                                <img className='w-24 h-24 bg-gray-100 rounded-full rounded"' src={require('../../images/user_placeholder.png')} alt="User flat image" />
+                                                <div class="w-6 h-6 bg-green-500 rounded-full ring-4 ring-white absolute bottom-0 right-0" />
+                                            </div>
+                                            <div>
+                                                <p className='text-lg font-bold capitalize'>{username}</p>
+                                            </div>
                                         </div>
-                                        <br />
-                                        <br />
+
                                     </div>
-                                    <div className="col-sm-1"></div>
-                                    <div className="col-sm-8 no-padding profile-user-stats">
-                                        <div className="profile-page-border">
-                                            <h3>Activity</h3>
-                                            <GithubCalendar submissions={submissions} />
 
-                                        </div>
-                                        <br />
-                                        <br />
-                                        <div className="profile-page-border">
-                                            <h3>Recent Submissions</h3>
-                                            {submissions.length > 0 && categories.length > 0 ?
-                                                submissions.sort((a, b) => new Date(b.date) - new Date(a.date)).slice(0, Math.min(10, submissions.length)).map(s => (
-                                                    <div className="profile-page-subtramission">
 
-                                                        <p>Solution to {linkToProblem(s)} submitted on {dateWithHoursAndDay(s.date)} with a total score of {s.score.toFixed(2)}
-                                                            &nbsp;({s.score != 0 ? (s.score / s.problem.maxScore * 100).toFixed(2) : '0'}%).</p>
-                                                    </div>
-                                                )) : <p className="page-subtitle">No recent submissions</p>}
-                                        </div>
+
+                                    <div className='border rounded-lg p-4'>
+                                        <GithubCalendar submissions={submissions} />
+                                    </div>
+
+                                    <div className=' p-4'>
+                                        <h3 className='font-bold'>Recent Submissions</h3>
+                                        {submissions.length > 0 && categories.length > 0 ?
+                                            submissions.sort((a, b) => new Date(b.date) - new Date(a.date)).slice(0, Math.min(10, submissions.length)).map(s => (
+                                                <div className="profile-page-subtramission">
+
+                                                    <p>Solution to {linkToProblem(s)} submitted on {dateWithHoursAndDay(s.date)} with a total score of {s.score.toFixed(2)}
+                                                        &nbsp;({s.score != 0 ? (s.score / s.problem.maxScore * 100).toFixed(2) : '0'}%).</p>
+                                                </div>
+                                            )) : <p className="page-subtitle">No recent submissions</p>}
                                     </div>
                                 </div>
+
+
+
+
+
+
+
                             </div>
                         </div>
                     ) : (

@@ -101,23 +101,28 @@ function ListProblems(props) {
 
 
     return (
-        <div className=''>
-            <PathLink path={location.pathname} title={''} />
+        <div className='h-screen'>
+            <PathLink path={location.pathname} title="Practise by solving exercices" />
             {filteredProblems.sort((a, b) => a.id - b.id).map((problem, index) => (
-                <div className='flex border rounded-lg border-blue-100'>
-                    <h1 className='m-4 w-1/3'>{problem.name}</h1>
-                    <div className='w-full flex justify-between'>
-                        <h1 className='m-4 font-bold text-blue-500e'>{problem.difficulty.name}</h1>
-                        <div id="button-container" className='m-4'>
-                            <Link to={{
-                                pathname: location.pathname + '/' + textToLowerCaseNoSpaces(problem.name), state: {
-                                    problemId: problem.id,
-                                    problemName: problem.name
-                                }
-                            }}><input type="submit" className="" /></Link>
+
+                <div className='px-8'>
+                    <div className='flex border rounded-lg border-blue-500'>
+                        <h1 className='m-4 w-1/3'>{problem.name}</h1>
+                        <div className='w-full flex justify-between'>
+                            <h1 className='m-4 font-bold text-blue-500e'>{problem.difficulty.name}</h1>
+                            <div id="button-container" className='m-4'>
+                                <Link to={{
+                                    pathname: location.pathname + '/' + textToLowerCaseNoSpaces(problem.name), state: {
+                                        problemId: problem.id,
+                                        problemName: problem.name
+                                    }
+                                }}><input type="submit" className="" /></Link>
+                            </div>
                         </div>
                     </div>
                 </div>
+
+
             ))}
         </div>
 

@@ -2,6 +2,7 @@ import React from 'react'
 import { dateSameDay, getDatesRange } from '../../../commons/Utils';
 import CalendarHeatmap from 'react-calendar-heatmap';
 import ReactTooltip from 'react-tooltip'
+import 'react-calendar-heatmap/dist/styles.css';
 
 class GithubCalendar extends React.Component {
     constructor(props) {

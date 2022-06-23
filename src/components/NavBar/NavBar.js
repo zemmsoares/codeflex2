@@ -38,10 +38,12 @@ function NavBar({ isSidebar }) {
             {logged ?
                 <div className="bg-white pt-8 pb-4 px-3 rounded border-r h-screen">
                     <div>
-                        <a href="#" class="flex items-center pl-2 mb-5">
-                            <img src="https://flowbite.com/docs/images/logo.svg" class="h-6 mr-3 sm:h-7" alt="Flowbite Logo" />
-                            <span class="self-center text-xl font-semibold whitespace-nowrap dark:text-white">Codeflex</span>
-                        </a>
+                        <Link to={{ pathname: "/" }}>
+                            <a href="/" class="flex items-center pl-2 mb-5">
+                                <img src="https://flowbite.com/docs/images/logo.svg" class="h-6 mr-3 sm:h-7" alt="Flowbite Logo" />
+                                <span class="self-center text-xl font-semibold whitespace-nowrap dark:text-white">Codeflex</span>
+                            </a>
+                        </Link>
                         {/* USER IS LOGGED IN */}
                         <div className="" id="myNavbar">
                             <ul className="">
@@ -53,7 +55,7 @@ function NavBar({ isSidebar }) {
                                             <path strokeLinecap="round" strokeLinejoin="round" d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z" />
                                         </svg>
 
-                                        <span class="flex-1 ml-3 whitespace-nowrap"><Link to="/"><p>Dashboard</p></Link></span>
+                                        <span class="flex-1 ml-3 whitespace-nowrap"><Link to="/Dashboard"><p>Dashboard</p></Link></span>
 
                                     </a>
                                 </li>
