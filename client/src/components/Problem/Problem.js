@@ -407,16 +407,25 @@ function Problem() {
 
     function getLoading() {
         let showLoading = "";
-        if (submission.submitting) {
+        if (submitting) {
             showLoading =
-                <div className="loader-container">
+                <div className="loader-container py-5 mb-12">
                     <h3>Evaluating your submission...</h3>
                     <div className="loader"></div>
                 </div>
         } else {
-            showLoading = <div className=" bg-blue-400">
-                <input type="submit" className="btn btn-codeflex" value="Submit your code!" onClick={submitSubmission} />
-            </div>
+            showLoading =
+
+
+                <div className='flex'>
+                    <div className="py-4 w-full">
+                        {error === 'Compiler Error' && page.problem ? <CompilerError errorMessage={result.message} /> : ''}
+                    </div>
+                    <div className="ml-auto justify-end py-4">
+                        <input type="submit" className="m-2 py-1.5 px-5 mr-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
+                            value="Submit your code!" onClick={submitSubmission} />
+                    </div>
+                </div>
         }
 
         return showLoading;
@@ -503,46 +512,45 @@ function Problem() {
                             <div className="" >
                                 <div className="flex flex-col">
                                     <PathLink path={location.pathname} title={problem.name} />
-                                   
-                                   <div className='px-8'>
-                                    <div className=" bg-green-500">
-                                        <ul onClick={onPageClick} className="m-0">
-                                            <li className={page.problem ? 'active' : ''}>Problem</li>
-                                            <li className={page.submissions ? 'active' : ''}>Submissions</li>
-                                            <li className={page.leaderboard ? 'active' : ''}>Leaderboard</li>
-                                        </ul>
+
+                                    <div className='px-8'>
+                                        <div className=" bg-green-500">
+                                            <ul onClick={onPageClick} className="m-0">
+                                                <li className={page.problem ? 'active' : ''}>Problem</li>
+                                                <li className={page.submissions ? 'active' : ''}>Submissions</li>
+                                                <li className={page.leaderboard ? 'active' : ''}>Leaderboard</li>
+                                            </ul>
+                                        </div>
+
+
+
+                                        {testa()}
+
+                                        <ToastContainer
+                                            position="top-right"
+                                            autoClose={5500}
+                                            hideProgressBar={false}
+                                            closeOnClick
+                                            rtl={false}
+                                            pauseOnVisibilityChange
+                                            draggable
+                                            pauseOnHover
+                                            style={{ fontFamily: "'Roboto', sans-serif", fontSize: '12pt', letterSpacing: '1px' }}
+                                        />
+
+                                        {loaded ?
+                                            <Navigate to={{
+                                                pathname: location.pathname + "/view-results", state: {
+                                                    information: submission.scoringResults
+                                                }
+                                            }} /> : ''
+                                        }
+
+
                                     </div>
 
 
-
-                                    {testa()}
-
-                                    <ToastContainer
-                                        position="top-right"
-                                        autoClose={5500}
-                                        hideProgressBar={false}
-                                        closeOnClick
-                                        rtl={false}
-                                        pauseOnVisibilityChange
-                                        draggable
-                                        pauseOnHover
-                                        style={{ fontFamily: "'Roboto', sans-serif", fontSize: '12pt', letterSpacing: '1px' }}
-                                    />
-
-                                    {loaded ?
-                                        <Navigate to={{
-                                            pathname: location.pathname + "/view-results", state: {
-                                                information: submission.scoringResults
-                                            }
-                                        }} /> : ''
-                                    }
-
                                 </div>
-                                {/*
-                                <div className="row">
-                                    {results.error === 'Compiler Error' && page.problem ? <CompilerError errorMessage={results.result.message} /> : ''}
-                                </div>
-        */}</div>
                             </div >
 
                         </div>
