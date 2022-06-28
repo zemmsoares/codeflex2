@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import { splitUrl, getAuthorization, textToLowerCaseNoSpaces, parseLocalJwt } from '../commons/Utils';
 import PathLink from '../PathLink/PathLink';
 
-import ProblemTable from  './ProblemTable';
+import ProblemTable from './ProblemTable';
 
 
 function ListProblems(props) {
@@ -106,7 +106,7 @@ function ListProblems(props) {
     }
 
     return (
-    
+
         <div>
             <PathLink path={location.pathname} title="Practise by solving exercices" />
             <div>
