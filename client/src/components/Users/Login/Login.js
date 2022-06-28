@@ -4,7 +4,8 @@ import { areStringEqual, validateEmail, validateLength, validateStringChars, isS
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-import imgBackground from '../../images/wallpaper.jpg';
+import codeflexLogo from '../../images/logo.svg'
+import imageExample from '../../images/happy_people.png'
 
 class Login extends Component {
 
@@ -159,7 +160,7 @@ class Login extends Component {
                     <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
                         <svg class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"></path><path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"></path></svg>
                     </div>
-                    <input className="password" type="password" onChange={this.handleChange} placeholder="Password" required id="password" class="w-96 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block pl-10 p-2.5" />
+                    <input className="password" type="password" onChange={this.handleChange} placeholder="Password" required id="password" class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block pl-10 p-2.5" />
                 </div>
 
 
@@ -173,7 +174,7 @@ class Login extends Component {
                     <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
                         <svg class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"></path><path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"></path></svg>
                     </div>
-                    <input key="1" id='email' className="email" type="email" onChange={this.handleChange} placeholder="Email" required class="w-96 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block pl-10 p-2.5" />
+                    <input key="1" id='email' className="email" type="email" onChange={this.handleChange} placeholder="Email" required class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block pl-10 p-2.5" />
                 </div>
 
 
@@ -185,7 +186,7 @@ class Login extends Component {
                     <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
                         <svg class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"></path><path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"></path></svg>
                     </div>
-                    <input key="2" id='password' className="password" type="password" onChange={this.handleChange} placeholder="Password" required class="w-96 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block pl-10 p-2.5" />
+                    <input key="2" id='password' className="password" type="password" onChange={this.handleChange} placeholder="Password" required class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block pl-10 p-2.5" />
                 </div>
 
 
@@ -197,7 +198,7 @@ class Login extends Component {
                     <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
                         <svg class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"></path><path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"></path></svg>
                     </div>
-                    <input key="3" id='passwordConfirmation' className="passwordConfirmation" type="password" onChange={this.handleChange} placeholder="Confirm password" required class="w-96 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block pl-10 p-2.5" />
+                    <input key="3" id='passwordConfirmation' className="passwordConfirmation" type="password" onChange={this.handleChange} placeholder="Confirm password" required class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block pl-10 p-2.5" />
                 </div>
 
 
@@ -212,61 +213,105 @@ class Login extends Component {
 
         return (
 
-            <div className="bg-red-600 flex">
-                <div className="bg-white ">
-                    <a href="#" class="flex items-center mb-10 py-4 px-5 ">
-                        <img src="https://flowbite.com/docs/images/logo.svg" class="h-6 mr-3 sm:h-7" alt="Flowbite Logo" />
-                        <span class="self-center text-xl font-semibold whitespace-nowrap dark:text-white">Codeflex</span>
-                    </a>
-                    <div className='p-4'>
-                        <h1 className='text-md font-bold text-gray-400 uppercase'>Start for free</h1>
-                        <h1 className='text-3xl font-bold text-gray-700'>Login or create your Codeflex account today!</h1>
-                        <form className="login-container">
-                            {/*<img id="img-user" src={require('../../images/login_icon.png')} alt="User flat image" />*/}
-                            <div>
-                                <h4 className='my-8'>Account Details</h4>
-                                {/*<input key="0" className="username" type="text" onChange={this.handleChange} placeholder="Username" required />*/}
+            <div className=" ">
 
+                <div class="grid sm:grid-cols-1 md:grid-cols-2 xl:grid-cols-2 2xl:grid-cols-2 justify-evenly w-screen h-screen">
 
+                    <div className='bg-blue-500 hidden md:flex '>
+                        <div className='m-auto'>
+                            <p>dqwdqwdq</p>
+                        </div>
 
-                                <label for="username" class="block mb-2 text-sm font-medium text-gray-900">Your username</label>
-                                <div class="relative">
-                                    <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                                        <svg class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"></path><path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"></path></svg>
-                                    </div>
-                                    <input key="0" className="username" type="text" id="username" class="w-96 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full pl-10 p-2.5" onChange={this.handleChange} placeholder="Username" required />
-                                </div>
-
-
-
-                            </div>
-
-                            {loginOrSignup}
-
-
-                            <ToastContainer
-                                position="top-right"
-                                autoClose={5500}
-                                hideProgressBar={false}
-                                closeOnClick
-                                rtl={false}
-                                pauseOnVisibilityChange
-                                draggable
-                                pauseOnHover
-                                style={{ fontFamily: "'Roboto', sans-serif", fontSize: '12pt', letterSpacing: '1px' }}
-                            />
-
-
-
-                            <div className="my-8">
-                                <input type="button" className="w-40 text-white bg-gray-500 hover:bg-blue-800 focus:outline-none font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:hover:bg-blue-700 " value="Login" onClick={this.handleSubmit} />
-                                <input type="button" className="w-40 text-white bg-blue-700 hover:bg-blue-800 focus:outline-none font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:hover:bg-blue-700" value="Create account" onClick={this.handleSubmit} />
-                            </div>
-                        </form>
                     </div>
+
+
+
+                    <div className=' justify-center flex p-16 '>
+                        <div class="flex flex-col">
+                            <div className='flex justify-center '>
+                                <a href="#" class="flex items-center mb-10 py-4 px-5 ">
+                                    <img src={codeflexLogo} class="h-6 mr-3 sm:h-7" alt="Flowbite Logo" />
+                                    <span class="self-center text-xl font-semibold whitespace-nowrap dark:text-white">Codeflex</span>
+                                </a>
+                            </div>
+                            <div className='flex justify-center'>
+                                <h1 className='text-md font-bold text-gray-400 uppercase'>Start for free</h1>
+                            </div>
+                            <div className='flex justify-center py-4'>
+                                <h1 className='text-3xl text-center font-bold text-gray-700 mx-12 2xl:w-96'>Login or create your Codeflex account today!</h1>
+                            </div>
+                            <div className='flex justify-center pt-4'>
+                                <form className="login-container  w-80">
+                                    {/*<img id="img-user" src={require('../../images/login_icon.png')} alt="User flat image" />*/}
+                                    <div>
+                                        {/*<input key="0" className="username" type="text" onChange={this.handleChange} placeholder="Username" required />*/}
+
+                                        <label for="username" class="block mb-2 text-sm font-medium text-gray-900">Your username</label>
+                                        <div class="relative">
+                                            <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                                                <svg class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"></path><path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"></path></svg>
+                                            </div>
+                                            <input key="0" className="username" type="text" id="username" class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block pl-10 p-2.5" onChange={this.handleChange} placeholder="Username" required />
+                                        </div>
+                                    </div>
+
+                                    {loginOrSignup}
+
+                                    <ToastContainer
+                                        position="top-right"
+                                        autoClose={5500}
+                                        hideProgressBar={false}
+                                        closeOnClick
+                                        rtl={false}
+                                        pauseOnVisibilityChange
+                                        draggable
+                                        pauseOnHover
+                                        style={{ fontFamily: "'Roboto', sans-serif", fontSize: '12pt', letterSpacing: '1px' }}
+                                    />
+
+                                    <div>
+
+                                    </div>
+                                </form>
+                            </div>
+
+                            {this.state.isSigninUp ? (
+                                <div>
+                                    <div className=''>
+                                        <div className="my-8 flex justify-center ">
+                                            <input type="button" className="w-80 text-white bg-gray-500 hover:bg-blue-800 focus:outline-none font-medium rounded-lg 
+                                              text-sm px-5 py-2.5 text-center dark:hover:bg-blue-700 " value="Create account" onClick={this.handleSubmit} />
+                                        </div>
+                                    </div>
+                                    <div className='flex flex-col'>
+                                        <div className='flex mt-auto justify-center '>
+                                            <p className='p-1'>Already have an account?</p>
+                                            <input type="button" className='cursor-pointer' value="Login" onClick={this.handleSubmit} />
+                                        </div>
+                                    </div>
+                                </div>
+                            ) : (
+                                <div>
+                                    <div className=''>
+                                        <div className="my-8 flex justify-center ">
+                                            <input type="button" className="w-80 text-white bg-gray-500 hover:bg-blue-800 focus:outline-none font-medium rounded-lg 
+                                        text-sm px-5 py-2.5 text-center dark:hover:bg-blue-700 " value="Login" onClick={this.handleSubmit} />
+                                        </div>
+                                    </div>
+                                    <div className='flex flex-col'>
+                                        <div className='flex mt-auto justify-center '>
+                                            <p className='p-1'>Don´t have an account yet?</p>
+                                            <input type="button" className='cursor-pointer' value="Create account" onClick={this.handleSubmit} />
+                                        </div>
+                                    </div>
+                                </div>
+                            )}
+
+                        </div>
+
+                    </div>
+
                 </div>
-
-
 
             </div>
         );

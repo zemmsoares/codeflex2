@@ -133,7 +133,6 @@ export class App extends Component {
 
               </Routes>
             </div>
-            <div style={{ marginBottom: '75px' }}></div>
           </Router>
         </main>
       )
