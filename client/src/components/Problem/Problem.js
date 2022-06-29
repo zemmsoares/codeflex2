@@ -514,15 +514,27 @@ function Problem() {
                                     <PathLink path={location.pathname} title={problem.name} />
 
                                     <div className='px-8'>
-                                        <div className=" bg-green-500">
-                                            <ul onClick={onPageClick} className="m-0">
-                                                <li className={page.problem ? 'active' : ''}>Problem</li>
-                                                <li className={page.submissions ? 'active' : ''}>Submissions</li>
-                                                <li className={page.leaderboard ? 'active' : ''}>Leaderboard</li>
-                                            </ul>
+
+                                        <div className="flex pb-6">
+                                            <div className='' >
+                                                <button onClick={onPageClick} type="button"
+                                                    className={`py-1.5 px-5 mr-2 text-sm font-medium ${page.problem ? 'active' : ''}`} >
+                                                    Problem
+                                                </button>
+                                            </div>
+                                            <div className=''>
+                                                <button onClick={onPageClick} type="button"
+                                                    className={`py-1.5 px-5 mr-2 text-sm font-medium ${page.submissions ? 'active' : ''}`} >
+                                                    Submissions
+                                                </button>
+                                            </div>
+                                            <div className='' onClick={onPageClick}>
+                                                <button onClick={onPageClick} type="button"
+                                                    className={`py-1.5 px-5 mr-2 text-sm font-medium ${page.leaderboard ? 'active' : ''}`} >
+                                                    Leaderboard
+                                                </button>
+                                            </div>
                                         </div>
-
-
 
                                         {testa()}
 
