@@ -22,6 +22,7 @@ import ManageTournaments from './components/ManageTournaments/ManageTournaments'
 import ManageContent from "./components/ManageContent/ManageContent";
 import ManageCategories from './components/ManageCategories/ManageCategories';
 import Home from './components/Home/Home';
+import TournamentLeaderboard from "./components/TournamentLeaderboard/TournamentLeaderboard";
 
 export class App extends Component {
   constructor(props) {
@@ -81,6 +82,15 @@ export class App extends Component {
                 <Route path="/compete/create-tournament" element={<CreateTournament />} />
                 <Route path="/compete/manage-tournaments" element={<ManageTournaments />} />
                 <Route path="/compete" element={<ListTournaments />} />
+
+                <Route path="/compete/:tournamentName/leaderboard" element={<TournamentLeaderboard />} />
+                <Route path="/compete/:tournamentName/edit" element={<CreateTournament />} />
+                <Route path="/compete/:tournamentName/:problemName" element={<Problem />} />
+                <Route path="/compete/:tournamentName" element={<ListProblems />} />
+
+
+                {/*  <Route path="/compete/:tournamentName/:problemName/view-results" element={<ViewResults />} />*/}
+
 
                 {/* REACT.FRAGMENT is breaking the switch */}
                 {this.manageSectionControl() ? <Route path="/manage" element={<ManageContent />} /> : ''}

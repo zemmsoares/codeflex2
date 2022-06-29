@@ -241,7 +241,7 @@ function CreateTournament() {
     console.log(name)
 
     return (
-        <div className="container">
+        <div className="container py-20">
             <div className="row">
                 <PathLink path={location.pathname} title={pathLinkTitle()} />
                 <div className="tournament-creation-container">
@@ -301,7 +301,7 @@ function CreateTournament() {
                             </div>
                         </div>
                         {location2 === 'compete' ?
-                            <div className="form-group">
+                            <div className="form-group mt-20">
                                 <label htmlFor="tournamentName" className="col-sm-1 control-label">Private Code</label>
                                 <div className="col-sm-4" style={{ display: 'inline-block' }}>
                                     <input type="code" className="form-control" id="privateCode" onChange={(e) => setPrivateCode(e.target.value)} value={privateCode} placeholder="Private code" />

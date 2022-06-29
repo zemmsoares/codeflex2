@@ -21,6 +21,8 @@ function ListProblems(props) {
 
     const location = useLocation();
 
+    const { tournamentName } = useParams();
+
 
     useEffect(() => {
         const url = splitUrl(location.pathname);
@@ -42,7 +44,7 @@ function ListProblems(props) {
     }, []);
 
     function isUserRegisteredInTournament() {
-        fetch(URL + '/api/database/Rating/isUserRegisteredInTournamentTest/' + parseLocalJwt().username + "/" + this.props.match.params.tournamentName, {
+        fetch(URL + '/api/database/Rating/isUserRegisteredInTournamentTest/' + parseLocalJwt().username + "/" + tournamentName, {
             headers: { ...getAuthorization() }
         }).then(res => {
             if (res.status === 200) {

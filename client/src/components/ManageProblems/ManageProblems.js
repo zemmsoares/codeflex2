@@ -66,6 +66,7 @@ function ManageProblems() {
                     .then(res => res.json())
                     .then(data => {
                         setProblems(data);
+                        console.log(data)
                     })
             } else if (url[1] === 'tournaments') {
                 fetchAllProblemsByTournamentName(url[2]);

@@ -480,7 +480,7 @@ function Problem() {
         return (<div>
             <div className="problem-description-container ">
                 <div id="anchor-remove-mathjax"></div>
-                {/*<Submissions pathname={location.pathname} />*/}
+                <Submissions path={location.pathname} />
             </div>
         </div>);
     }

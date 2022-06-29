@@ -11,6 +11,9 @@ export default function ManageProblemsTable(props) {
 
     const location = useLocation();
 
+    console.log(props)
+
+
     function deleteProblem(problem) {
         fetch(URL + '/api/database/Problem/deleteByName/' + textToLowerCaseNoSpaces(problem.name), {
             method: 'POST',
@@ -62,21 +65,19 @@ export default function ManageProblemsTable(props) {
                         <thead>
                             <tr className="border-gray-200 uppercase text-xs text-gray-700 tracking-wider">
                                 <th className="p-2 pl-4" />
-                                <th className="p-2">User</th>
-                                <th className="p-2">Score</th>
+                                <th className="p-2">Id</th>
+                                <th className="p-2">Difficulty</th>
                                 <th className="p-2 pr-4">Owner</th>
-                                <th className="p-2 pr-4">Status</th>
+                                <th className="p-2 pr-4">Test Cases</th>
                             </tr>
                         </thead>
                         <tbody className="bg-white">
                             {props.problem.map(problem => (
                                 <tr key={problem.id} className="border-b border-gray-200">
-                                    <td className="py-1 pl-6 ">
-                                        <img
-                                            src={userAvatar}
-                                            alt={'dqwdqwdqw'}
-                                            className="block w-8 h-8 rounded-full"
-                                        />
+                                    <td className="py-1 px-2">
+                                        <span className="bg-green-200 py-1 px-2 text-xs rounded-full text-green-900">
+                                            {problem.id}
+                                        </span>
                                     </td>
                                     <td className="py-1 px-2">
                                         <span className="block text-sm">{problem.name}</span>
@@ -86,19 +87,20 @@ export default function ManageProblemsTable(props) {
                                     </td>
                                     <td className="py-1 px-2">{problem.owner.username}</td>
                                     <td className="py-1 px-2 pr-4">
-                                        {problem.solved === "true" ? (
-                                            <span className="bg-green-200 py-1 px-2 text-xs rounded-full text-green-900">
-                                                Solved
-                                            </span>
-                                        ) : (
-                                            <span className="bg-red-200 py-1 px-2 text-xs rounded-full text-red-900">
-                                                Unsolved
-                                            </span>
-                                        )}
+                                        <span className="bg-red-200 py-1 px-2 text-xs rounded-full text-red-900">
+                                            {problem.testCases.length}
+                                            <Link to={location.pathname + "/" + textToLowerCaseNoSpaces(problem.name) + "/test-cases"}>
+                                                <i className="material-icons manage-tournament-icon">edit</i>
+                                            </Link>
+                                        </span>
                                     </td>
 
                                     <td className="py-1 pr-6 w-64">
                                         <div className=" flex justify-end">
+                                            <div>
+
+                                            </div>
+
                                             <Link to={{
                                                 pathname: props.path + '/' + textToLowerCaseNoSpaces(problem.name), state: {
                                                     problemId: problem.id,
