@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { Link, useLocation, useParams } from 'react-router-dom';
 import { URL } from '../commons/Constants';
 import { getAuthorization, parseLocalJwt, splitUrl, textToLowerCaseNoSpaces } from '../commons/Utils';
 import PageNotFound from '../PageNotFound/PageNotFound';
 import PathLink from '../PathLink/PathLink';
+import ManageProblemsTable from './ManageProblemsTable';
 
 function ManageProblems() {
 
@@ -14,6 +15,9 @@ function ManageProblems() {
     const location = useLocation();
     const { tournamentNameParam } = useParams();
     const { urlParam } = useParams();
+
+
+    const childRef = useRef()
 
     useEffect(() => {
         if (parseLocalJwt().role != 'CONTENT_MANAGER') {
@@ -134,6 +138,7 @@ function ManageProblems() {
                     <div>
                         {problems.length > 0 ? (
                             <div>
+                                <ManageProblemsTable problem={problems} path={location.pathname} ref={childRef} />
                                 {/* 
                                 <ReactTable
                                     data={problems}

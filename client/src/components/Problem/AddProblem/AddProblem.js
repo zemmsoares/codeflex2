@@ -87,7 +87,7 @@ function AddProblem() {
     }
 
     function fetchCurrentProblem() {
-        const problemName = problemName;
+
         fetch(URL + '/api/database/Problem/viewAllDetails/' + problemName, {
             headers: { ...getAuthorization() }
         }).then(res => res.json()).then(data => {
