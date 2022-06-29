@@ -13,9 +13,12 @@ function ManageCategories() {
     const modalAdd = useRef();
     const inputCategoryName = useRef();
 
+    //prevent windows.reload
+    const [newCategory, setNewCategory] = useState(false);
+
     useEffect(() => {
         fetchCategories();
-    }, [])
+    }, [newCategory])
 
     function fetchCategories() {
         fetch(URL + '/api/database/PractiseCategory/view', {
@@ -25,6 +28,7 @@ function ManageCategories() {
             .then(data => {
                 setCategories(data)
             })
+        setNewCategory(false);
     }
 
     function deleteCategory(pc) {
@@ -51,7 +55,7 @@ function ManageCategories() {
             setCategories(newCategories);
 
             modalAdd.current.closeModal();
-
+            setNewCategory(true);
         })
     }
 
@@ -80,7 +84,7 @@ function ManageCategories() {
                     <div className='w-full h-full rounded-lg bg-white border'>
 
                         <div class=" h-5/6 flex justify-center items-center">
-                            <div className='h-10 w-10 bg-blue-500 rounded rounded-full flex justify-center items-center'>
+                            <div className='h-10 w-10 bg-blue-500 rounded rounded-full flex justify-center items-center' onClick={() => modalAdd.current.openModal()}>
                                 <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 fill-white" viewBox="0 0 20 20" fill="currentColor">
                                     <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v2H7a1 1 0 100 2h2v2a1 1 0 102 0v-2h2a1 1 0 100-2h-2V7z" clipRule="evenodd" />
                                 </svg>
@@ -93,7 +97,7 @@ function ManageCategories() {
                         <div className='w-full h-full rounded-lg bg-white border'>
                             <div className='p-8 text-center'>
                                 <div className=' flex text-center justify-center items-center'>
-                                    <h3 className='font-semibold text-2xl  ' >Learn! </h3>
+                                    <h3 className='font-semibold text-2xl  ' >{c.name}</h3>
                                     <div className='flex ml-auto justify-center items-cente'>
                                         <div className='h-10 w-10 bg-blue-500 rounded rounded-full flex justify-center items-center' onClick={() => deleteCategory(c)} >
                                             <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 fill-white" viewBox="0 0 20 20" fill="currentColor">
@@ -117,7 +121,9 @@ function ManageCategories() {
                     ))}
 
 
-
+                    <Popup ref={modalAdd} >
+                        <PopupAddCategory />
+                    </Popup>
 
                 </div>
             </div>
