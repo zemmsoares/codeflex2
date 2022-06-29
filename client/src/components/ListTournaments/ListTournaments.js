@@ -37,9 +37,6 @@ function ListTournaments() {
         })
     }
 
-    function onInputChange(e) {
-        this.setState({ [e.target.name]: e.target.value });
-    }
 
     function onClickTournament(clickType, tournamentId, tournamentName) {
         if (clickType === 'Sign Up') {
@@ -122,7 +119,7 @@ function ListTournaments() {
                     <div className='flex px-6 pb-4'>
                         {displayInputCode ? <div className="private-code">
                             <input type="text" className="textbox-no-radius" style={{ height: '25px', marginBottom: '7px' }} placeholder="Tournament Private Code"
-                                name="privateCode" onChange={(e) => onInputChange(e)} value={privateCode} />
+                                name="privateCode" onChange={(e) => setPrivateCode(e.target.value)} value={privateCode} />
                             <input style={{ maxHeight: '25px' }} type="button" className="m-2 py-1.5  text-sm font-medium text-gray-900 focus:outline-none 
                             bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200"
                                 value="Register" onClick={onClickEnterPrivateTournament} />

@@ -89,14 +89,6 @@ function CreateTournament() {
         setEndDate(date);
     }
 
-    function handleChange(e) {
-        this.setState({
-            [e.target.id]: e.target.value
-
-        });
-
-    }
-
     function validateTournament(data) {
 
         if (isStringEmpty(data.name) || isStringEmpty(data.description)) {
@@ -246,6 +238,8 @@ function CreateTournament() {
         )
     }
 
+    console.log(name)
+
     return (
         <div className="container">
             <div className="row">
@@ -260,14 +254,14 @@ function CreateTournament() {
                         <div className="form-group">
                             <label for="tournamentName" className="col-sm-1 control-label" >Name</label>
                             <div className="col-sm-5">
-                                <input type="tournamentName" className="form-control" id="name" onChange={handleChange} value={name} placeholder="Tournament name" />
+                                <input type="tournamentName" className="form-control" id="name" onChange={(e) => setName(e.target.value)} value={name} placeholder="Tournament name" />
                                 <small className="fill-info">Length between 5 and 50 characters. No special characters except ':' and '_'</small>
                             </div>
                         </div>
                         <div className="form-group">
                             <label for="tournamentDescription" className="col-sm-1 control-label">Description</label>
                             <div className="col-sm-10">
-                                <textarea className="form-control" id="description" rows="6" onChange={handleChange} value={description} placeholder="Short tournament description"></textarea>
+                                <textarea className="form-control" id="description" rows="6" onChange={(e) => setDescription(e.target.value)} value={description} placeholder="Short tournament description"></textarea>
                                 <small className="fill-info">Length between 50 and 1000 characters</small>
                             </div>
                         </div>
@@ -310,7 +304,7 @@ function CreateTournament() {
                             <div className="form-group">
                                 <label htmlFor="tournamentName" className="col-sm-1 control-label">Private Code</label>
                                 <div className="col-sm-4" style={{ display: 'inline-block' }}>
-                                    <input type="code" className="form-control" id="privateCode" onChange={handleChange} value={privateCode} placeholder="Private code" />
+                                    <input type="code" className="form-control" id="privateCode" onChange={(e) => setPrivateCode(e.target.value)} value={privateCode} placeholder="Private code" />
                                     <small className="fill-info">Add a private code that you can share with your friends to register on the tournament</small>
                                 </div>
                             </div> : ''}
