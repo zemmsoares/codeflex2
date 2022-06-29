@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { getAuthorization, isContentManager, parseLocalJwt, splitUrl } from '../../commons/Utils';
 import PathLink from '../../PathLink/PathLink';
 import { URL } from '../../commons/Constants';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useParams } from 'react-router-dom';
 import { EditorState, convertToRaw, convertFromRaw } from 'draft-js';
 import { Editor } from 'react-draft-wysiwyg';
 import { toast, ToastContainer } from 'react-toastify';
@@ -26,12 +26,20 @@ function AddProblem() {
 
     const [problemMaxScore, setProblemMaxScore] = useState(100);
     const [difficulty, setDifficulty] = useState({ id: '', name: '' });
+
+    const [difficultyId, setDifficultyId] = useState(0);
+    const [difficultyName, setDifficultyName] = useState('');
+
     const [category, setCategory] = useState({ id: '', name: '' });
     const [problemId, setProblemId] = useState('');
-    const [problemName, setProblemName] = useState('');
+    const [problemNameA, setProblemNameA] = useState('');
+
+    const [catId, setCatId] = useState(0);
+    const [catName, setCatName] = useState('');
 
     const location = useLocation();
-
+    const { tournamentName } = useParams()
+    const { problemName } = useParams();
 
     useEffect(() => {
         if (!isContentManager()) {
@@ -58,10 +66,16 @@ function AddProblem() {
         }
     }, [])
 
+    useEffect(() => {
+        console.log(catName)
+        console.log(difficultyName)
+        console.log(problemNameA)
+    })
+
 
 
     function isUserTournamentOwner() {
-        fetch(URL + '/api/database/tournament/isUserTournamentOwner/' + this.props.match.params.tournamentName + "/" + parseLocalJwt().username, {
+        fetch(URL + '/api/database/tournament/isUserTournamentOwner/' + tournamentName + "/" + parseLocalJwt().username, {
             headers: new Headers({ ...getAuthorization() })
         }).then(res => {
             if (res.status === 200) {
@@ -73,7 +87,7 @@ function AddProblem() {
     }
 
     function fetchCurrentProblem() {
-        const problemName = this.props.match.params.problemName;
+        const problemName = problemName;
         fetch(URL + '/api/database/Problem/viewAllDetails/' + problemName, {
             headers: { ...getAuthorization() }
         }).then(res => res.json()).then(data => {
@@ -136,11 +150,6 @@ function AddProblem() {
         );
     }
 
-    function onTextBoxChange(e) {
-        console.log(e.target.value)
-        this.setState({ [e.target.name]: e.target.value });
-    }
-
     // couldn't figure out how to get the target for the editors. This will have to do. ( maybe refs)
     function onDescriptionChange(change) {
         setProblemDescription(change);
@@ -156,9 +165,15 @@ function AddProblem() {
     }
 
     function handleSelectBoxChange(e) {
-        let selectedItem = [...e.target.options].filter(o => o.selected)[0]; //
-        console.log(selectedItem.id);
-        this.setState({ [e.target.name]: { id: selectedItem.value, name: selectedItem.id } });
+        let selectedItem = [...e.target.options].filter(o => o.selected)[0];
+        setCatId(selectedItem.value)
+        setCatName(selectedItem.id)
+    }
+
+    function handleSelectBoxChangeDifficulty(e) {
+        let selectedItem = [...e.target.options].filter(o => o.selected)[0];
+        setDifficultyId(selectedItem.value)
+        setDifficultyName(selectedItem.id)
     }
 
     function updateProblem() {
@@ -166,26 +181,26 @@ function AddProblem() {
         const data = {
             problem: {
                 id: problemId,
-                name: problemName,
+                name: problemNameA,
                 maxScore: parseInt(problemMaxScore),
                 description: JSON.stringify(convertToRaw(problemDescription.getCurrentContent())),
                 constraints: JSON.stringify(convertToRaw(problemConstraints.getCurrentContent())),
                 inputFormat: JSON.stringify(convertToRaw(problemInputFormat.getCurrentContent())),
                 outputFormat: JSON.stringify(convertToRaw(problemOutputFormat.getCurrentContent())),
                 difficulty: {
-                    id: difficulty.id,
-                    name: difficulty.name
+                    id: difficultyId,
+                    name: difficultyName
                 }
             },
             category: {
-                id: category.id,
-                name: category.name
+                id: catId,
+                name: catName
             },
             owner: {
                 username: parseLocalJwt().username
             },
             tournament: {
-                name: this.props.match.params.tournamentName
+                name: tournamentName
             }
         }
 
@@ -218,7 +233,27 @@ function AddProblem() {
 
         let url = splitUrl(location.pathname)
 
-        if (!validateSaveProblem(this.state)) {
+        const dataVal = {
+            invalidData: true,
+            userIsOwner: userIsOwner,
+            problemId: problemId,
+            problemName: problemNameA,
+            problemMaxScore: problemMaxScore,
+            problemDescription: EditorState.createEmpty(),
+            problemConstraints: EditorState.createEmpty(),
+            problemInputFormat: EditorState.createEmpty(),
+            problemOutputFormat: EditorState.createEmpty(),
+            difficulty: {
+                id: difficultyId, name: difficultyName
+            },
+            category: {
+                id: catId, name: catName
+            },
+            displayDifficulties: displayDifficulties,
+            displayCategories: displayCategories,
+        }
+
+        if (!validateSaveProblem(dataVal)) {
             return;
         }
 
@@ -231,7 +266,7 @@ function AddProblem() {
 
         const data = {
             problem: {
-                name: problemName,
+                name: problemNameA,
                 maxScore: Number(problemMaxScore),
                 description: JSON.stringify(convertToRaw(problemDescription.getCurrentContent())),
                 constraints: JSON.stringify(convertToRaw(problemConstraints.getCurrentContent())),
@@ -240,18 +275,18 @@ function AddProblem() {
                 creationDate: new Date().getTime(),
             },
             difficulty: {
-                id: difficulty.id,
-                name: difficulty.name
+                id: difficultyId,
+                name: difficultyName
             },
             category: {
-                id: category.id,
-                name: category.name
+                id: catId,
+                name: catName
             },
             owner: {
                 username: parseLocalJwt().username
             },
             tournament: {
-                name: this.props.match.params.tournamentName
+                name: tournamentName
             }
         }
 
@@ -279,20 +314,15 @@ function AddProblem() {
         let url = splitUrl(location.pathname);
 
         if (url[0] === 'compete') {
-            return "/compete/manage-tournaments/" + this.props.match.params.tournamentName;
+            return "/compete/manage-tournaments/" + tournamentName;
         } else if (url[0] === 'manage') {
             if (url[1] === 'problems') {
                 return "/manage/problems";
             } else if (url[1] === 'tournaments') {
-                return "/manage/tournaments/" + this.props.match.params.tournamentName;
+                return "/manage/tournaments/" + tournamentName;
             }
         }
     }
-
-
-
-
-
 
     return (
         <div className="container add-problem">
@@ -303,7 +333,7 @@ function AddProblem() {
                     <p>Add a name to your problem.</p>
                 </div>
                 <div className="col-sm-10 add-problem-textarea">
-                    <input name="problemName" className="textbox-problem" onChange={onTextBoxChange} value={problemName} type="text" id="input-problem-name" placeholder="Problem name" />
+                    <input name="problemName" className="textbox-problem" onChange={(e) => { setProblemNameA(e.target.value) }} value={problemNameA} type="text" id="input-problem-name" placeholder="Problem name" />
                     <small className="fill-info"> &nbsp; Length between 5 and 50 characters</small>
                 </div>
             </div>
@@ -334,7 +364,7 @@ function AddProblem() {
                     <p>Select the difficulty of the problem.</p>
                 </div>
                 <div className="col-sm-10 add-problem-textarea">
-                    <select name="difficulty" className="textbox-problem" placeholder="Difficulty" onChange={handleSelectBoxChange}>
+                    <select name="difficulty" className="textbox-problem" placeholder="Difficulty" onChange={handleSelectBoxChangeDifficulty}>
                         <option value="" disabled selected>Select difficulty</option>
                         {displayDifficulties.map((d, index) => (
                             <option key={d.id} value={d.id} selected={d.id === difficulty.id ? 'selected' : ''
@@ -451,7 +481,8 @@ function AddProblem() {
                     <p>Max score of the problem. It will be divided equally by all the test cases that aren't shown to the user.</p>
                 </div>
                 <div className="col-sm-10 add-problem-textarea">
-                    <input name="problemMaxScore" className="textbox-problem" onChange={onTextBoxChange} value={problemMaxScore} type="text" placeholder="Max score (e.g. 100)" />
+                    <input name="problemMaxScore" className="textbox-problem" onChange={(e) => { setProblemMaxScore(e.target.value) }}
+                        value={problemMaxScore} type="text" placeholder="Max score (e.g. 100)" />
                     <small className="fill-info"> &nbsp; Value between 10 and 250</small>
                 </div>
             </div>
