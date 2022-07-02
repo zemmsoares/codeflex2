@@ -1,7 +1,7 @@
 
 
 import React, { useEffect, useState, useRef } from 'react'
-import { useLocation, useParams, Link, Navigate } from 'react-router-dom';
+import { useLocation, useParams, Link, Navigate, useNavigate } from 'react-router-dom';
 import { getAuthorization, parseLocalJwt, splitUrl, textToLowerCaseNoSpaces, dateWithDay } from '../commons/Utils';
 import { URL } from '../commons/Constants';
 import { ToastContainer, toast } from 'react-toastify';
@@ -45,6 +45,8 @@ function Problem() {
 
     const location = useLocation();
     const { problemName } = useParams()
+
+    const navigate = useNavigate();
 
 
     const mounted = useRef();
@@ -549,14 +551,10 @@ function Problem() {
                                             pauseOnHover
                                             style={{ fontFamily: "'Roboto', sans-serif", fontSize: '12pt', letterSpacing: '1px' }}
                                         />
-
                                         {loaded ?
-                                            <Navigate to={{
-                                                pathname: location.pathname + "/view-results", state: {
-                                                    information: submission.scoringResults
-                                                }
-                                            }} /> : ''
+                                            navigate(location.pathname + "/view-results", { state: { information: scoringResults } }) : ''
                                         }
+
 
 
                                     </div>

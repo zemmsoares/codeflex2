@@ -1,7 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { textToLowerCaseNoSpaces } from "../commons/Utils";
-import userAvatar from '../images/user_placeholder.png';
+import { textToLowerCaseNoSpaces } from "../../commons/Utils";
 
 export default function ProblemLeaderboardTable(props) {
     function handleChange(e) {
@@ -51,55 +50,23 @@ export default function ProblemLeaderboardTable(props) {
                         <thead>
                             <tr className="border-gray-200 uppercase text-xs text-gray-700 tracking-wider">
                                 <th className="p-2 pl-4" ></th>
-                                <th className="p-2">Description</th>
-                                <th className="p-2">Status</th>
+                                <th className="p-2">Username</th>
+                                <th className="p-2">Score</th>
 
                             </tr>
                         </thead>
                         <tbody className="bg-white">
-                            {props.tournaments.map(data => (
-                                <tr key={data.tournament.id} className="border-b border-gray-200">
+                            {props.leaderboard.map(data => (
+                                <tr key={data.id} className="border-b border-gray-200">
                                     <td className="py-1 px-2">
-                                        <span className="block text-sm">{data.tournament.name}</span>
+                                        <span className="block text-sm"></span>
                                     </td>
                                     <td className="py-1 px-2">
-                                        <span className="text-gray-700 text-xs">{data.tournament.description}</span>
+                                        <span className="block text-sm">{data.username}</span>
                                     </td>
-                                    <td className="py-1 px-2 pr-4">
-                                        {data.tournament.open === "true" ? (
-                                            <span className="bg-green-200 py-1 px-2 text-xs rounded-full text-green-900">
-                                                Open
-                                            </span>
-                                        ) : (
-                                            <span className="bg-red-200 py-1 px-2 text-xs rounded-full text-red-900">
-                                                Closed
-                                            </span>
-                                        )}
+                                    <td className="py-1 px-2">
+                                        <span className="text-gray-700 text-xs">{data.score}</span>
                                     </td>
-                                    <td className="py-1  w-44">
-                                        <div className="flex justify-end">
-                                            <Link to={"/compete/" + textToLowerCaseNoSpaces(data.tournament.name) + "/leaderboard"}>
-                                                <button type="button" class="py-1.5 px-5 text-sm font-medium text-gray-900 focus:outline-none
-                                                 bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 
-                                                 focus:z-10 focus:ring-4 focus:ring-gray-200">
-                                                    View Leaderboard
-                                                </button>
-                                            </Link>
-                                        </div>
-                                    </td>
-                                    <td className="py-1 w-44 pr-6">
-                                        <div className="flex justify-end">
-                                            <Link to={"/compete/" + textToLowerCaseNoSpaces(data.tournament.name)}>
-                                                <button type="button" class=" py-1.5 px-5 text-sm font-medium text-gray-900 focus:outline-none
-                                                 bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 
-                                                 focus:z-10 focus:ring-4 focus:ring-gray-200">
-                                                    View Problems
-                                                </button>
-                                            </Link>
-                                        </div>
-
-                                    </td>
-
                                 </tr>
                             ))}
                         </tbody>

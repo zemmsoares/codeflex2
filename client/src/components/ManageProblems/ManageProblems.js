@@ -24,7 +24,7 @@ function ManageProblems() {
             isUserTournamentOwner();
         }
         fetchProblems();
-    })
+    }, [])
 
     function isUserTournamentOwner() {
         fetch(URL + '/api/database/tournament/isUserTournamentOwner/' + tournamentNameParam + "/" + parseLocalJwt().username, {
@@ -41,6 +41,9 @@ function ManageProblems() {
 
     function fetchProblems() {
         const url = splitUrl(location.pathname);
+
+        console.log('#############################################')
+        console.log(url[2])
         let origin = '';
         if (url[0] === 'manage') {
             if (url[1] === 'tournaments') {
@@ -72,7 +75,7 @@ function ManageProblems() {
                 fetchAllProblemsByTournamentName(url[2]);
             }
         } else if (origin === 'manage-tournaments') {
-            fetch(URL + '/api/database/Tournament/getAllProblemsByName/' + tournamentNameParam, {
+            fetch(URL + '/api/database/Tournament/getAllProblemsByName/' + url[2], {
                 headers: { ...getAuthorization() }
             }).then(res => res.json())
                 .then(data => {
@@ -82,8 +85,8 @@ function ManageProblems() {
     }
 
 
-    function fetchAllProblemsByTournamentName(tournamentName) {
-        fetch(URL + '/api/database/Tournament/getAllProblemsByName/' + tournamentName, {
+    function fetchAllProblemsByTournamentName(tournamentNameParam) {
+        fetch(URL + '/api/database/Tournament/getAllProblemsByName/' + tournamentNameParam, {
             headers: { ...getAuthorization() }
         }).then(res => res.json())
             .then(data => {
@@ -132,7 +135,7 @@ function ManageProblems() {
         <div className="container">
             <div className="row">
                 {origin === 'tournament' ?
-                    <PathLink path={location.pathname} title={splitUrl(urlParam)[2]} />
+                    <PathLink path={location.pathname} title="dqwdqw" />
                     :
                     <PathLink path={location.pathname} title="Manage Problems" />}
                 <div>
@@ -210,7 +213,20 @@ function ManageProblems() {
 
                             </div>
                         ) : (
-                            <div></div>
+                            <div>
+                                <div>No problems to be displayed</div>
+                                <Link to={location.pathname + '/add'}>
+                                    <button
+                                        type="button"
+                                        class="ml-auto m-2 py-1.5 px-8 mr-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
+                                    >
+                                        Create new problem!
+                                    </button>
+                                </Link>
+                            </div>
+
+
+
                         )}
                     </div>
 

@@ -3,6 +3,7 @@ import { dateWithHoursAndDay, getAuthorization, parseLocalJwt, splitUrl, textToL
 import { URL } from '../commons/Constants';
 import PathLink from '../PathLink/PathLink';
 import { Link, useLocation } from 'react-router-dom';
+import ManageTournamentsTable from './ManageTournamentsTable';
 
 function ManageTournaments() {
 
@@ -25,6 +26,7 @@ function ManageTournaments() {
             }).then(res => res.json())
                 .then(data => {
                     setTournaments(data)
+                    console.log(data)
                 })
         } else if (location2 === 'manage') {
             console.log('fetching public tournaments')
@@ -33,6 +35,7 @@ function ManageTournaments() {
             }).then(res => res.json())
                 .then(data => {
                     setTournaments(data)
+                    console.log(data)
                 })
         }
     }
@@ -97,9 +100,9 @@ function ManageTournaments() {
             <PathLink path={location.pathname} title="Manage tournaments" />
             <div className="px-8">
                 {tournaments.length > 0 ?
-                    <div>
-                        {/* DO REACT TABLE DO REACT TABLE DO REACT TABLE DO REACT TABLE DO REACT TABLE  */}
-                    </div> : <h3 className="no-data-h3 ">There are no tournaments created.</h3>}
+                    <ManageTournamentsTable tournaments={tournaments} />
+                    :
+                    <h3 className="no-data-h3 ">There are no tournaments created.</h3>}
 
                 <Link to={location2 === 'compete' ? "/compete/create-tournament" : "/manage/tournaments/add"}>
                     <button

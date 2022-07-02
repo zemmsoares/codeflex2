@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import './Leaderboard.css';
+import ProblemLeaderboardTable from './ProblemLeaderboardTable'
 
 import { URL } from '../../commons/Constants';
 import { splitUrl, msToTime, getAuthorization, parseLocalJwt } from '../../commons/Utils';
@@ -19,7 +20,7 @@ function Leaderboard({ pathname }) {
     }, [])
 
 
-    let toRender = '<div></div>';
+    let toRender = <ProblemLeaderboardTable leaderboard={leaderboard} />;
     if (problemName != null) {
 
         let leaderboardFiltered = leaderboard.sort((a, b) => { return (b.score - a.score || a.durationMilliseconds - b.durationMilliseconds) });

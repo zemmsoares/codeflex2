@@ -24,6 +24,7 @@ function ListProblems(props) {
     const { tournamentName } = useParams();
 
 
+
     useEffect(() => {
         const url = splitUrl(location.pathname);
 
@@ -48,29 +49,32 @@ function ListProblems(props) {
             headers: { ...getAuthorization() }
         }).then(res => {
             if (res.status === 200) {
+                console.log('is registered')
                 setRegistered(true);
                 fetchTournament();
                 fetchProblemsByTournament();
-
             } else {
                 setRegistered(false);
+
             }
         })
 
     }
 
     function fetchTournament() {
-        fetch(URL + '/api/database/Tournament/viewByName/' + this.props.match.params.tournamentName, {
+        fetch(URL + '/api/database/Tournament/viewByName/' + tournamentName, {
             headers: { ...getAuthorization() }
         }).then(res => res.json()
         ).then(data => {
             setTournament(data);
+            console.log(data)
         })
 
     }
     function fetchProblemsByTournament() {
         const currentTournament = splitUrl(location.pathname)[1];
-        fetch(URL + '/api/database/tournament/getAllProblemsByName/' + currentTournament + "/" + parseLocalJwt().username, {
+        console.log(currentTournament)
+        fetch(URL + '/api/database/tournament/getAllProblemsByName/' + currentTournament, {
             headers: {
                 ...getAuthorization()
             }
@@ -78,6 +82,7 @@ function ListProblems(props) {
             .then(data => {
                 setProblems(data);
                 setFilteredProblems(data);
+
             })
     }
 

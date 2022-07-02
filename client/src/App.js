@@ -23,6 +23,7 @@ import ManageContent from "./components/ManageContent/ManageContent";
 import ManageCategories from './components/ManageCategories/ManageCategories';
 import Home from './components/Home/Home';
 import TournamentLeaderboard from "./components/TournamentLeaderboard/TournamentLeaderboard";
+import ViewResults from "./components/ViewResults/ViewResults";
 
 export class App extends Component {
   constructor(props) {
@@ -67,6 +68,7 @@ export class App extends Component {
                 <Route path="/dashboard" element={<Dashboard />} />
                 <Route path="/leaderboard" element={<GlobalLeaderboard />} />
                 <Route path="/user/:username" element={<ProfilePage />} />
+                <Route path="/practise/:categoryName/:problemName/view-results" element={<ViewResults />} />
                 <Route path="/practise/:categoryName/:problemName" element={<Problem />} />
                 <Route path="/practise/:categoryName" element={<ListProblems />} />
                 <Route path="/practise" element={<ListCategories />} />
@@ -89,7 +91,7 @@ export class App extends Component {
                 <Route path="/compete/:tournamentName" element={<ListProblems />} />
 
 
-                {/*  <Route path="/compete/:tournamentName/:problemName/view-results" element={<ViewResults />} />*/}
+                <Route path="/compete/:tournamentName/:problemName/view-results" element={<ViewResults />} />
 
 
                 {/* REACT.FRAGMENT is breaking the switch */}

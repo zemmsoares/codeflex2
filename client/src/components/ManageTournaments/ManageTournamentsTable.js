@@ -1,14 +1,22 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import { textToLowerCaseNoSpaces } from "../commons/Utils";
+import React, { useEffect, useState } from "react";
+import { Link, useLocation } from "react-router-dom";
+import { URL } from "../commons/Constants";
+import { dateWithHoursAndDay, getAuthorization, parseLocalJwt, splitUrl, textToLowerCaseNoSpaces } from "../commons/Utils";
 import userAvatar from '../images/user_placeholder.png';
 
-export default function ProblemTable(props) {
+export default function ManageTournamentsTable(props) {
     function handleChange(e) {
         props.setFilter(e.target.value);
     }
 
-    console.log(props)
+    const [redirectDestination, setRedirectDestination] = useState('')
+    const [tournaments, setTournaments] = useState('')
+
+    const location = useLocation();
+
+    console.log(props.path)
+
+
 
     return (
         <div className="px-8 flex justify-center mb-10">
@@ -21,7 +29,7 @@ export default function ProblemTable(props) {
 
                             <div className="ml-6 my-5">
 
-                                <span className="text-gray-700 font-bold text-lg pr-8">Haskell Problems: </span>
+                                <span className="text-gray-700 font-bold text-lg pr-8">{props.title}</span>
                             </div>
 
                         </label>
@@ -51,57 +59,69 @@ export default function ProblemTable(props) {
                         <thead>
                             <tr className="border-gray-200 uppercase text-xs text-gray-700 tracking-wider">
                                 <th className="p-2 pl-4" />
-                                <th className="p-2">User</th>
-                                <th className="p-2">Score</th>
-                                <th className="p-2 pr-4">Owner</th>
-                                <th className="p-2 pr-4">Status</th>
+                                <th className="p-2">Name</th>
+                                <th className="p-2">Status</th>
+                                <th className="p-2 pr-4">startingDate</th>
+                                <th className="p-2 pr-4">endingDate</th>
                             </tr>
                         </thead>
                         <tbody className="bg-white">
-                            {props.problem.map(problem => (
-                                <tr key={problem.id} className="border-b border-gray-200">
-                                    <td className="py-1 pl-6 ">
-                                        <img
-                                            src={userAvatar}
-                                            alt={'dqwdqwdqw'}
-                                            className="block w-8 h-8 rounded-full"
-                                        />
-                                    </td>
+                            {props.tournaments.map(tournament => (
+                                <tr key={tournament.id} className="border-b border-gray-200">
+
                                     <td className="py-1 px-2">
-                                        <span className="block text-sm">{problem.name}</span>
+                                        <span className="block text-sm">{tournament.tournament.id}</span>
                                     </td>
+
                                     <td className="py-1 px-2">
-                                        <span className="text-gray-700 text-xs">{problem.difficulty.name}</span>
+                                        <span className="block text-sm">{tournament.tournament.name}</span>
                                     </td>
-                                    <td className="py-1 px-2">{problem.owner.username}</td>
+
                                     <td className="py-1 px-2 pr-4">
-                                        {problem.solved === "true" ? (
+                                        {tournament.tournament.open === "true" ? (
                                             <span className="bg-green-200 py-1 px-2 text-xs rounded-full text-green-900">
-                                                Solved
+                                                Open
                                             </span>
                                         ) : (
                                             <span className="bg-red-200 py-1 px-2 text-xs rounded-full text-red-900">
-                                                Unsolved
+                                                Closed
                                             </span>
                                         )}
                                     </td>
 
+
+                                    <td className="py-1 px-2">
+                                        <span className="block text-sm">{dateWithHoursAndDay(tournament.tournament.startingDate)}</span>
+                                    </td>
+
+                                    <td className="py-1 px-2">
+                                        <span className="block text-sm">{dateWithHoursAndDay(tournament.tournament.endingDate)}</span>
+                                    </td>
+
+                                    <td className="py-1 px-2">
+                                        <span className="block text-sm">{tournament.users.length}</span>
+                                    </td>
+
                                     <td className="py-1 pr-6 w-64">
                                         <div className=" flex justify-end">
+
+
+
                                             <Link to={{
-                                                pathname: props.path + '/' + textToLowerCaseNoSpaces(problem.name), state: {
-                                                    problemId: problem.id,
-                                                    problemName: problem.name
-                                                }
+                                                pathname: '/manage/tournaments/' + textToLowerCaseNoSpaces(tournament.tournament.name)
                                             }}>
                                                 <button type="button" class=" py-1.5 px-5 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">
-                                                    Solve Problem
+                                                    View Problems
                                                 </button>
 
                                             </Link>
+
+
+
                                         </div>
 
                                     </td>
+
 
                                 </tr>
                             ))}
@@ -110,13 +130,7 @@ export default function ProblemTable(props) {
                 </div>
 
 
-                <div className="flex justify-start">
-                    <label>
-                        <div className="ml-6 my-2">
-                            <span className="text-gray-700 text-sm pr-8 text-gray-400">2022@codeflex </span>
-                        </div>
-                    </label>
-                </div>
+                <div className="flex justify-start py-4"></div>
 
             </div>
         </div>
