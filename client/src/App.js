@@ -58,10 +58,10 @@ export class App extends Component {
       return (
         <main class="flex">
           <Router>
-            <div className="fixed w-64 min-w-fit max-w-xs h-screen bg-white invisible md:visible ">
+            <div className=" ">
               <NavBar />
             </div>
-            <div className="justify-between ml-0 md:ml-64 bg-gray-50 w-full">
+            <div className="w-full bg-gray-50">
               <Routes>
 
                 <Route path="/" element={<Home />} />
