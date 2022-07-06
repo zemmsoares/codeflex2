@@ -112,6 +112,8 @@ function NavBar() {
                                 </Link>
                             </li>
                         </ul>
+
+
                         <ul className="py-2">
                             {parseLocalJwt().role === "CONTENT_MANAGER" ?
                                 <li className='border-t'>
@@ -131,6 +133,41 @@ function NavBar() {
                                     </div>
                                 </li> : ''
                             }
+                        </ul>
+
+                        <ul className="py-2">
+                            <li>
+                                <Link to={"/user/" + parseLocalJwt().username}
+                                    onClick={() => setSelected('profile')}
+                                    className={`flex rounded-md p-2 cursor-pointer text-base font-semibold items-center gap-x-4 text-gray-400 hover:text-black hover:bg-gray-50
+                                    ${selected == 'profile' ? 'text-black' : ''}`}>
+                                    <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                                        <path strokeLinecap="round" strokeLinejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                                    </svg>
+                                    <span className={`${!open && "hidden"} origin-left duration-200`}>
+                                        Profile
+                                    </span>
+                                </Link>
+                            </li>
+                        </ul>
+
+
+                        <ul className="py-2">
+                            <li className='border-t'>
+                                <div className='pt-4'>
+                                    <Link to="/"
+                                        onClick={logoutUser}
+                                        className={`flex rounded-md p-2 cursor-pointer text-base font-semibold items-center gap-x-4 text-gray-400 hover:text-black hover:bg-gray-50
+                                    ${selected == 'logout' ? 'text-black' : ''}`}>
+                                        <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                                            <path strokeLinecap="round" strokeLinejoin="round" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+                                        </svg>
+                                        <span className={`${!open && "hidden"} origin-left duration-200`}>
+                                            Log out
+                                        </span>
+                                    </Link>
+                                </div>
+                            </li>
                         </ul>
 
 

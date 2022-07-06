@@ -25,6 +25,8 @@ import Home from './components/Home/Home';
 import TournamentLeaderboard from "./components/TournamentLeaderboard/TournamentLeaderboard";
 import ViewResults from "./components/ViewResults/ViewResults";
 
+import ManageExample from './components/ManageExample/ManageExample';
+
 export class App extends Component {
   constructor(props) {
     super(props);
@@ -75,7 +77,6 @@ export class App extends Component {
                 <Route path="/404" element={<PageNotFound />} />
                 <Route path="*" element={<PageNotFound />} />
 
-
                 <Route path="/compete/manage-tournaments/:tournamentName/:problemName/test-cases" element={<ManageTestCases />} />
                 <Route path="/compete/manage-tournaments/:tournamentName/:problemName/edit" element={<AddProblem />} />
                 <Route path="/compete/manage-tournaments/:tournamentName/edit" element={<CreateTournament />} />
@@ -110,7 +111,7 @@ export class App extends Component {
                 {this.manageSectionControl() ? <Route path="/manage/tournaments/:tournamentName/:problemName/test-cases" element={<ManageTestCases />} /> : ''}
                 {this.manageSectionControl() ? <Route path="/manage/categories" element={<ManageCategories />} /> : ''}
 
-
+                {this.manageSectionControl() ? <Route path="/manage/v2" element={<ManageExample />} /> : ''}
 
               </Routes>
             </div>

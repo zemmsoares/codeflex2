@@ -12,6 +12,8 @@ function PathLink(props) {
         });
     }
 
+    console.log(props)
+
     function buildPath(pathname, index) {
         let finalPath = '/';
         for (let i = 0; i <= index; i++) {
@@ -39,10 +41,9 @@ function PathLink(props) {
         titleCheck.replace('-', ' ');
     }
 
-
     return (
         <div className='px-8 py-8'>
-            <h1 className='text-2xl upp font-bold capitalize'>{pathname}</h1>
+            <h1 className='text-2xl upp font-bold capitalize'>{pathname[0]}</h1>
             <p className='text-gray-600'>{props.title}</p>
 
             <div className='pt-4 mt-4 space-y-2 border-t border-gray-200 dark:border-gray-700'></div>

@@ -16,6 +16,8 @@ function ManageProblems() {
     const { tournamentNameParam } = useParams();
     const { urlParam } = useParams();
 
+    const [filteredData, setFilteredData] = useState();
+
 
     const childRef = useRef()
 
@@ -130,6 +132,7 @@ function ManageProblems() {
                 <input className="btn btn-codeflex" type="button" value="Add problem" />
             </Link>
         </div>
+
 
     return (
         <div className="container">

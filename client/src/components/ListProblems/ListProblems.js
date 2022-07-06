@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { URL } from '../commons/Constants';
 import { useLocation, useParams } from 'react-router-dom';
-import { Link } from 'react-router-dom';
 import { splitUrl, getAuthorization, textToLowerCaseNoSpaces, parseLocalJwt } from '../commons/Utils';
 import PathLink from '../PathLink/PathLink';
 
@@ -106,18 +105,12 @@ function ListProblems(props) {
     }
 
 
-    function renderTables() {
-        return (
-            <ProblemTable problem={filteredProblems} path={location.pathname} />
-        );
-    }
-
     return (
 
         <div>
             <PathLink path={location.pathname} title="Practise by solving exercices" />
             <div>
-                {renderTables()}
+                <ProblemTable problem={filteredProblems} path={location.pathname} />
             </div>
         </div>
 

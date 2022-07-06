@@ -81,6 +81,28 @@ function ManageContent() {
                         </Link>
 
 
+
+                        <Link to="/manage/v2">
+                            <div className='w-full h-full rounded-lg bg-white border'>
+                                <div className='p-8 text-center'>
+
+                                    <div className='flex justify-center items-center'>
+                                        <div className='h-24 w-24 bg-blue-500 rounded rounded-full flex justify-center items-center'>
+                                            <svg xmlns="http://www.w3.org/2000/svg" className="h-12 w-12 fill-white" viewBox="0 0 20 20" fill="currentColor">
+                                                <path fillRule="evenodd" d="M18 13V5a2 2 0 00-2-2H4a2 2 0 00-2 2v8a2 2 0 002 2h3l3 3 3-3h3a2 2 0 002-2zM5 7a1 1 0 011-1h8a1 1 0 110 2H6a1 1 0 01-1-1zm1 3a1 1 0 100 2h3a1 1 0 100-2H6z" clipRule="evenodd" />
+                                            </svg>
+                                        </div>
+                                    </div>
+
+                                    <br></br>
+                                    <h3 className='font-semibold text-2xl'>New Stuff</h3>
+                                    <br></br>
+                                    <p>Manage the list of problems and to which category they belong. Test cases are also take care of here.</p>
+                                </div>
+                            </div>
+                        </Link>
+
+
                     </div>
                 </div>
             ) : (
