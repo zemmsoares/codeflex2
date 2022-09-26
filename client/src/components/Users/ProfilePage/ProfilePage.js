@@ -99,7 +99,7 @@ function ProfilePage() {
 
                                 <div className='px-8'>
 
-                                    <div className='bg-gray-100 mb-4'>
+                                    <div className='bg-gray-50 mb-4'>
                                         <div class="flex-1 flex flex-row justify-start space-x-2">
                                             <div class="relative inline-block">
                                                 <img className='w-24 h-24 bg-gray-100 rounded-full rounded"' src={require('../../images/user_placeholder.png')} alt="User flat image" />

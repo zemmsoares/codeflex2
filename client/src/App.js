@@ -26,6 +26,7 @@ import TournamentLeaderboard from "./components/TournamentLeaderboard/Tournament
 import ViewResults from "./components/ViewResults/ViewResults";
 
 import ManageExample from './components/ManageExample/ManageExample';
+import Exam from "./components/Exam/Exam";
 
 export class App extends Component {
   constructor(props) {
@@ -74,6 +75,7 @@ export class App extends Component {
                 <Route path="/practise/:categoryName/:problemName" element={<Problem />} />
                 <Route path="/practise/:categoryName" element={<ListProblems />} />
                 <Route path="/practise" element={<ListCategories />} />
+                <Route path="/exam" element={<Exam/>} />
                 <Route path="/404" element={<PageNotFound />} />
                 <Route path="*" element={<PageNotFound />} />
 

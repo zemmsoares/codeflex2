@@ -31,7 +31,9 @@ function ListCategories() {
                             <div className='relative w-full h-full rounded-lg bg-white border shadow'>
                                 <div className='p-4'>
                                     <div className='flex flex-row pb-4 '>
-                                        <img className='rounded-full h-24 w-24 flex-shrink-0 ' src={avatarImg}></img>
+                                        <span className='rounded-full h-24 w-24 flex-shrink-0 bg-gray-200 flex justify-center items-center font-bold text-4xl text-white'>{category.name.charAt(0)}</span>
+                                        {/* <img className='rounded-full h-24 w-24 flex-shrink-0 ' src={avatarImg}></img> */}
+
                                         <div className='ml-4'>
                                             <span className='flex items-center  '>
                                                 <p className='text-xl font-bold pb-1'>{category.name}</p>
