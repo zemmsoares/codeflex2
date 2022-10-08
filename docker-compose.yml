@@ -7,6 +7,14 @@ services:
   #   - 8080:8080
   # networks:
   #   - network_backend
+  executor:
+    build: ./executor
+    ports: 
+      - 8081:8081
+    tty: true
+    networks:
+      - network_backend
+
 
   server:
     image: maven:3.6.3-jdk-8

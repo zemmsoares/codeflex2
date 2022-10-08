@@ -50,7 +50,7 @@ public class CodeflexApplication {
 
     @Bean
     public Host fetchAndConnectHosts() {
-        Host h1 = new Host("213.168.248.100", 22, "root", new SSHClient(),
+        Host h1 = new Host("172.18.0.2", 22, "root", new SSHClient(),
                 "", false);
 
       //  System.out.println("Trying to connect");
@@ -71,7 +71,7 @@ public class CodeflexApplication {
             // TODO : deal with this
             ssh.addHostKeyVerifier(new PromiscuousVerifier());
             ssh.connect(host.getIp(), host.getPort());
-            ssh.authPassword("root", "root!asd123"); // TODO: move to secrets
+            ssh.authPassword("root", "root"); // TODO: move to secrets
             ssh.startSession().exec("rm -rf " + PATH_SERVER + File.separator + "*");
             ssh.startSession().exec("touch ~/created_from_java.txt");
             ssh.startSession().exec("mkdir Submissions");
