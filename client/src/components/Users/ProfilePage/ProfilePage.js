@@ -96,9 +96,7 @@ function ProfilePage() {
                                 <div className="">
                                     <PathLink path={location.pathname} title="Profile" />
                                 </div>
-
                                 <div className='px-8'>
-
                                     <div className='bg-gray-50 mb-4'>
                                         <div class="flex-1 flex flex-row justify-start space-x-2">
                                             <div class="relative inline-block">
@@ -109,21 +107,15 @@ function ProfilePage() {
                                                 <p className='text-lg font-bold capitalize'>{username}</p>
                                             </div>
                                         </div>
-
                                     </div>
-
-
-
                                     <div className='border rounded-lg p-4'>
                                         <GithubCalendar submissions={submissions} />
                                     </div>
-
                                     <div className=' p-4'>
                                         <h3 className='font-bold'>Recent Submissions</h3>
                                         {submissions.length > 0 && categories.length > 0 ?
                                             submissions.sort((a, b) => new Date(b.date) - new Date(a.date)).slice(0, Math.min(10, submissions.length)).map(s => (
                                                 <div className="profile-page-subtramission">
-
                                                     <p>Solution to {linkToProblem(s)} submitted on {dateWithHoursAndDay(s.date)} with a total score of {s.score.toFixed(2)}
                                                         &nbsp;({s.score != 0 ? (s.score / s.problem.maxScore * 100).toFixed(2) : '0'}%).</p>
                                                 </div>
