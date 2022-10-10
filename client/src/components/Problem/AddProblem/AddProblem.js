@@ -401,7 +401,7 @@ function AddProblem() {
       splitUrl(location.pathname)[1] !== "tournaments" ? (
         <div>
           {
-            <div className="row info-section">
+            <div className="row info-section pl-8">
               <div className="col-sm-2 add-problem-desc">
                 <h3>Category</h3>
                 <p>Select the category that best represents the problem.</p>
@@ -604,7 +604,7 @@ function AddProblem() {
         <div className="col-sm-offset-2 col-sm-10 col-xs-12 pl-8">
           <input
             type="button"
-            className="btn btn-codeflex bg-blue-500 rounded mb-10 text-white font-bold"
+            class="ml-auto m-2 py-1.5 px-8 mr-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700 cursor-pointer mb-10"
             onClick={saveProblem}
             name=""
             id="save-problem"
