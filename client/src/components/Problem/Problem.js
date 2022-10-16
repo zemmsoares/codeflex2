@@ -353,7 +353,7 @@ function Problem() {
 
     return (
       <div className="flex flex-col">
-        <div className=" " id="problem-section">
+        <div className="border rounded-xl" id="problem-section">
           <div id="anchor-remove-mathjax"></div>
 
           <h3 id="problem-statement" className="problem-section-h3">
@@ -408,7 +408,7 @@ function Problem() {
         </div>
         {/* REMOVED PROBLEM INFORMATION */}
         {/*{problemInformation}*/}
-        <div className="col-sm-12 ace-editor-container">
+        <div className="col-sm-12 ace-editor-container mt-5">
           <div className="ace-editor">
             <div className="ace-editor-navbar">
               <p

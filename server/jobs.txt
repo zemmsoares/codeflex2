@@ -1,0 +1,2 @@
+firejail --private=/home/ubuntu/Submissions/12_Haskell --quiet --net=none cat 12_Haskell/1 | timeout 3s ./Solution ./12_Haskell/1 2> runtime_error.txt > output_12_1.txt
+firejail --private=/home/ubuntu/Submissions/12_Haskell --quiet --net=none cat 12_Haskell/2 | timeout 3s ./Solution ./12_Haskell/2 2> runtime_error.txt > output_12_2.txt

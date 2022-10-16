@@ -137,9 +137,33 @@ public class EvaluateSubmissions implements Runnable {
 		} catch (ConnectionException | TransportException e1) {
 			e1.printStackTrace();
 		}
+		
+		System.out.println("#####################################################");
+		System.out.println("ProblemID "+submission.getProblem().getId());
+		System.out.println("#####################################################");
+		String encodedtest = "";
+
+		if(submission.getProblem().getId()== 1){
+
+			// Problema 1 Números perfeitos
+			String decoded = new String(Base64.getDecoder().decode(submission.getCode()));
+
+			String haskell_imports = "\nimport System.Environment\nimport System.IO \nimport Data.List\n\n";
+			String hask_main_method = "\n\nmain :: IO()\nmain = do";
+			String s3 = "\nargs <- getArgs\ncontents <- readFile (head args)\nlet value = read contents::Int\nprint(problema1 value)\n";
+			String hask_main_content = s3.replaceAll("(?m)^", "\t");
+
+			String join = haskell_imports+decoded+hask_main_method+hask_main_content;
+			encodedtest = new String(Base64.getEncoder().encode(join.getBytes()));
+
+
+		}
+
 
 		// Create file with the code and send it to the server
-		createFile(new String(Base64.getDecoder().decode(submission.getCode())), "Solution");
+		createFile(new String(Base64.getDecoder().decode(encodedtest)), "Solution");
+
+		
 		scp(PATH_SPRING + Path.separator + CLASS_FILE_NAME, PATH_SERVER + Path.separator + uniqueId + "_"
 				+ submission.getLanguage().getName() + Path.separator + "Solution" + suffix);
 
@@ -260,13 +284,17 @@ public class EvaluateSubmissions implements Runnable {
 			int isRight = validateResult(tc.getOutput(), s);
 
 			if (tc.isShown()) {
-				givenTestCases++;
+				//givenTestCases++;
 			}
 
 			double score = isRight == 1
 					? ((double) submission.getProblem().getMaxScore()
 							/ ((double) totalTestCasesForProblem - (double) givenTestCases))
 					: 0;
+
+
+			System.out.println("-------------------------------------------------------------------");
+			System.out.println(submission.getProblem().getMaxScore());
 
 			LOGGER.log(Level.INFO, "Score: " + score);
 			Scoring sc = new Scoring(submission, tc, score, isRight);

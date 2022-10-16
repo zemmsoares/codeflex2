@@ -1,0 +1,18 @@
+
+import System.Environment
+import System.IO 
+import Data.List
+
+problema1 :: Int->[Int]
+problema1 n = [x | x <- [1..n], inteiroPerfeito x]
+
+
+inteiroPerfeito ::Int -> Bool
+inteiroPerfeito n = (sum [x | x <- [1..n],mod n x==0])==n*2
+
+main :: IO()
+main = do	
+	args <- getArgs
+	contents <- readFile (head args)
+	let value = read contents::Int
+	print(problema1 value)

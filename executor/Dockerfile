@@ -15,6 +15,9 @@ RUN apt-get install -y default-jdk
 RUN apt-get install -y firejail
 RUN apt-get install -y parallel
 
+RUN apt-get install -y swi-prolog 
+RUN apt-get install -y haskell-platform
+
 RUN apt install -y mono-mcs 
 
 EXPOSE 22

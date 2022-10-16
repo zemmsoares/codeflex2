@@ -34,26 +34,25 @@ public class CommandGeneration {
 			command += "javac " + CLASS_FILE_NAME + ".java 2> " + compilerError;
 			suffix = ".java";
 			break;
-		case "C++11 (gcc 5.4.0)":
-			command += "g++ -std=c++11 -o " + CLASS_FILE_NAME + "_exec_" + uniqueId + " " + CLASS_FILE_NAME + ".cpp 2> "
-					+ compilerError;
-			suffix = ".cpp";
-			break;
-		case "Python 2.7":
-			// TODO : get a compiler for python
-			break;
-		case "C# (mono 4.2.1)":
-			command += "mcs -out:" + CLASS_FILE_NAME + "_exec_" + uniqueId + " " + CLASS_FILE_NAME + ".cs 2> "
-					+ compilerError;
-			suffix = ".cs";
-			break;
+		//case "C++11 (gcc 5.4.0)":
+		//	command += "g++ -std=c++11 -o " + CLASS_FILE_NAME + "_exec_" + uniqueId + " " + CLASS_FILE_NAME + ".cpp 2> "
+		//			+ compilerError;
+		//	suffix = ".cpp";
+		//	break;
+		//case "Python 2.7":
+		//	// TODO : get a compiler for python
+		//	break;
+		//case "C# (mono 4.2.1)":
+		//	command += "mcs -out:" + CLASS_FILE_NAME + "_exec_" + uniqueId + " " + CLASS_FILE_NAME + ".cs 2> "
+		//			+ compilerError;
+		//	suffix = ".cs";
+		//	break;
 		case "Prolog":
 			command += "swipl -s " + CLASS_FILE_NAME + " -g "+"'likes(john,food)'"+" -t halt. 2> " + compilerError;
 			suffix = ".pl";
 		case "Haskell":
 			command += "ghc " + CLASS_FILE_NAME + ".hs -v0 -fno-warn-tabs 2> " + compilerError;
 			suffix = ".hs";
-
 			break;
 			
 		default:
