@@ -114,20 +114,26 @@ function AddProblem() {
       .then((res) => res.json())
       .then((data) => {
         let saveData = "";
-
         try {
-          console.log(data.problem.id);
           console.log(data.problem.name);
-          //console.log(convertFromRaw(JSON.parse(data.problem.description)));
           saveData = {
             problemId: data.problem.id,
             problemName: data.problem.name,
-
+            problemDescription: EditorState.createWithContent(
+              convertFromRaw(JSON.parse(data.problem.description))
+            ),
+            problemConstraints: EditorState.createWithContent(
+              convertFromRaw(JSON.parse(data.problem.constraints))
+            ),
+            problemInputFormat: EditorState.createWithContent(
+              convertFromRaw(JSON.parse(data.problem.inputFormat))
+            ),
+            problemOutputFormat: EditorState.createWithContent(
+              convertFromRaw(JSON.parse(data.problem.outputFormat))
+            ),
             problemMaxScore: data.problem.maxScore,
           };
-        } catch (err) {
-          console.log(err);
-        }
+        } catch (err) {}
         if (data.category) {
           saveData = {
             ...saveData,
@@ -200,7 +206,6 @@ function AddProblem() {
   }
 
   function updateProblem() {
-    console.log("-------------------------updating");
     const data = {
       problem: {
         id: problemId,
@@ -235,6 +240,8 @@ function AddProblem() {
       },
     };
 
+    console.log(data);
+
     fetch(URL + "/api/database/Problem/update", {
       method: "POST",
       body: JSON.stringify(data),
@@ -245,9 +252,9 @@ function AddProblem() {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
         console.log("PROBLEM UPDATED");
-        //window.location.href = this.getRedirectDestinationOnSave();
+        window.location.href = getRedirectDestinationOnSave();
+        console.log(data);
       });
   }
 

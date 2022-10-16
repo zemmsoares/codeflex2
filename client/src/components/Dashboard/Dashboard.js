@@ -74,10 +74,6 @@ function Dashboard() {
                     <p className=" bg-gray-200 h-6 text-sm rounded-lg px-2 flex items-center justify-center ml-2">
                       solved
                     </p>
-                    <img
-                      src={require("../images/study.png")}
-                      className="absolute h-48 "
-                    />
                   </span>
                   <p className="pr-32">
                     Haskell is a general-purpose, statically-typed, purely
