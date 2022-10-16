@@ -1,0 +1,92 @@
+.submissions-container {
+    margin: 0;
+    padding: 0;
+    position: relative;
+}
+
+.submissions-container {
+    height: 150px;
+    box-shadow: 0px 0px 10px 0px #ccc;
+    margin-bottom: 25px;
+    padding: 25px;
+    transition: all 250ms ease-in-out;
+
+    word-break: break-all;
+}
+
+.submissions-container > p:nth-child(1){
+    font-size: 16pt;
+}
+
+.submissions-container > p {
+    text-align: justify;
+}
+
+.submissions-container:hover {
+    transform: scale(1.007);
+    box-shadow: 0px 0px 15px 0px #999;
+    background: #6A44FF !important;
+}
+
+.submissions-container:hover > div > p {
+    color:white;
+}
+
+.submissions-container:hover input {
+    background-color: #6A44FF;
+    border: 1.5px solid white;
+    color: white;
+}
+.submissions-container {
+    border-bottom: 1px solid #ccc;
+}
+
+.submissions-container:last-child {
+    border-bottom: none;
+}
+
+.both-categories-container {
+    padding: 0;
+}
+
+.both-categories-container h2 {
+    padding-bottom: 0;
+}
+
+.both-categories-container h2:nth-child(4){
+    margin-top: 50px;
+}
+
+.submission-container .green-text {
+    font-size: 10pt;
+}
+
+
+.button-container-submissions input{
+    width: 125px;
+    left: 20%;
+    top:0px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    margin-top: 5px;
+}
+
+
+@media only screen and (max-width: 850px) {
+
+    .submission-container {
+        height: 200px;
+    }
+
+    .button-container-submissions input {
+        position: relative;
+        left:0;
+        top:0;
+        margin: 5px 0;
+    }
+
+
+
+    
+}

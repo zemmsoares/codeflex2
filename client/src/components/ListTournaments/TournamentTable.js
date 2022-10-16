@@ -46,7 +46,7 @@ export default function TournamentTable(props) {
           <table className="table-auto bg-blue-50 text-left w-full border border-l-0 border-r-0">
             <thead>
               <tr className="border-gray-200 uppercase text-xs text-gray-700 tracking-wider">
-                <th className="p-2 pl-4"></th>
+                <th className="p-2 pl-4">Name</th>
                 <th className="p-2">Description</th>
                 <th className="p-2">Status</th>
               </tr>
