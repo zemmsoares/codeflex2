@@ -19,6 +19,7 @@ services:
       - 8080:8080
     volumes:
       - ./server:/usr/src/mymaven:rw
+      - ./server:/root/Submissions
     working_dir: /usr/src/mymaven
     networks:
       network_backend:
