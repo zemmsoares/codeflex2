@@ -50,7 +50,7 @@ public class CodeflexApplication {
 
     @Bean
     public Host fetchAndConnectHosts() {
-        Host h1 = new Host("172.18.0.2", 22, "root", new SSHClient(),
+        Host h1 = new Host("10.5.0.4", 22, "root", new SSHClient(),
                 "", false);
 
       //  System.out.println("Trying to connect");
