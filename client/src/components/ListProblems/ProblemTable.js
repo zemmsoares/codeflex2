@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { textToLowerCaseNoSpaces } from "../commons/Utils";
 import userAvatar from "../images/user_placeholder.png";
@@ -54,61 +54,66 @@ export default function ProblemTable(props) {
               </tr>
             </thead>
             <tbody className="bg-white">
-              {props.problem.map((problem) => (
-                <tr key={problem.id} className="border-b border-gray-200">
-                  <td className="py-1 pl-6 ">
-                    <img
-                      src={userAvatar}
-                      alt={"dqwdqwdqw"}
-                      className="block w-8 h-8 rounded-full"
-                    />
-                  </td>
-                  <td className="py-1 px-2">
-                    <span className="block text-sm">{problem.name}</span>
-                  </td>
-                  <td className="py-1 px-2">
-                    <span className="text-gray-700 text-xs">
-                      {problem.difficulty.name}
-                    </span>
-                  </td>
-                  <td className="py-1 px-2">{problem.owner.username}</td>
-                  <td className="py-1 px-2 pr-4">
-                    {problem.solved === "true" ? (
-                      <span className="bg-green-200 py-1 px-2 text-xs rounded-full text-green-900">
-                        Solved
-                      </span>
-                    ) : (
-                      <span className="bg-red-200 py-1 px-2 text-xs rounded-full text-red-900">
-                        Unsolved
-                      </span>
-                    )}
-                  </td>
+              {props.problem.map(
+                (problem) => (
+                  console.log(problem.solved),
+                  (
+                    <tr key={problem.id} className="border-b border-gray-200">
+                      <td className="py-1 pl-6 ">
+                        <img
+                          src={userAvatar}
+                          alt={"dqwdqwdqw"}
+                          className="block w-8 h-8 rounded-full"
+                        />
+                      </td>
+                      <td className="py-1 px-2">
+                        <span className="block text-sm">{problem.name}</span>
+                      </td>
+                      <td className="py-1 px-2">
+                        <span className="text-gray-700 text-xs">
+                          {problem.difficulty.name}
+                        </span>
+                      </td>
+                      <td className="py-1 px-2">{problem.owner.username}</td>
+                      <td className="py-1 px-2 pr-4">
+                        {problem.solved === true ? (
+                          <span className="bg-green-200 py-1 px-2 text-xs rounded-full text-green-900">
+                            Solved
+                          </span>
+                        ) : (
+                          <span className="bg-red-200 py-1 px-2 text-xs rounded-full text-red-900">
+                            Unsolved
+                          </span>
+                        )}
+                      </td>
 
-                  <td className="py-1 pr-6 w-64">
-                    <div className=" flex justify-end">
-                      <Link
-                        to={{
-                          pathname:
-                            props.path +
-                            "/" +
-                            textToLowerCaseNoSpaces(problem.name),
-                          state: {
-                            problemId: problem.id,
-                            problemName: problem.name,
-                          },
-                        }}
-                      >
-                        <button
-                          type="button"
-                          class=" py-1.5 px-5 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
-                        >
-                          Solve Problem
-                        </button>
-                      </Link>
-                    </div>
-                  </td>
-                </tr>
-              ))}
+                      <td className="py-1 pr-6 w-64">
+                        <div className=" flex justify-end">
+                          <Link
+                            to={{
+                              pathname:
+                                props.path +
+                                "/" +
+                                textToLowerCaseNoSpaces(problem.name),
+                              state: {
+                                problemId: problem.id,
+                                problemName: problem.name,
+                              },
+                            }}
+                          >
+                            <button
+                              type="button"
+                              class=" py-1.5 px-5 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
+                            >
+                              Solve Problem
+                            </button>
+                          </Link>
+                        </div>
+                      </td>
+                    </tr>
+                  )
+                )
+              )}
             </tbody>
           </table>
         </div>
