@@ -144,20 +144,18 @@ function ListTournaments() {
         <div>
           <div className="flex px-6 pb-4">
             {displayInputCode ? (
-              <div className="private-code">
+              <div className="private-code pl-2">
                 <input
                   type="text"
-                  className="textbox-no-radius"
-                  style={{ height: "25px", marginBottom: "7px" }}
+                  className="h-9 border rounded-md"
                   placeholder="Tournament Private Code"
                   name="privateCode"
                   onChange={(e) => setPrivateCode(e.target.value)}
                   value={privateCode}
                 />
                 <input
-                  style={{ maxHeight: "25px" }}
                   type="button"
-                  className="m-2 py-1.5  text-sm font-medium text-gray-900 focus:outline-none 
+                  className="m-2 py-1.5 h-9 px-5 text-sm font-medium text-gray-900 focus:outline-none 
                             bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200"
                   value="Register"
                   onClick={onClickEnterPrivateTournament}

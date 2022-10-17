@@ -264,7 +264,7 @@ function CreateTournament() {
     }
   }
 
-  const dateFormat = "HH:mm dd/mm/yyyy";
+  const dateFormat = "HH:mm dd/MM/yyyy";
 
   if (!registered || !userIsOwner) {
     return <PageNotFound />;
@@ -288,7 +288,7 @@ function CreateTournament() {
           <form className="form-horizontal">
             <div className="form-group">
               <label for="tournamentName" className="col-sm-1 control-label">
-                Name
+                <span className="text-sm text-gray-400">Name</span>
               </label>
               <div className="col-sm-5">
                 <input
@@ -310,7 +310,7 @@ function CreateTournament() {
                 for="tournamentDescription"
                 className="col-sm-1 control-label"
               >
-                Description
+                <span className="text-sm text-gray-400">Description</span>
               </label>
               <div className="col-sm-10">
                 <textarea
@@ -326,10 +326,11 @@ function CreateTournament() {
                 </small>
               </div>
             </div>
-            <div className="form-group inline-block mr-10">
-              <p>Date in GMT+1</p>
+            <div className="form-group inline-block mr-2">
               <label for="startingDate" className="col-sm-1 control-label">
-                Starting Date
+                <span className="text-sm text-gray-500">
+                  Starting Date (GMT+1)
+                </span>
               </label>
               <div className="col-sm-2 date-picker pl-5 py-4">
                 <DatePicker
@@ -348,7 +349,9 @@ function CreateTournament() {
             </div>
             <div className="form-group  inline-block">
               <label htmlFor="endingDate" className="col-sm-1 control-label">
-                Ending Date
+                <span className="text-sm text-gray-500">
+                  Ending Date (GMT+1)
+                </span>
               </label>
               <div className="col-sm-5 date-picker pl-5 py-4">
                 <DatePicker
@@ -366,14 +369,11 @@ function CreateTournament() {
               </div>
             </div>
             {location2 === "compete" ? (
-              <div className="form-group mt-10">
-                <label
-                  htmlFor="tournamentName"
-                  className="col-sm-1 control-label"
-                >
-                  Private Code
+              <div className="form-group">
+                <label for="tournamentName" className="col-sm-1 control-label">
+                  <span className="text-sm text-gray-400">Code</span>
                 </label>
-                <div className="col-sm-4" style={{ display: "inline-block" }}>
+                <div className="col-sm-5">
                   <input
                     type="code"
                     className="form-control bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 mr-5"
