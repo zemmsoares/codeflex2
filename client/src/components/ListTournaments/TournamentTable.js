@@ -8,11 +8,20 @@ import {
 import userAvatar from "../images/user_placeholder.png";
 import moment from "moment";
 
-import Countdown from "./Countdown";
+import CountDownTimer from "./CountDown/CountDownTimer";
 
 export default function TournamentTable(props) {
   function handleChange(e) {
     props.setFilter(e.target.value);
+  }
+
+  function isFuture(startDate) {
+    let s = new Date(startDate).getTime();
+    //console.log(s);
+    let t = new Date().getTime();
+    if (s > t) {
+      return true;
+    }
   }
 
   console.log(props);
@@ -90,19 +99,33 @@ export default function TournamentTable(props) {
                         </span>
                       </td>
                       <td className="py-1 px-2 justify-center w-48">
-                        {data.tournament.open === true ? (
-                          <span className=" py-1 px-2 text-xs text-green-900">
-                            <Countdown
-                              eventTime={new Date(
-                                data.tournament.endingDate
-                              ).getTime()}
-                              interval={1000}
+                        {isFuture(data.tournament.startingDate) ? (
+                          <span className=" py-1 px-2 text-xs text-green-900 ">
+                            <CountDownTimer
+                              targetDate={data.tournament.startingDate}
+                              isFuture={true}
                             />
                           </span>
                         ) : (
-                          <span className="bg-red-200 py-1 px-2 text-xs rounded-full text-red-900">
-                            Closed
+                          console.log("isNotFuture")
+                        )}
+                        {data.tournament.open === true ? (
+                          <span className=" py-1 px-2 text-xs text-green-900">
+                            <CountDownTimer
+                              targetDate={data.tournament.endingDate}
+                            />
                           </span>
+                        ) : (
+                          <div>
+                            {data.tournament.open === false &&
+                            isFuture(data.tournament.startingDate) == true ? (
+                              console.log()
+                            ) : (
+                              <span className="bg-red-200 py-1 px-2 text-xs rounded-full text-red-900">
+                                Archived
+                              </span>
+                            )}
+                          </div>
                         )}
                       </td>
                       <td className="py-1 w-32">
