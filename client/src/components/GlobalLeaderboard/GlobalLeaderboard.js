@@ -48,7 +48,11 @@ function GlobalLeaderboard() {
 
   return (
     <div>
-      <PathLink path={location.pathname} title="Global Leaderboard" />
+      <PathLink
+        path={location.pathname}
+        title="Global Leaderboard"
+        user={parseLocalJwt().username}
+      />
       <div>{renderTables()}</div>
     </div>
   );

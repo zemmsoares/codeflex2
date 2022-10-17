@@ -36,6 +36,7 @@ function Dashboard() {
       <PathLink
         path={location.pathname}
         title="Practise by solving exercices"
+        user={parseLocalJwt().username}
       />
 
       <div

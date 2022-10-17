@@ -10,7 +10,11 @@ function ManageContent() {
 
   return (
     <div>
-      <PathLink path={location.pathname} title="Manage Content" />
+      <PathLink
+        path={location.pathname}
+        title="Manage Content"
+        user={parseLocalJwt().username}
+      />
       {parseLocalJwt().role == "CONTENT_MANAGER" ? (
         // ROLE IS CONTENT MANAGER
         <div class="w-full h-full flex justify-center items-center">
