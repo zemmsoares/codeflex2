@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { textToLowerCaseNoSpaces } from "../commons/Utils";
+import { dateWithHoursAndDay, textToLowerCaseNoSpaces } from "../commons/Utils";
 import userAvatar from "../images/user_placeholder.png";
 
 export default function TournamentTable(props) {
@@ -48,6 +48,8 @@ export default function TournamentTable(props) {
               <tr className="border-gray-200 uppercase text-xs text-gray-700 tracking-wider">
                 <th className="p-2 pl-4">Name</th>
                 <th className="p-2">Description</th>
+                <th className="p-2">Start</th>
+                <th className="p-2">End</th>
                 <th className="p-2">Status</th>
               </tr>
             </thead>
@@ -62,12 +64,22 @@ export default function TournamentTable(props) {
                       {data.tournament.name}
                     </span>
                   </td>
-                  <td className="py-1 px-2">
+                  <td className="py-1 px-2 w-auto">
                     <span className="text-gray-700 text-xs">
                       {data.tournament.description}
                     </span>
                   </td>
-                  <td className="py-1 px-2 pr-4">
+                  <td className="py-1 px-2 w-28">
+                    <span className="text-gray-700 text-xs">
+                      {dateWithHoursAndDay(data.tournament.startingDate)}
+                    </span>
+                  </td>
+                  <td className="py-1 px-2 w-28">
+                    <span className="text-gray-700 text-xs">
+                      {dateWithHoursAndDay(data.tournament.endingDate)}
+                    </span>
+                  </td>
+                  <td className="py-1 px-2 justify-center w-24">
                     {data.tournament.open === "true" ? (
                       <span className="bg-green-200 py-1 px-2 text-xs rounded-full text-green-900">
                         Open
@@ -78,7 +90,7 @@ export default function TournamentTable(props) {
                       </span>
                     )}
                   </td>
-                  <td className="py-1  w-44">
+                  <td className="py-1 w-32">
                     <div className="flex justify-end">
                       <Link
                         to={
@@ -93,13 +105,13 @@ export default function TournamentTable(props) {
                                                  bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 
                                                  focus:z-10 focus:ring-4 focus:ring-gray-200"
                         >
-                          View Leaderboard
+                          Leaderboard
                         </button>
                       </Link>
                     </div>
                   </td>
-                  <td className="py-1 w-44 pr-6">
-                    <div className="flex justify-end">
+                  <td className="py-1 w-32 pr-2">
+                    <div className="flex justify-center">
                       <Link
                         to={
                           "/compete/" +
@@ -112,7 +124,7 @@ export default function TournamentTable(props) {
                                                  bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 
                                                  focus:z-10 focus:ring-4 focus:ring-gray-200"
                         >
-                          View Problems
+                          Problems
                         </button>
                       </Link>
                     </div>
