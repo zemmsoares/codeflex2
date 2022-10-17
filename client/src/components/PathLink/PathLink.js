@@ -62,7 +62,7 @@ function PathLink(props) {
                     <p className="text-xl font-bold pb-1">{props.user}</p>
                   </Link>
                   <p className=" bg-gray-200 h-6 text-sm rounded-lg px-2 flex items-center justify-center ml-2">
-                    dqwdqwdwq
+                    1000
                   </p>
                 </span>
               </div>

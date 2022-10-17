@@ -125,35 +125,44 @@ function ProfilePage() {
                     user={parseLocalJwt().username}
                   />
                 </div>
-                <div className="px-8">
-                  <div className="bg-gray-50 mb-4">
-                    <div class="flex-1 flex flex-row justify-start space-x-2">
-                      <div class="relative inline-block">
+
+                <div className="grid px-8 md:flex-none md:flex">
+                  <div className=" flex items-center justify-center p-8 md:p-0">
+                    <div className="flex-col">
+                      <div className="flex justify-center items-center px-10">
                         <img
-                          className='w-24 h-24 bg-gray-100 rounded-full rounded"'
+                          className='w-24 h-24 rounded-full rounded "'
                           src={require("../../images/user_placeholder.png")}
                           alt="User flat image"
                         />
-                        <div class="w-6 h-6 bg-green-500 rounded-full ring-4 ring-white absolute bottom-0 right-0" />
                       </div>
-                      <div>
-                        <p className="text-lg font-bold capitalize">
-                          {username}
-                        </p>
+                      <p className="text-lg font-bold capitaliz flex justify-center items-center">
+                        {username}
+                      </p>
+
+                      <div className="flex justify-center">
+                        <span className=" bg-gray-200 h-6 text-sm rounded-lg px-4 flex items-center justify-center ml-2">
+                          1000
+                        </span>
                       </div>
                     </div>
                   </div>
-                  <div className="border rounded-lg p-4">
-                    <GithubCalendar submissions={submissions} />
+                  <div className=" flex-grow">
+                    <div className="border rounded-lg p-4 ">
+                      <GithubCalendar submissions={submissions} />
+                    </div>
                   </div>
-                  <div className=" p-4">
+                </div>
+
+                <div className="px-8">
+                  <div className="">
                     <h3 className="font-bold">Recent Submissions</h3>
                     {submissions.length > 0 && categories.length > 0 ? (
                       submissions
                         .sort((a, b) => new Date(b.date) - new Date(a.date))
                         .slice(0, Math.min(10, submissions.length))
                         .map((s) => (
-                          <div className="profile-page-subtramission">
+                          <div className="profile-page-subtramission text-sm">
                             <p>
                               Solution to {linkToProblem(s)} submitted on{" "}
                               {dateWithHoursAndDay(s.date)} with a total score
