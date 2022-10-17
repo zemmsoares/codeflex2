@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { textToLowerCaseNoSpaces } from "../commons/Utils";
+import { dateWithHoursAndDay, textToLowerCaseNoSpaces } from "../commons/Utils";
 import userAvatar from "../images/user_placeholder.png";
 
 export default function TournamentLeaderboardTable(props) {
@@ -50,7 +50,9 @@ export default function TournamentLeaderboardTable(props) {
                       </span>
                     </td>
                     <td className="py-1 px-2">
-                      <span className="text-gray-700 text-xs">{data.date}</span>
+                      <span className="text-gray-700 text-xs">
+                        {dateWithHoursAndDay(data.date)}
+                      </span>
                     </td>
                     <td className="py-1 px-2">
                       <span className="text-gray-700 text-xs">

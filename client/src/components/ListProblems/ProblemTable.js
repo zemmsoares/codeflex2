@@ -47,9 +47,9 @@ export default function ProblemTable(props) {
             <thead>
               <tr className="border-gray-200 uppercase text-xs text-gray-700 tracking-wider">
                 <th className="p-2 pl-4" />
-                <th className="p-2">User</th>
-                <th className="p-2">Score</th>
-                <th className="p-2 pr-4">Owner</th>
+                <th className="p-2">Problem Name</th>
+                <th className="p-2">Difficulty</th>
+                {/* <th className="p-2 pr-4">Owner</th>*/}
                 <th className="p-2 pr-4">Status</th>
               </tr>
             </thead>
@@ -74,7 +74,11 @@ export default function ProblemTable(props) {
                           {problem.difficulty.name}
                         </span>
                       </td>
-                      <td className="py-1 px-2">{problem.owner.username}</td>
+                      {/* 
+                      <td className="py-1 px-2">{
+                        problem.owner.username
+                      }</td>
+                      */}
                       <td className="py-1 px-2 pr-4">
                         {problem.solved === true ? (
                           <span className="bg-green-200 py-1 px-2 text-xs rounded-full text-green-900">
