@@ -352,8 +352,8 @@ function Problem() {
     const problemInformation = getProblemInformation();
 
     return (
-      <div className="flex flex-col">
-        <div className="border rounded-xl" id="problem-section">
+      <div className="flex flex-col ">
+        <div className=" " id="problem-section">
           <div id="anchor-remove-mathjax"></div>
 
           <h3 id="problem-statement" className="problem-section-h3">
@@ -609,7 +609,7 @@ function Problem() {
                   />
 
                   <div className="px-8">
-                    <div className="flex pb-6">
+                    <div className="flex  mb-5">
                       <div className="">
                         <button
                           onClick={onPageClick}

@@ -122,7 +122,7 @@ function ManageTournaments() {
   const rows = tournaments.length;
 
   return (
-    <div className="container">
+    <div className="w-full">
       <PathLink
         path={location.pathname}
         title="Manage tournaments"
