@@ -25,6 +25,8 @@ function ListProblems(props) {
 
   const { tournamentName } = useParams();
 
+  //console.log("AQUI AQUI AQUI" + JSON.stringify(location.state.title));
+
   useEffect(() => {
     const url = splitUrl(location.pathname);
 

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { textToLowerCaseNoSpaces } from "../commons/Utils";
+import { splitUrl, textToLowerCaseNoSpaces } from "../commons/Utils";
 import userAvatar from "../images/user_placeholder.png";
 
 export default function ProblemTable(props) {
@@ -8,7 +8,8 @@ export default function ProblemTable(props) {
     props.setFilter(e.target.value);
   }
 
-  console.log("i am your dog" + JSON.stringify(props));
+  console.log(JSON.stringify(props.path));
+  let title = splitUrl(props.path);
 
   return (
     <div className="px-8 flex justify-center mb-10">
@@ -18,7 +19,8 @@ export default function ProblemTable(props) {
             <label>
               <div className="ml-6 my-5">
                 <span className="text-gray-700 font-bold text-lg pr-8">
-                  ghdiqwuhdiqw
+                  {/*{props.title == null ? <p>Table</p> : <p>{props.title}</p>} */}
+                  {title[1].toUpperCase()}
                 </span>
               </div>
             </label>
