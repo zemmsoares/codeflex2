@@ -291,7 +291,7 @@ function ManageTestCases() {
     currentMode === "bulk" ? (
       <LoadFiles addTestCasesFromFiles={addTestCasesFromFiles} />
     ) : (
-      <div className="tc-popup ">
+      <div className=" ">
         <h2 style={{ color: "black", margin: "auto" }}>Add new </h2>
         <input
           type="button"
