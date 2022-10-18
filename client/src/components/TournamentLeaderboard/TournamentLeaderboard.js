@@ -65,7 +65,11 @@ function TournamentLeaderboard() {
   return (
     <div className="">
       <div className="">
-        <PathLink path={location.pathname} title="Leaderboard" />
+        <PathLink
+          path={location.pathname}
+          title="Leaderboard"
+          user={parseLocalJwt().username}
+        />
 
         {leaderboardData.length == 0 ? (
           <h3 className="no-data-h3 pl-8">

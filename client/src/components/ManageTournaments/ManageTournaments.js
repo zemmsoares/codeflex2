@@ -123,7 +123,11 @@ function ManageTournaments() {
 
   return (
     <div className="container">
-      <PathLink path={location.pathname} title="Manage tournaments" />
+      <PathLink
+        path={location.pathname}
+        title="Manage tournaments"
+        user={parseLocalJwt().username}
+      />
       <div className="px-8">
         {tournaments.length > 0 ? (
           <ManageTournamentsTable tournaments={tournaments} />

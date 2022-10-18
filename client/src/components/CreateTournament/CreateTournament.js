@@ -275,7 +275,11 @@ function CreateTournament() {
   return (
     <div className="container">
       <div className="row">
-        <PathLink path={location.pathname} title={pathLinkTitle()} />
+        <PathLink
+          path={location.pathname}
+          title={pathLinkTitle()}
+          user={parseLocalJwt().username}
+        />
         <div className="tournament-creation-container pl-8">
           <div className="tournament-creation-top">
             <h3 className="page-subtitle">

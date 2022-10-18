@@ -110,13 +110,11 @@ export default function ManageProblemsTable(props) {
                   <td className="py-1 pr-6 w-64">
                     <div className=" flex justify-end">
                       <div></div>
+                      {console.log(location)}
 
                       <Link
                         to={{
-                          pathname:
-                            props.path +
-                            "/" +
-                            textToLowerCaseNoSpaces(problem.name),
+                          pathname: "",
                           state: {
                             problemId: problem.id,
                             problemName: problem.name,

@@ -378,7 +378,11 @@ function AddProblem() {
   return (
     <div className="container add-problem">
       <div className="row">
-        <PathLink path={location.pathname} title="Add problem" />
+        <PathLink
+          path={location.pathname}
+          title="Add problem"
+          user={parseLocalJwt().username}
+        />
         <div className="col-sm-2 add-problem-desc pl-8">
           <h3>Name</h3>
           <p>Add a name to your problem.</p>

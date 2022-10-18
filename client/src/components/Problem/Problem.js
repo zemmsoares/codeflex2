@@ -602,7 +602,11 @@ function Problem() {
             <div>
               <div className="">
                 <div className="flex flex-col">
-                  <PathLink path={location.pathname} title={problem.name} />
+                  <PathLink
+                    path={location.pathname}
+                    title={problem.name}
+                    user={parseLocalJwt().username}
+                  />
 
                   <div className="px-8">
                     <div className="flex pb-6">

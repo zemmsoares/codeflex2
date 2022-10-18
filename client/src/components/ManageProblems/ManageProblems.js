@@ -164,9 +164,17 @@ function ManageProblems() {
     <div className="container">
       <div className="row">
         {origin === "tournament" ? (
-          <PathLink path={location.pathname} title="dqwdqw" />
+          <PathLink
+            path={location.pathname}
+            title="dqwdqw"
+            user={parseLocalJwt().username}
+          />
         ) : (
-          <PathLink path={location.pathname} title="Manage Problems" />
+          <PathLink
+            path={location.pathname}
+            title="Manage Problems"
+            user={parseLocalJwt().username}
+          />
         )}
         <div>
           <div>
