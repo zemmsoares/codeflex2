@@ -115,7 +115,11 @@ function ListCategories() {
                           pathname:
                             "/practise/" +
                             textToLowerCaseNoSpaces(category.name),
-                          state: { categoryId: category.id },
+                          state: {
+                            categoryId: category.id,
+                            categoryName:
+                              "#############################################################",
+                          },
                         }}
                       >
                         <button

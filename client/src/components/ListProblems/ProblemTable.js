@@ -8,7 +8,7 @@ export default function ProblemTable(props) {
     props.setFilter(e.target.value);
   }
 
-  console.log(props);
+  console.log("i am your dog" + JSON.stringify(props));
 
   return (
     <div className="px-8 flex justify-center mb-10">
@@ -18,7 +18,7 @@ export default function ProblemTable(props) {
             <label>
               <div className="ml-6 my-5">
                 <span className="text-gray-700 font-bold text-lg pr-8">
-                  Haskell Problems:{" "}
+                  ghdiqwuhdiqw
                 </span>
               </div>
             </label>
