@@ -269,7 +269,7 @@ function ManageTestCases() {
 
   const PopupInformation = () => (
     <div className="tc-popup">
-      <h2 style={{ color: "black", margin: "auto" }}>{modalTitle}</h2>
+      <h2>{modalTitle}</h2>
       <textarea
         autoFocus
         name="input"
@@ -291,7 +291,7 @@ function ManageTestCases() {
     currentMode === "bulk" ? (
       <LoadFiles addTestCasesFromFiles={addTestCasesFromFiles} />
     ) : (
-      <div className="tc-popup">
+      <div className="tc-popup ">
         <h2 style={{ color: "black", margin: "auto" }}>Add new </h2>
         <input
           type="button"
@@ -365,15 +365,15 @@ function ManageTestCases() {
         </p>
 
         <div
-          className="col-sm-3 col-xs-12 test-case-wrapper tc add-test-case"
+          className="w-52 m-2 border rounded-md shadow ml-7 mt-5 cursor-pointer"
           onClick={onClickAdd}
         >
-          <div className="flex justify-center bg-cyan-200">
+          <div className="h-10 flex justify-center items-center bg-blue-400">
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              className="h-5 w-5"
+              className="h-4 w-4 mr-2 "
               viewBox="0 0 20 20"
-              fill="currentColor"
+              fill="white"
             >
               <path
                 fillRule="evenodd"
@@ -381,62 +381,85 @@ function ManageTestCases() {
                 clipRule="evenodd"
               />
             </svg>
+            <p className="text-white text-lg">Add test case</p>
           </div>
         </div>
 
-        {testCases
-          .sort((a, b) => a.id - b.id)
-          .map((t, i) => (
-            <div className="col-sm-3 col-xs-12 test-case-wrapper tc">
-              <div>
-                <h3 style={{ display: "inline-block" }}>Test Case {i + 1}</h3>
-                <i
-                  style={{ position: "absolute", top: "20px", right: "15px" }}
-                  className="material-icons"
-                  onClick={() => deleteTestCase(t.id)}
-                >
-                  delete
-                </i>
+        <div className="pl-5">
+          {testCases
+            .sort((a, b) => a.id - b.id)
+            .map((t, i) => (
+              <div className="w-52 m-2 border rounded-md shadow inline-block">
+                <div className=" flex border-b-2 p-2 justify-center items-center">
+                  <h3>Test Case {i + 1}</h3>
+                </div>
+                <div className="h-fit py-8 flex justify-center items-center">
+                  {/* MID SECTION */}
+                  <div className="grid grid-cols-2 gap-1">
+                    <input
+                      className="btn border rounded border-blue-400 p-1 cursor-pointer"
+                      type="button"
+                      value="Input"
+                      onClick={() => onClick(t.input, "input", "Add input", t)}
+                    />
+                    <input
+                      className="btn border rounded border-blue-400 p-1 cursor-pointer"
+                      type="button"
+                      value="Output"
+                      onClick={() =>
+                        onClick(t.output, "output", "Add output", t)
+                      }
+                    />
+                    <input
+                      className="btn border rounded border-blue-400 p-1 cursor-pointer"
+                      type="button"
+                      value="Description"
+                      onClick={() =>
+                        onClick(
+                          t.description,
+                          "description",
+                          "Add description",
+                          t
+                        )
+                      }
+                    />
+                    <label className="container inline-field">
+                      Show
+                      <input
+                        type="checkbox"
+                        name="shown"
+                        checked={t.shown ? "checked" : ""}
+                        onClick={(e) => toggleCheckBox(e, t)}
+                      />
+                      <span className="checkmark"></span>
+                    </label>
+                  </div>
+                </div>
+                <div className="border m-3 py-1 cursor-pointer flex justify-center items-center">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    strokeWidth={1.5}
+                    stroke="currentColor"
+                    className="w-6 h-6 px-1"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0"
+                    />
+                  </svg>
+                  <p
+                    className="material-icons cursor-pointer"
+                    onClick={() => deleteTestCase(t.id)}
+                  >
+                    Delete
+                  </p>
+                </div>
               </div>
-              <hr
-                style={{
-                  borderBottom: "none",
-                  borderLeft: "none",
-                  borderRight: "none",
-                }}
-              />
-              <input
-                className="btn btn-tc"
-                type="button"
-                value="Input"
-                onClick={() => onClick(t.input, "input", "Add input", t)}
-              />
-              <input
-                className="btn btn-tc"
-                type="button"
-                value="Output"
-                onClick={() => onClick(t.output, "output", "Add output", t)}
-              />
-              <input
-                className="btn btn-tc"
-                type="button"
-                value="Description"
-                onClick={() =>
-                  onClick(t.description, "description", "Add description", t)
-                }
-              />
-              <label className="container inline-field">
-                Show
-                <input
-                  type="checkbox"
-                  name="shown"
-                  checked={t.shown ? "checked" : ""}
-                  onClick={(e) => toggleCheckBox(e, t)}
-                />
-                <span className="checkmark"></span>
-              </label>
-            </div>
-          ))}
+            ))}
+        </div>
 
         <Popup ref={modalAdd} onModalClose={onNewTestCaseModalClose}>
           <PopupAddTestCase />
