@@ -284,7 +284,7 @@ public class EvaluateSubmissions implements Runnable {
 			int isRight = validateResult(tc.getOutput(), s);
 
 			if (tc.isShown()) {
-				//givenTestCases++;
+				givenTestCases++;
 			}
 
 			double score = isRight == 1

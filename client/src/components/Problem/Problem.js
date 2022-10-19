@@ -219,7 +219,7 @@ function Problem() {
           setSubmitting(false);
           setScoringResults(data);
           setWaitingForResults(false);
-          setLoaded(true);
+          //setLoaded(true);
 
           clearInterval(window.resultsListener);
         }
@@ -244,7 +244,6 @@ function Problem() {
         }
 
         if (data.length === 1 && data[0].submissions.result != null) {
-          console.log("entrou aqui");
           /* TODO : corrigir este corner case
                         caso a solução seja válida e faça 
                         um update que dará uma length de 1 emitirá um erro
@@ -258,7 +257,6 @@ function Problem() {
           let errorMessage = submissionResult.message;
 
           if (name === "Compiler Error") {
-            console.log("Compiler Error");
             {
               /* 
                         this.setState({
@@ -282,6 +280,8 @@ function Problem() {
             clearInterval(window.resultsListener);
           } else if (name === "Runtime Error") {
             console.log("Runtime Error");
+          } else {
+            setLoaded(true);
           }
           //console.log("error message " + this.state.results.result.message);
         }
@@ -649,8 +649,9 @@ function Problem() {
                         letterSpacing: "1px",
                       }}
                     />
-                    {console.log(error)}
-                    {loaded && error == !null
+                    {console.log("loaded: " + loaded)}
+                    {console.log("error: " + error)}
+                    {loaded
                       ? navigate(location.pathname + "/view-results", {
                           state: { information: scoringResults },
                         })
