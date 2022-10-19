@@ -41,29 +41,22 @@ function ManageTournaments() {
         });
     } else if (location2 === "manage") {
       console.log("fetching public tournaments");
-      fetch(URL + "/api/database/Tournament/viewAllPublicTournaments", {
-        headers: { ...getAuthorization() },
-      })
-        .then((res) => res.json())
-        .then((data) => {
-          setTournaments(data);
-        });
 
-      // ALSO FETCH NON REGISTERED TOURNAMENTS TO MANAGE
-      fetch(
-        URL +
-          "/api/database/Tournament/viewAllWithRegisteredUsersByOwnerUsername/" +
-          parseLocalJwt().username,
-        {
+      Promise.all([
+        fetch(URL + "/api/database/Tournament/viewAllPublicTournaments", {
           headers: { ...getAuthorization() },
-        }
-      )
-        .then((res) => res.json())
-        .then((data) => {
-          //tournaments.push(...data);
-
-          setTournaments((tournaments) => [...tournaments, ...data]);
-          console.log(tournaments);
+        }),
+        fetch(
+          URL +
+            "/api/database/Tournament/viewAllWithRegisteredUsersByOwnerUsername/" +
+            parseLocalJwt().username,
+          { headers: { ...getAuthorization() } }
+        ),
+      ])
+        .then(([res1, res2]) => Promise.all([res1.json(), res2.json()]))
+        .then(([data1, data2]) => {
+          setTournaments(data1);
+          setTournaments((tournaments) => [...tournaments, ...data2]);
         });
     }
   }
