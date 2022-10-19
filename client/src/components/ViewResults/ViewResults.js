@@ -17,6 +17,8 @@ function ViewResults(props) {
 
   const location = useLocation();
 
+  console.log(results);
+
   useEffect(() => {
     if (typeof location.state.information !== "undefined") {
       setResults(location.state.information);
@@ -66,16 +68,42 @@ function ViewResults(props) {
           <h2>Total Score : {totalScore.toFixed(2)}</h2>
         </div>
         {results.map((s, index) => (
-          <div className="col-sm-4">
+          <div className="col-sm-4 mx-5">
             <div className="col-sm-11 testcase">
               <div className="testcase-icons">
                 {s.isRight === 1 ? (
                   <i className="material-icons green-icon" title="Correct!">
-                    check_circle_outline
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      strokeWidth={1.5}
+                      stroke="currentColor"
+                      className="w-6 h-6"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                      />
+                    </svg>
                   </i>
                 ) : s.isRight === 0 ? (
                   <i className="material-icons red-icon" title="Incorrect!">
-                    highlight_off
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      strokeWidth={1.5}
+                      stroke="currentColor"
+                      className="w-6 h-6"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M9.75 9.75l4.5 4.5m0-4.5l-4.5 4.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                      />
+                    </svg>
                   </i>
                 ) : (
                   <i
@@ -99,7 +127,7 @@ function ViewResults(props) {
 
     if (typeof results[0] !== "undefined") {
       renderCode = (
-        <div>
+        <div className="px-8 mb-10">
           <h3>Code submitted</h3>
           <AceEditor
             style={aceStyle}

@@ -243,7 +243,12 @@ function Problem() {
           return;
         }
 
-        if (data.length === 1 && data[0].submissions.result != null) {
+        console.log("data.length :" + data.length);
+        console.log(
+          "data[0].submissions.result :" + data[0].submissions.result
+        );
+
+        if (data.length > 0 && data[0].submissions.result != null) {
           /* TODO : corrigir este corner case
                         caso a solução seja válida e faça 
                         um update que dará uma length de 1 emitirá um erro
