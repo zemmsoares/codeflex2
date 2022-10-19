@@ -151,9 +151,7 @@ function Problem() {
       }),
     })
       .then((res) => res.json())
-      .then((data) => {
-        // console.log(data)
-      });
+      .then((data) => {});
   }
 
   function onAceChange(newValue) {
@@ -162,9 +160,6 @@ function Problem() {
 
   function handleSelectBoxChange(e) {
     let selectedItem = [...e.target.options].filter((o) => o.selected)[0].value; //
-    console.log(selectedItem);
-
-    console.log(e.target.name);
 
     if (e.target.name === "language") {
       selectedItem = displayLanguages.filter(
@@ -176,7 +171,6 @@ function Problem() {
     } else {
       setLanguage({ [e.target.name]: selectedItem });
     }
-    console.log(selectedItem.mode + " - " + selectedItem.name);
   }
 
   function submitSubmission() {
@@ -218,8 +212,6 @@ function Problem() {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
-
         if (
           JSON.stringify(data) !== "[]" &&
           teste.problem.testCases.length === data.length
@@ -230,8 +222,6 @@ function Problem() {
           setLoaded(true);
 
           clearInterval(window.resultsListener);
-
-          console.log(1);
         }
 
         if (new Date().getTime() - window.secondsWaiting >= 30000) {
@@ -248,13 +238,13 @@ function Problem() {
 
           setSubmitting(false);
           setWaitingForResults(false);
-          setLoaded(true);
-          console.log(2);
+          problemLoaded(true);
 
           return;
         }
 
         if (data.length === 1 && data[0].submissions.result != null) {
+          console.log("entrou aqui");
           /* TODO : corrigir este corner case
                         caso a solução seja válida e faça 
                         um update que dará uma length de 1 emitirá um erro
@@ -266,9 +256,9 @@ function Problem() {
           let submissionResult = data[0].submissions.result;
           let name = submissionResult.name;
           let errorMessage = submissionResult.message;
-          console.log(3);
 
           if (name === "Compiler Error") {
+            console.log("Compiler Error");
             {
               /* 
                         this.setState({
@@ -282,7 +272,6 @@ function Problem() {
                         })
                        */
             }
-            console.log(4);
 
             setSubmitting(false);
             setScoringResults([]);
@@ -292,11 +281,9 @@ function Problem() {
 
             clearInterval(window.resultsListener);
           } else if (name === "Runtime Error") {
-            console.log(5);
+            console.log("Runtime Error");
           }
           //console.log("error message " + this.state.results.result.message);
-          console.log(6);
-          console.log("error message " + submissionResult.message);
         }
 
         // HERE
@@ -662,7 +649,8 @@ function Problem() {
                         letterSpacing: "1px",
                       }}
                     />
-                    {loaded
+                    {console.log(error)}
+                    {loaded && error == !null
                       ? navigate(location.pathname + "/view-results", {
                           state: { information: scoringResults },
                         })

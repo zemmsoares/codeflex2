@@ -15,25 +15,18 @@ import "./ViewResults.css";
 function ViewResults(props) {
   const [results, setResults] = useState([]);
 
-  console.log("state" + JSON.stringify(props));
-
   const location = useLocation();
 
   useEffect(() => {
     if (typeof location.state.information !== "undefined") {
       setResults(location.state.information);
-      console.log("HI");
     } else {
-      console.log("CALLING FETCH RESULTS");
       fetchScoringResults();
     }
   }, []);
 
   function fetchScoringResults() {
     let pathname = splitUrl(location.pathname)[2];
-
-    console.log("Fetching view-results");
-    console.log(pathname);
     fetch(
       URL +
         "/api/database/Scoring/viewBySubmissionId/" +
@@ -42,9 +35,6 @@ function ViewResults(props) {
     )
       .then((res) => res.json())
       .then((data) => {
-        console.log("VIEW RESULTS");
-        console.log(data);
-        console.log(data.length);
         setResults(data);
       });
   }
@@ -63,8 +53,6 @@ function ViewResults(props) {
   let renderCode = "";
 
   if (typeof results !== "undefined") {
-    console.log("RESULTS");
-    console.log(results);
     let totalScore = 0.0;
     results.map((s) => {
       if (s.isRight === 1 && !s.testcases.shown) {
@@ -134,9 +122,6 @@ function ViewResults(props) {
       );
     }
   }
-
-  console.log(renderCode);
-  console.log("doqwdwqd" + JSON.stringify(location));
 
   return (
     <div className="container">

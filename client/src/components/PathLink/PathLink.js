@@ -11,7 +11,7 @@ function PathLink(props) {
     });
   }
 
-  console.log(props);
+  //console.log(props);
 
   function buildPath(pathname, index) {
     let finalPath = "/";
