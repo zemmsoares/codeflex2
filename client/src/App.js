@@ -24,6 +24,7 @@ import ViewResults from "./components/ViewResults/ViewResults";
 
 import ManageExample from "./components/ManageExample/ManageExample";
 import Exam from "./components/Exam/Exam";
+import ManageTournamentSubmissions from "./components/ManageTournamentSubmissions/ManageTournamentSubmissions";
 
 export class App extends Component {
   constructor(props) {
@@ -216,6 +217,14 @@ export class App extends Component {
                   <Route
                     path="/manage/tournaments/:tournamentName"
                     element={<ManageProblems />}
+                  />
+                ) : (
+                  ""
+                )}
+                {this.manageSectionControl() ? (
+                  <Route
+                    path="/manage/tournaments/submissions/:tournamentName"
+                    element={<ManageTournamentSubmissions />}
                   />
                 ) : (
                   ""
