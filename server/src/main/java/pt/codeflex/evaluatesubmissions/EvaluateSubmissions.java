@@ -284,7 +284,7 @@ public class EvaluateSubmissions implements Runnable {
 			int isRight = validateResult(tc.getOutput(), s);
 
 			if (tc.isShown()) {
-				givenTestCases++;
+				//givenTestCases++;
 			}
 
 			double score = isRight == 1
@@ -292,6 +292,10 @@ public class EvaluateSubmissions implements Runnable {
 							/ ((double) totalTestCasesForProblem - (double) givenTestCases))
 					: 0;
 
+			System.out.println("isRight" +isRight);
+			System.out.println("submission.getProblem().getMaxScore()" +submission.getProblem().getMaxScore());
+			System.out.println("totalTestCasesForProblem" +totalTestCasesForProblem);
+			System.out.println("givenTestCases" +givenTestCases);
 
 			System.out.println("-------------------------------------------------------------------");
 			System.out.println(submission.getProblem().getMaxScore());

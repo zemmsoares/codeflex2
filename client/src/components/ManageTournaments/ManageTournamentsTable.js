@@ -63,6 +63,7 @@ export default function ManageTournamentsTable(props) {
                 <th className="p-2">Status</th>
                 <th className="p-2 pr-4">startingDate</th>
                 <th className="p-2 pr-4">endingDate</th>
+                <th className="p-2 pr-4">Users</th>
               </tr>
             </thead>
             <tbody className="bg-white">

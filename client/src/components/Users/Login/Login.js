@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { URL, URL_FRONT } from "../../commons/Constants";
+import { URL } from "../../commons/Constants";
 import {
   areStringEqual,
   validateEmail,
@@ -11,7 +11,6 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 import codeflexLogo from "../../images/logo.svg";
-import imageExample from "../../images/happy_people.png";
 
 class Login extends Component {
   constructor(props) {
@@ -56,7 +55,6 @@ class Login extends Component {
     })
       .then((res) => {
         if (res.status === 401 || res.status === 403) {
-          console.log("ERRRROR");
           toast.error("Invalid credentials", { autoClose: 2500 });
           return;
         } else {
@@ -65,7 +63,6 @@ class Login extends Component {
       })
       .then((data) => {
         if (data) {
-          console.log(data);
           window.location.href = "/";
           localStorage.setItem("token", data.token);
           localStorage.setItem(
@@ -75,12 +72,11 @@ class Login extends Component {
         }
       })
       .catch((e) => {
-        console.log(e);
+        //console.log(e);
       });
   }
 
   validateRegistration = (data) => {
-    console.log(data);
     this.setState({ showErrors: true });
 
     if (
@@ -121,7 +117,6 @@ class Login extends Component {
       ...sentData,
       passwordConfirmation: this.state.passwordConfirmation,
     };
-    console.log(this.validateRegistration(validateData));
 
     fetch(URL + "/api/account/register", {
       method: "POST",

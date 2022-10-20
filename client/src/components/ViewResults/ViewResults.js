@@ -1,12 +1,7 @@
 import React, { useEffect, useState } from "react";
 import AceEditor from "react-ace";
 import PathLink from "../PathLink/PathLink";
-import {
-  textToLowerCaseNoSpaces,
-  splitUrl,
-  getAuthorization,
-  parseLocalJwt,
-} from "../commons/Utils";
+import { getAuthorization, parseLocalJwt } from "../commons/Utils";
 import { URL } from "../commons/Constants";
 import { useLocation } from "react-router-dom";
 
@@ -14,10 +9,7 @@ import "./ViewResults.css";
 
 function ViewResults(props) {
   const [results, setResults] = useState([]);
-
   const location = useLocation();
-
-  console.log(results);
 
   useEffect(() => {
     if (typeof location.state.information !== "undefined") {
@@ -28,7 +20,6 @@ function ViewResults(props) {
   }, []);
 
   function fetchScoringResults() {
-    let pathname = splitUrl(location.pathname)[2];
     fetch(
       URL +
         "/api/database/Scoring/viewBySubmissionId/" +

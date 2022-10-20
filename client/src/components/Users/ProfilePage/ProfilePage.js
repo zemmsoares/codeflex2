@@ -1,4 +1,4 @@
-import React, { Component, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { URL } from "../../commons/Constants";
 import { Link, useLocation, useParams } from "react-router-dom";
 import {
@@ -127,11 +127,11 @@ function ProfilePage() {
                 </div>
 
                 <div className="grid px-8 md:flex-none md:flex">
-                  <div className=" flex items-center justify-center p-8 md:p-0">
+                  <div className=" flex items-center justify-center p-8 md:p-0 mx-6">
                     <div className="flex-col">
                       <div className="flex justify-center items-center px-10">
                         <img
-                          className='w-24 h-24 rounded-full rounded "'
+                          className="w-24 h-24 rounded-full"
                           src={require("../../images/user_placeholder.png")}
                           alt="User flat image"
                         />
@@ -148,7 +148,7 @@ function ProfilePage() {
                     </div>
                   </div>
                   <div className=" flex-grow">
-                    <div className="border rounded-lg p-4 ">
+                    <div className="border rounded-lg p-4">
                       <GithubCalendar submissions={submissions} />
                     </div>
                   </div>

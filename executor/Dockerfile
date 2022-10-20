@@ -11,10 +11,8 @@ RUN echo 'root:root' | chpasswd
 
 RUN apt-get install -y default-jre
 RUN apt-get install -y default-jdk
-
 RUN apt-get install -y firejail
 RUN apt-get install -y parallel
-
 RUN apt-get install -y swi-prolog 
 RUN apt-get install -y haskell-platform
 

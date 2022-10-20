@@ -1,17 +1,10 @@
 import React, { Component } from "react";
 import { BrowserRouter as Router, Route, Link, Routes } from "react-router-dom";
-import LandingPage from "./components/LandingPage/LandingPage";
 import NavBar from "./components/NavBar/NavBar";
 import PageNotFound from "./components/PageNotFound/PageNotFound";
-import PageWrapper from "./components/PageWrapper/PageWrapper";
 import Login from "./components/Users/Login/Login";
 import ProfilePage from "./components/Users/ProfilePage/ProfilePage";
-
-import {
-  parseLocalJwt,
-  splitUrl,
-  getAuthorization,
-} from "./components/commons/Utils";
+import { parseLocalJwt, getAuthorization } from "./components/commons/Utils";
 import Dashboard from "./components/Dashboard/Dashboard";
 import ListCategories from "./components/ListCategories/ListCategories";
 import ListProblems from "./components/ListProblems/ListProblems";
@@ -77,7 +70,7 @@ export class App extends Component {
       return (
         <main class="flex">
           <Router>
-            <div className=" ">
+            <div>
               <NavBar />
             </div>
             <div className="w-full bg-gray-50">
@@ -275,13 +268,6 @@ export class App extends Component {
       return (
         <main class="">
           <Router>
-            {/*  REMOVED NAVBAR ON LOGOUT AND PADDING
-            <div className="w-screen h-16" >
-              <div className="w-screen">
-                <NavBar />
-              </div>
-            </div>
-            */}
             <div className=" w-screen">
               <Routes>
                 {/*<Route exact path="/" component={PageWrapper(LandingPage)} />*/}
