@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { splitUrl } from "../commons/Utils";
+import "./PathLink.css";
 
 function PathLink(props) {
   function createPath(path, index) {
@@ -47,7 +48,7 @@ function PathLink(props) {
   }
 
   return (
-    <div className="px-8 py-8">
+    <div className={`px-8 py-8 `}>
       <div className="flex justify-between">
         <div>
           <h1 className="text-2xl upp font-bold capitalize">{pathname[0]}</h1>

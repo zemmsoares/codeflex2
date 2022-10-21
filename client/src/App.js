@@ -74,7 +74,7 @@ export class App extends Component {
             <div>
               <NavBar />
             </div>
-            <div className="w-full bg-gray-50">
+            <div className={`w-full bg-gray-50 `}>
               <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="/dashboard" element={<Dashboard />} />
