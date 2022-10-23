@@ -87,6 +87,27 @@ function Dashboard() {
             </div>
           </Link>
         </div>
+
+        <div class="w-26">
+          <Link to="/leaderboard">
+            <div className="relative w-full h-full rounded-lg bg-white border shadow">
+              <div className="p-4">
+                <div className="flex flex-row pb-4 ">
+                  <div className="ml-4">
+                    <span className="flex items-center  ">
+                      <p className="text-xl font-bold pb-1">Leaderboard</p>
+                    </span>
+                    <p>
+                      Haskell is a general-purpose, statically-typed, purely
+                      functional programming language with type inference and
+                      lazy evaluation.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </Link>
+        </div>
       </div>
     </div>
   );

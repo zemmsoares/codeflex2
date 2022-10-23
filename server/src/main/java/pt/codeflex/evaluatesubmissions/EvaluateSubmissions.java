@@ -138,13 +138,16 @@ public class EvaluateSubmissions implements Runnable {
 			e1.printStackTrace();
 		}
 		
-		System.out.println("#####################################################");
-		System.out.println("ProblemID "+submission.getProblem().getId());
-		System.out.println("#####################################################");
-		String encodedtest = "";
+		System.out.println("#############################");
+		System.out.println(submission.getLanguage().getName());
 
-		if(submission.getProblem().getId()== 1){
 
+		if((submission.getLanguage().getName()).equals("Haskell")){
+
+			System.out.println("#############################");
+			System.out.println("SUBMISSAO HASKELL");
+
+			String encodedtest = "";
 			// Problema 1 Números perfeitos
 			String decoded = new String(Base64.getDecoder().decode(submission.getCode()));
 
@@ -154,14 +157,23 @@ public class EvaluateSubmissions implements Runnable {
 			String hask_main_content = s3.replaceAll("(?m)^", "\t");
 
 			String join = haskell_imports+decoded+hask_main_method+hask_main_content;
+			
 			encodedtest = new String(Base64.getEncoder().encode(join.getBytes()));
 
+			// Create file with the code and send it to the server
+			//createFile(new String(Base64.getDecoder().decode(encodedtest)), "Solution");
+			createFile(new String(Base64.getDecoder().decode(encodedtest)), "Solution");
+		}else{
 
+			System.out.println("#############################");
+			System.out.println("SUBMISSAO JAVA");
+
+			// Create file with the code and send it to the server
+			//createFile(new String(Base64.getDecoder().decode(encodedtest)), "Solution");
+			createFile(new String(Base64.getDecoder().decode(submission.getCode())), "Solution");
 		}
 
 
-		// Create file with the code and send it to the server
-		createFile(new String(Base64.getDecoder().decode(encodedtest)), "Solution");
 
 		
 		scp(PATH_SPRING + Path.separator + CLASS_FILE_NAME, PATH_SERVER + Path.separator + uniqueId + "_"
