@@ -143,26 +143,75 @@ public class EvaluateSubmissions implements Runnable {
 
 
 		if((submission.getLanguage().getName()).equals("Haskell")){
-
+			
 			System.out.println("#############################");
 			System.out.println("SUBMISSAO HASKELL");
-
 			String encodedtest = "";
-			// Problema 1 Números perfeitos
-			String decoded = new String(Base64.getDecoder().decode(submission.getCode()));
 
-			String haskell_imports = "\nimport System.Environment\nimport System.IO \nimport Data.List\n\n";
-			String hask_main_method = "\n\nmain :: IO()\nmain = do";
-			String s3 = "\nargs <- getArgs\ncontents <- readFile (head args)\nlet value = read contents::Int\nprint(problema1 value)\n";
-			String hask_main_content = s3.replaceAll("(?m)^", "\t");
 
-			String join = haskell_imports+decoded+hask_main_method+hask_main_content;
+			List<TestCases> testCases = submission.getProblem().getTestCases();
+			//System.out.println("AUSHUAHSUASHUAHUSHAHA "+testCases.get(0).getInput());
+			System.out.println("AUSHUAHSUASHUAHUSHAHA2 "+testCases.get(0).getDescription());
+
+		
+
+			if(testCases.get(0).getDescription().equals("Int,Int")){
+				System.out.println("ENTROU NO PRIMEIRO");
+				System.out.println("TYPE: "+testCases.get(0).getDescription());
+				// Problema 1 Números perfeitos
+				String decoded = new String(Base64.getDecoder().decode(submission.getCode()));
+				String haskell_imports = "\nimport System.Environment\nimport System.IO \nimport Data.List\n\n";
+				String hask_main_method = "\n\nmain :: IO()\nmain = do";
+				String s3 = "\nargs <- getArgs\ncontents <- readFile (head args)\nlet value = read contents::Int\nprint(problem value)\n";
+				String hask_main_content = s3.replaceAll("(?m)^", "\t");
+				String join = haskell_imports+decoded+hask_main_method+hask_main_content;
+				encodedtest = new String(Base64.getEncoder().encode(join.getBytes()));
+				
+				createFile(new String(Base64.getDecoder().decode(encodedtest)), "Solution");
+				
+			}else if(testCases.get(0).getDescription().equals("Int,String")){
+				System.out.println("ENTROU NO SEGUNDO");
+				System.out.println("TYPE: "+testCases.get(0).getDescription());
+				// Problema 3 – Dia de Natal
+				String decoded = new String(Base64.getDecoder().decode(submission.getCode()));
+
+				String haskell_imports = "\nimport System.Environment\nimport System.IO \nimport Data.List\n\n";
+				String hask_main_method = "\n\nmain :: IO()\nmain = do";
+				String s3 = "\nargs <- getArgs\ncontents <- readFile (head args)\nlet value = read contents::Int\nproblem(value)\n";
+				String hask_main_content = s3.replaceAll("(?m)^", "\t");
+
+				String join = haskell_imports+decoded+hask_main_method+hask_main_content;
+				encodedtest = new String(Base64.getEncoder().encode(join.getBytes()));
+				System.out.println(join);
 			
-			encodedtest = new String(Base64.getEncoder().encode(join.getBytes()));
+				// Create file with the code and send it to the server
+				//createFile(new String(Base64.getDecoder().decode(encodedtest)), "Solution");
+				createFile(new String(Base64.getDecoder().decode(encodedtest)), "Solution");
+				
+			}else {
+				System.out.println("ENTROU NO TERCEIRO");
+				System.out.println("TYPE: "+testCases.get(0).getDescription());
+									//String,Int
+					// Problem 4 - ESTATISTICA
+				String decoded = new String(Base64.getDecoder().decode(submission.getCode()));
 
-			// Create file with the code and send it to the server
-			//createFile(new String(Base64.getDecoder().decode(encodedtest)), "Solution");
-			createFile(new String(Base64.getDecoder().decode(encodedtest)), "Solution");
+				String haskell_imports = "\nimport System.Environment\nimport System.IO \nimport Data.List\n\n";
+				String hask_main_method = "\n\nmain :: IO()\nmain = do";
+				String s3 = "\nargs <- getArgs\ncontents <- readFile (head args)\nlet value = read contents::String\nprint(problem value)\n";
+				String hask_main_content = s3.replaceAll("(?m)^", "\t");
+
+				String join = haskell_imports+decoded+hask_main_method+hask_main_content;
+				encodedtest = new String(Base64.getEncoder().encode(join.getBytes()));
+				System.out.println(join);
+			
+				// Create file with the code and send it to the server
+				//createFile(new String(Base64.getDecoder().decode(encodedtest)), "Solution");
+				createFile(new String(Base64.getDecoder().decode(encodedtest)), "Solution");
+			}
+
+
+
+			
 		}else{
 
 			System.out.println("#############################");

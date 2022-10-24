@@ -64,7 +64,7 @@ export default function ProblemTable(props) {
                       <td className="py-1 pl-6 ">
                         <img
                           src={userAvatar}
-                          alt={"dqwdqwdqw"}
+                          alt={"c"}
                           className="block w-8 h-8 rounded-full"
                         />
                       </td>
