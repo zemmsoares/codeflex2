@@ -86,7 +86,9 @@ function ListProblems(props) {
     fetch(
       URL +
         "/api/database/tournament/getAllProblemsByName/" +
-        currentTournament,
+        currentTournament +
+        "/" +
+        parseLocalJwt().username,
       {
         headers: {
           ...getAuthorization(),

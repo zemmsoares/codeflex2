@@ -1395,14 +1395,37 @@ public class DatabaseController {
 		return tournamentsToList;
 	}
 
-	@GetMapping(path = "/Tournament/getAllProblemsByName/{name}")
-	public List<Problem> getAllProblemsByTournamentName(@PathVariable String name) {
+	@GetMapping(path = "/Tournament/getAllProblemsByName/{name}/{username}")
+	public List<Problem> getAllProblemsByTournamentName(@PathVariable String name,@PathVariable String username) {
 		Tournament tournament = viewTournamentByName(name);
+		
+		System.out.println("############################################");
 		System.out.println(tournament.toString());
-		if (tournament == null)
-			return new ArrayList<>();
+		System.out.println("############################################");
+		List<Problem> problems2  = new ArrayList<>();
 
-		return problemRepository.findAllByTournament(tournament);
+		if (tournament != null){
+			List<Problem> problems = problemRepository.findAllByTournament(tournament);
+			
+			System.out.println(problems);
+			for (Problem p : problems) {
+				System.out.println(p.getName());
+				List<Submissions> submissions = getAllSubmissionsByUsernameAndProblemId(username, p.getId());
+				boolean solved = false;
+				for (Submissions s : submissions) {
+					Result result = s.getResult();
+					if (result != null && result.getName().equals("Correct")) {
+						solved = true;
+					}
+				}
+				problems2.add(new Problem(p.getName(),p.getDescription(), p.getDifficulty(),1, solved));
+				System.out.println(solved);
+			}
+
+			//Problem(String name, String description, Difficulty difficulty, int maxScore, boolean solved)
+		}
+		return problems2;
+		
 	}
 
 	// not sure if this should be here

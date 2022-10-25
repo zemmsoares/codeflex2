@@ -49,6 +49,8 @@ public class Problem {
 
 	private int maxScore;
 
+	private boolean solved;
+
 	@ManyToOne
 	@NotFound(action = NotFoundAction.IGNORE)
 	private Tournament tournament;
@@ -76,24 +78,26 @@ public class Problem {
 		this.creationDate = Calendar.getInstance().getTime();
 	}
 
-	public Problem(String name, String description, Difficulty difficulty) {
+	public Problem(String name, String description, Difficulty difficulty, boolean solved) {
 		this.name = name;
 		this.description = description;
 		this.difficulty = difficulty;
+		this.solved = solved;
 		this.maxScore = 10;
 		this.creationDate = Calendar.getInstance().getTime();
 	}
 
-	public Problem(String name, String description, Difficulty difficulty, int maxScore) {
+	public Problem(String name, String description, Difficulty difficulty, int maxScore, boolean solved) {
 		this.name = name;
 		this.description = description;
 		this.difficulty = difficulty;
+		this.solved = solved;
 		this.maxScore = maxScore;
 		this.creationDate = Calendar.getInstance().getTime();
 	}
 
 	public Problem(String name, String description, String inputFormat, String outputFormat, String constraints,
-			int maxScore, Users owner, Difficulty difficulty) {
+			int maxScore, Users owner, Difficulty difficulty, boolean solved) {
 		this.name = name;
 		this.description = description;
 		this.inputFormat = inputFormat;
@@ -143,6 +147,14 @@ public class Problem {
 
 	public void setDifficulty(Difficulty difficulty) {
 		this.difficulty = difficulty;
+	}
+
+	public boolean isSolved() {
+		return solved;
+	}
+
+	public void setSolved(boolean solved) {
+		this.solved = solved;
 	}
 
 	public int getMaxScore() {
@@ -206,7 +218,7 @@ public class Problem {
 		return "Problem [id=" + id + ", name=" + name + ", description=" + description + ", inputFormat=" + inputFormat
 				+ ", outputFormat=" + outputFormat + ", constraints=" + constraints + ", creationDate=" + creationDate
 				+ ", maxScore=" + maxScore + ", tournament=" + tournament + ", owner=" + owner + ", testCases="
-				+ testCases + ", difficulty=" + difficulty + "]";
+				+ testCases + ", difficulty=" + difficulty+ ", solved=" + solved + "]";
 	}
 
 }

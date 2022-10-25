@@ -88,7 +88,7 @@ export default function ManageProblemsTable(props) {
                       {problem.difficulty.name}
                     </span>
                   </td>
-                  <td className="py-1 px-2">{problem.owner.username}</td>
+                  {/*<td className="py-1 px-2">{problem.owner.username}</td>*/}
                   <td className="py-1 px-2 pr-4">
                     <span className="bg-red-200 py-1 px-2 text-xs rounded-full text-red-900">
                       {problem.testCases.length}

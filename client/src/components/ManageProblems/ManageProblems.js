@@ -69,6 +69,8 @@ function ManageProblems() {
       origin = "tournament";
     }
 
+    console.log(parseLocalJwt().username);
+
     if (origin === "tournament") {
       fetchAllProblemsByTournamentName(url[2]);
     } else if (origin === "manage") {
@@ -85,9 +87,16 @@ function ManageProblems() {
         fetchAllProblemsByTournamentName(url[2]);
       }
     } else if (origin === "manage-tournaments") {
-      fetch(URL + "/api/database/Tournament/getAllProblemsByName/" + url[2], {
-        headers: { ...getAuthorization() },
-      })
+      fetch(
+        URL +
+          "/api/database/tournament/getAllProblemsByName/" +
+          url[2] +
+          "/" +
+          parseLocalJwt().username,
+        {
+          headers: { ...getAuthorization() },
+        }
+      )
         .then((res) => res.json())
         .then((data) => {
           setProblems(data);

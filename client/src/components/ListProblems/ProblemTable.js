@@ -14,7 +14,77 @@ export default function ProblemTable(props) {
   let location = useLocation();
 
   let url = splitUrl(location.pathname);
-  console.log(url[0]);
+
+  function checkProblem(problem, index) {
+    console.log(problem);
+    console.log(index);
+
+    if (index === 0) {
+      return (
+        <Link
+          to={{
+            pathname: props.path + "/" + textToLowerCaseNoSpaces(problem.name),
+            state: {
+              problemId: problem.id,
+              problemName: problem.name,
+            },
+          }}
+        >
+          <button
+            type="button"
+            class=" py-1.5 px-5 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
+          >
+            Solve Problem
+          </button>
+        </Link>
+      );
+    } else {
+      if (props.problem[index - 1].solved === true) {
+        return (
+          <Link
+            to={{
+              pathname:
+                props.path + "/" + textToLowerCaseNoSpaces(problem.name),
+              state: {
+                problemId: problem.id,
+                problemName: problem.name,
+              },
+            }}
+          >
+            <button
+              type="button"
+              class=" py-1.5 px-5 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
+            >
+              Solve Problem
+            </button>
+          </Link>
+        );
+      } else {
+        return (
+          <button
+            type="button"
+            class=" py-1.5 px-5 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
+          >
+            Locked
+          </button>
+        );
+      }
+    }
+
+    /*
+    if (index === 0) {
+      return problem.solved ? "Solve again" : "Solve problem";
+    } else {
+      console.log(this.state.filteredProblems[index - 1].solved);
+
+      if (this.state.filteredProblems[index - 1].solved) {
+        return problem.solved ? "Solve again" : "Solve problem";
+      } else {
+        return problem.solved ? "Solve again" : "Locked";
+      }
+    }
+    */
+  }
 
   return (
     <div className="px-8 flex justify-center mb-10">
@@ -62,7 +132,7 @@ export default function ProblemTable(props) {
             </thead>
             <tbody className="bg-white">
               {props.problem.map(
-                (problem) => (
+                (problem, index) => (
                   console.log(problem.solved),
                   (
                     <tr key={problem.id} className="border-b border-gray-200">
@@ -101,7 +171,7 @@ export default function ProblemTable(props) {
                       <td className="py-1 pr-6 w-64">
                         <div className=" flex justify-end">
                           {url[0] == "compete" ? (
-                            <div>{console.log(problem)}</div>
+                            <div>{checkProblem(problem, index)}</div>
                           ) : (
                             <Link
                               to={{
