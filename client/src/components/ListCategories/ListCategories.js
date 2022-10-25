@@ -89,7 +89,7 @@ function ListCategories() {
                                 clipRule="evenodd"
                               />
                             </svg>
-                            <p className="text-white">Achievement Completed</p>
+                            <p className="text-white">All exercices solved</p>
                           </div>
                         </div>
                       ) : (
@@ -106,7 +106,7 @@ function ListCategories() {
                               clipRule="evenodd"
                             />
                           </svg>
-                          <p className="text-gray-300">Achievement Completed</p>
+                          <p className="text-gray-300">All exercices solved</p>
                         </div>
                       )}
 
