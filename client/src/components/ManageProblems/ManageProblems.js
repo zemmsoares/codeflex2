@@ -161,7 +161,7 @@ function ManageProblems() {
   );
 
   return (
-    <div className="container">
+    <div className="">
       <div className="row">
         {origin === "tournament" ? (
           <PathLink

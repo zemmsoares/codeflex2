@@ -14,6 +14,8 @@ import static pt.codeflex.evaluatesubmissions.EvaluateConstants.PATH_SERVER;
 import static pt.codeflex.evaluatesubmissions.EvaluateConstants.RUN_ERROR;
 import static pt.codeflex.evaluatesubmissions.EvaluateConstants.COMPILER_ERROR;
 
+import java.util.List;
+
 public class CommandGeneration {
 
 	public static final Logger LOGGER = Logger.getLogger(CommandGeneration.class.getName());
@@ -25,6 +27,17 @@ public class CommandGeneration {
 				+ " && ";
 		String suffix = "";
 		String compilerError = COMPILER_ERROR;
+		
+		String prologExec = "";
+
+		
+
+		if(submission.getLanguage().getName().equals("Prolog")){
+			List<TestCases> testCases = submission.getProblem().getTestCases();
+			//System.out.println("AUSHUAHSUASHUAHUSHAHA "+testCases.get(0).getInput());
+			System.out.println("PROLOG DESC "+testCases.get(0).getDescription());
+			prologExec = testCases.get(0).getDescription();
+		}
 
 		// TODO : add memory limit
 		// TODO : load compiler commands from files ?!
@@ -48,8 +61,10 @@ public class CommandGeneration {
 		//	suffix = ".cs";
 		//	break;
 		case "Prolog":
-			command += "swipl -s " + CLASS_FILE_NAME + " -g "+"'likes(john,food)'"+" -t halt. 2> " + compilerError;
+			command += "swipl -s " + CLASS_FILE_NAME + " -g '"+prologExec+"' -t halt. 2> " + compilerError;
 			suffix = ".pl";
+			System.out.println(command);
+			break;
 		case "Haskell":
 			command += "ghc " + CLASS_FILE_NAME + ".hs -v0 -fno-warn-tabs 2> " + compilerError;
 			suffix = ".hs";
