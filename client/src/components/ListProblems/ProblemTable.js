@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { splitUrl, textToLowerCaseNoSpaces } from "../commons/Utils";
 import userAvatar from "../images/user_placeholder.png";
 
@@ -10,6 +10,11 @@ export default function ProblemTable(props) {
 
   console.log(JSON.stringify(props.path));
   let title = splitUrl(props.path);
+
+  let location = useLocation();
+
+  let url = splitUrl(location.pathname);
+  console.log(url[0]);
 
   return (
     <div className="px-8 flex justify-center mb-10">
@@ -95,25 +100,29 @@ export default function ProblemTable(props) {
 
                       <td className="py-1 pr-6 w-64">
                         <div className=" flex justify-end">
-                          <Link
-                            to={{
-                              pathname:
-                                props.path +
-                                "/" +
-                                textToLowerCaseNoSpaces(problem.name),
-                              state: {
-                                problemId: problem.id,
-                                problemName: problem.name,
-                              },
-                            }}
-                          >
-                            <button
-                              type="button"
-                              class=" py-1.5 px-5 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
+                          {url[0] == "compete" ? (
+                            <div>{console.log(problem)}</div>
+                          ) : (
+                            <Link
+                              to={{
+                                pathname:
+                                  props.path +
+                                  "/" +
+                                  textToLowerCaseNoSpaces(problem.name),
+                                state: {
+                                  problemId: problem.id,
+                                  problemName: problem.name,
+                                },
+                              }}
                             >
-                              Solve Problem
-                            </button>
-                          </Link>
+                              <button
+                                type="button"
+                                class=" py-1.5 px-5 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
+                              >
+                                Solve Problem
+                              </button>
+                            </Link>
+                          )}
                         </div>
                       </td>
                     </tr>

@@ -143,7 +143,7 @@ function ViewResults(props) {
   }
 
   return (
-    <div className="container">
+    <div className="">
       <div className="row ">
         <PathLink
           path={location.pathname}
