@@ -4,6 +4,7 @@ import { useLocation } from "react-router-dom";
 import { URL } from "../commons/Constants";
 import { getAuthorization, parseLocalJwt, splitUrl } from "../commons/Utils";
 import ManageTournamentSubmissionsTable from "./ManageTournamentSubmissionsTable";
+import _ from "lodash";
 
 function ManageTournamentSubmissions() {
   const [submissions, setSubmissions] = useState([]);
@@ -12,11 +13,10 @@ function ManageTournamentSubmissions() {
 
   const [teste, setTeste] = useState({});
 
+  const [filteredUsers, setFilteredUsers] = useState([]);
+
   const location = useLocation();
   const url = splitUrl(location.pathname);
-  console.log(url[3]);
-
-  console.log(location);
 
   useEffect(() => {
     fetchSubmissions();
@@ -30,7 +30,6 @@ function ManageTournamentSubmissions() {
       .then((res) => res.json())
       .then((data) => {
         setSubmissions(data);
-
         filterSubmissions(data);
       });
   }
@@ -55,18 +54,29 @@ function ManageTournamentSubmissions() {
       }
     });
     setFilteredData([...filtered]);
+    filterUsers(filtered);
   }
 
-  console.log(submissions);
-  console.log(teste);
+  function filterUsers(filtered) {
+    setFilteredUsers(_.groupBy(filtered, "users.username"));
+  }
+
+  console.log(filteredData);
+  console.log(filteredUsers);
+
+  function filterUser() {
+    for (let i = 0; i < filterSubmissions.length; i++) {}
+  }
 
   return (
     <div>
       {filteredData ? (
-        <ManageTournamentSubmissionsTable
-          submissions={filteredData}
-          title={url[3]}
-        />
+        <div>
+          <ManageTournamentSubmissionsTable
+            submissions={filteredData}
+            title={url[3]}
+          />
+        </div>
       ) : (
         ""
       )}
