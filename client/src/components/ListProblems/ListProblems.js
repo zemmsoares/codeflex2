@@ -21,6 +21,8 @@ function ListProblems(props) {
 
   const [problemName2, setProblemName2] = useState("");
 
+  const [leaderboard, setLeaderboard] = useState([]);
+
   const location = useLocation();
 
   const { tournamentName } = useParams();
@@ -68,7 +70,23 @@ function ListProblems(props) {
         setRegistered(false);
       }
     });
+
+    fetch(
+      URL +
+        "/api/database/Tournament/viewTournamentLeaderboard/" +
+        tournamentName,
+      {
+        headers: { ...getAuthorization() },
+      }
+    )
+      .then((res) => res.json())
+      .then((data) => setLeaderboard(data))
+      .catch((e) => {
+        console.log("error " + e);
+      });
   }
+
+  console.log(leaderboard);
 
   function fetchTournament() {
     fetch(URL + "/api/database/Tournament/viewByName/" + tournamentName, {
@@ -137,6 +155,20 @@ function ListProblems(props) {
         user={parseLocalJwt().username}
       />
       <div>
+        <div>
+          {leaderboard.length > 0 ? (
+            <div>
+              Score:
+              {leaderboard
+                .filter((users) => users.username == parseLocalJwt().username)
+                .map((filteredUsers) => {
+                  return <p>{filteredUsers.score}</p>;
+                })}
+            </div>
+          ) : (
+            <div></div>
+          )}
+        </div>
         <ProblemTable problem={filteredProblems} path={location.pathname} />
       </div>
     </div>

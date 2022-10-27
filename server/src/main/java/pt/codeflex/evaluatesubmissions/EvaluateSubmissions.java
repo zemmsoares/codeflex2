@@ -184,15 +184,10 @@ public class EvaluateSubmissions implements Runnable {
 				encodedtest = new String(Base64.getEncoder().encode(join.getBytes()));
 				System.out.println(join);
 			
-				// Create file with the code and send it to the server
-				//createFile(new String(Base64.getDecoder().decode(encodedtest)), "Solution");
 				createFile(new String(Base64.getDecoder().decode(encodedtest)), "Solution");
 				
 			}else {
-				System.out.println("ENTROU NO TERCEIRO");
 				System.out.println("TYPE: "+testCases.get(0).getDescription());
-									//String,Int
-					// Problem 4 - ESTATISTICA
 				String decoded = new String(Base64.getDecoder().decode(submission.getCode()));
 
 				String haskell_imports = "\nimport System.Environment\nimport System.IO \nimport Data.List\n\n";

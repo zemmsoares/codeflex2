@@ -1228,6 +1228,97 @@ public class DatabaseController {
 		return finalLeaderboard;
 	}
 
+
+	/*
+
+	CHANGES
+
+	*/
+
+	@GetMapping("/Tournament/viewTournamentUserScore/{tournamentName}/{username}")
+	public List<TournamentLeaderboard> viewTournamentUserScore(@PathVariable String tournamentName, @PathVariable String username) {
+
+		List<TournamentLeaderboard> finalLeaderboard = new ArrayList<>();
+
+		Tournament tournament = viewTournamentByName(tournamentName);
+
+		if (tournament == null)
+			return null;
+
+		List<TournamentLeaderboard> tournamentLeaderboard = leaderboardRepository
+				.getInformationForTournamentLeaderboard(tournament.getId());
+
+		if (tournamentLeaderboard.isEmpty())
+			return null;
+
+		//String username = tournamentLeaderboard.get(0).getUsername();
+
+		List<DateStatus> problemDurations = new ArrayList<>();
+		double totalScore = 0;
+
+System.out.println("blablablabla"+tournamentLeaderboard.size());
+
+		for (int i = 0; i < tournamentLeaderboard.size(); i++) {
+
+			TournamentLeaderboard t = tournamentLeaderboard.get(i);
+			totalScore += t.getScore();
+
+			System.out.println(t.getUsername() + " - " + t.getOpeningDate() + " -  " + t.getCompletionDate());
+
+			problemDurations.add(new DateStatus(t.getOpeningDate().getTime(), true));
+
+			DateStatus completion;
+			if (t.getCompletionDate() == null) { // user hasn't completed the problem
+				if (tournament.getEndingDate().getTime() <= Calendar.getInstance().getTimeInMillis()) {
+					// in case the tournament has ended use the tournament's ending date as
+					// completion date
+					completion = new DateStatus(tournament.getEndingDate().getTime(), false);
+				} else {
+					completion = new DateStatus(Calendar.getInstance().getTimeInMillis(), false); // the tournament is
+																									// still active, so,
+																									// use the current
+																									// date
+				}
+			} else {
+				completion = new DateStatus(t.getCompletionDate().getTime(), false);
+			}
+
+			problemDurations.add(completion);
+
+			if (i + 1 < tournamentLeaderboard.size()) {
+
+				TournamentLeaderboard t1 = tournamentLeaderboard.get(i + 1);
+
+				if (!username.equals(t1.getUsername())) {
+					long ms = DurationCalculation.calculateDuration(problemDurations);
+					t.setTotalMilliseconds(ms);
+					finalLeaderboard.add(new TournamentLeaderboard(t.getUsername(), totalScore, null, null,
+							t.getTotalMilliseconds()));
+					problemDurations = new ArrayList<>();
+					totalScore = 0;
+					username = t1.getUsername();
+				}
+			}
+
+			if (i == tournamentLeaderboard.size() - 1) { // - 1
+				long ms = DurationCalculation.calculateDuration(problemDurations);
+				t.setTotalMilliseconds(ms);
+				finalLeaderboard.add(
+						new TournamentLeaderboard(t.getUsername(), totalScore, null, null, t.getTotalMilliseconds()));
+			}
+
+		}
+
+		return finalLeaderboard;
+	}
+
+
+	/*
+
+	END CHANGED
+
+	*/
+
 	@GetMapping("/Tournament/isUserTournamentOwner/{tournamentName}/{username}")
 	public ResponseEntity<?> isUserTournamentOwner(@PathVariable String tournamentName, @PathVariable String username) {
 
