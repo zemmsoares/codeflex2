@@ -157,13 +157,15 @@ function ListProblems(props) {
       <div>
         <div>
           {leaderboard.length > 0 ? (
-            <div>
-              Score:
-              {leaderboard
-                .filter((users) => users.username == parseLocalJwt().username)
-                .map((filteredUsers) => {
-                  return <p>{filteredUsers.score}</p>;
-                })}
+            <div className="px-8 flex my-4 ">
+              <div className="bg-blue-100 rounded px-3 py-1 flex">
+                <p className="font-bold">Tournament Score:</p>
+                {leaderboard
+                  .filter((users) => users.username == parseLocalJwt().username)
+                  .map((filteredUsers) => {
+                    return <span className="pl-1">{filteredUsers.score}</span>;
+                  })}
+              </div>
             </div>
           ) : (
             <div></div>
