@@ -72,10 +72,21 @@ function ManageTournamentSubmissions() {
     <div>
       {filteredData ? (
         <div>
+          {Object.keys(filteredUsers).map((key, index) => {
+            return (
+              <ManageTournamentSubmissionsTable
+                submissions={filteredUsers[key]}
+                title={key}
+              />
+            );
+            //console.log(filteredUsers[key]);
+          })}
+          {/* 
           <ManageTournamentSubmissionsTable
             submissions={filteredData}
             title={url[3]}
-          />
+/>
+          */}
         </div>
       ) : (
         ""
