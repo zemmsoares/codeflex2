@@ -92,7 +92,9 @@ export default function ManageTournamentSubmissionsTable(props) {
                   </td>
                   <td className="py-1 px-2">
                     <span className="block text-sm">
-                      {submission.result.name}
+                      {submission.result
+                        ? submission.result.name
+                        : "Timeout Error"}
                     </span>
                   </td>
                 </tr>

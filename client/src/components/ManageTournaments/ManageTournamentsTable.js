@@ -30,26 +30,9 @@ export default function ManageTournamentsTable(props) {
             <label>
               <div className="ml-6 my-5">
                 <span className="text-gray-700 font-bold text-lg pr-8">
-                  {props.title}
+                  Tournaments
                 </span>
               </div>
-            </label>
-          </div>
-
-          <div className="justify-end ml-auto">
-            <label>
-              <span className="text-gray-700">Status: </span>
-              <span className="relative">
-                <select
-                  value={props.filter}
-                  onChange={handleChange}
-                  className="rounded mb-2 py-1 px-2 appearance-none bg-gray-200 border border-gray-200 text-gray-700 my-5 mr-6 pr-8 rounded leading-tight focus:outline-none focus:border-gray-500"
-                >
-                  <option value="all">All</option>
-                  <option value="active">Active</option>
-                  <option value="expired">Expired</option>
-                </select>
-              </span>
             </label>
           </div>
         </div>
@@ -148,7 +131,7 @@ export default function ManageTournamentsTable(props) {
                       >
                         <button
                           type="button"
-                          class=" py-1.5 px-5 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
+                          class=" py-1.5 px-4 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
                         >
                           View Problems
                         </button>
