@@ -53,7 +53,7 @@ function Problem() {
 
   //const [language, setLanguage] = useState({ mode: "java", name: "Java" });
   const [language, setLanguage] = useState({
-    language: { mode: "java", name: "Java" },
+    language: { mode: "prolog", name: "Prolog" },
   });
 
   const [theme, setTheme] = useState("github");

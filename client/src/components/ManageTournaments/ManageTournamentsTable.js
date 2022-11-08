@@ -11,16 +11,31 @@ import {
 import userAvatar from "../images/user_placeholder.png";
 
 export default function ManageTournamentsTable(props) {
+  const [filteredTournaments, setFilteredTournaments] = useState(props);
+
   function handleChange(e) {
-    props.setFilter(e.target.value);
+    console.log(e.target.value);
+
+    if (e.target.value == "closed") {
+      const result = props.tournaments.filter(
+        (t) => t.tournament.open == false
+      );
+      setFilteredTournaments(result);
+      console.log("clooooooo");
+    } else if (e.target.value == "open") {
+      const result = props.tournaments.filter((t) => t.tournament.open == true);
+      setFilteredTournaments(result);
+      console.log("opeeeeeee");
+    } else {
+      const result = props.tournaments.filter(
+        (t) => t.tournament.open == true || t.tournament.open == false
+      );
+      setFilteredTournaments(result);
+      console.log("opeeeeeee");
+    }
   }
 
-  const [redirectDestination, setRedirectDestination] = useState("");
-  const [tournaments, setTournaments] = useState("");
-
-  const location = useLocation();
-
-  console.log(props);
+  console.log(filteredTournaments);
 
   return (
     <div className=" flex justify-center mb-10">
@@ -30,9 +45,26 @@ export default function ManageTournamentsTable(props) {
             <label>
               <div className="ml-6 my-5">
                 <span className="text-gray-700 font-bold text-lg pr-8">
-                  Tournaments
+                  {props.title}
                 </span>
               </div>
+            </label>
+          </div>
+
+          <div className="justify-end ml-auto">
+            <label>
+              <span className="text-gray-700">Status: </span>
+              <span className="relative">
+                <select
+                  value={props.filter}
+                  onChange={handleChange}
+                  className="rounded mb-2 py-1 px-2 appearance-none bg-gray-200 border border-gray-200 text-gray-700 my-5 mr-6 pr-8 rounded leading-tight focus:outline-none focus:border-gray-500"
+                >
+                  <option value="all">All</option>
+                  <option value="open">Open</option>
+                  <option value="closed">Closed</option>
+                </select>
+              </span>
             </label>
           </div>
         </div>
@@ -50,96 +82,106 @@ export default function ManageTournamentsTable(props) {
               </tr>
             </thead>
             <tbody className="bg-white">
-              {props.tournaments.map((tournament) => (
-                <tr key={tournament.id} className="border-b border-gray-200">
-                  <td className="py-1 px-2">
-                    <span className="block text-sm">
-                      {tournament.tournament.id}
-                    </span>
-                  </td>
-
-                  <td className="py-1 px-2">
-                    <span className="block text-sm">
-                      {tournament.tournament.name}
-                    </span>
-                  </td>
-
-                  <td className="py-1 px-2 pr-4">
-                    {tournament.tournament.open === true ? (
-                      <span className="bg-green-200 py-1 px-2 text-xs rounded-full text-green-900">
-                        Open
+              {filteredTournaments.tournaments != undefined ? (
+                filteredTournaments.tournaments.map((tournament) => (
+                  <tr key={tournament.id} className="border-b border-gray-200">
+                    <td className="py-1 px-2">
+                      <span className="block text-sm">
+                        {tournament.tournament.id}
                       </span>
-                    ) : (
-                      <span className="bg-red-200 py-1 px-2 text-xs rounded-full text-red-900">
-                        Closed
+                    </td>
+
+                    <td className="py-1 px-2">
+                      <span className="block text-sm">
+                        {tournament.tournament.name}
                       </span>
-                    )}
-                  </td>
+                    </td>
 
-                  <td className="py-1 px-2">
-                    <span className="block text-sm">
-                      {dateWithHoursAndDay(tournament.tournament.startingDate)}
-                    </span>
-                  </td>
+                    <td className="py-1 px-2 pr-4">
+                      {tournament.tournament.open === true ? (
+                        <span className="bg-green-200 py-1 px-2 text-xs rounded-full text-green-900">
+                          Open
+                        </span>
+                      ) : (
+                        <span className="bg-red-200 py-1 px-2 text-xs rounded-full text-red-900">
+                          Closed
+                        </span>
+                      )}
+                    </td>
 
-                  <td className="py-1 px-2">
-                    <span className="block text-sm">
-                      {dateWithHoursAndDay(tournament.tournament.endingDate)}
-                    </span>
-                  </td>
+                    <td className="py-1 px-2">
+                      <span className="block text-sm">
+                        {dateWithHoursAndDay(
+                          tournament.tournament.startingDate
+                        )}
+                      </span>
+                    </td>
 
-                  <td className="py-1 px-2">
-                    <span className="block text-sm">
-                      {tournament.users.length}
-                    </span>
-                  </td>
+                    <td className="py-1 px-2">
+                      <span className="block text-sm">
+                        {dateWithHoursAndDay(tournament.tournament.endingDate)}
+                      </span>
+                    </td>
 
-                  <td className="py-1 flex items-center justify-end mr-3 ">
-                    <div className=" flex items-center justify-center max-w-fit">
-                      <Link
-                        to={{
-                          pathname:
-                            "/manage/tournaments/submissions/" +
-                            textToLowerCaseNoSpaces(tournament.tournament.name),
-                          state: {
-                            something: "example",
-                          },
-                        }}
-                      >
-                        <button
-                          type="button"
-                          class="flex justify-center items-center py-1.5 px-5 text-sm font-medium 
-                          text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200
-                           hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 
-                           dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 
-                           dark:hover:text-white dark:hover:bg-gray-700"
+                    <td className="py-1 px-2">
+                      <span className="block text-sm">
+                        {tournament.users.length}
+                      </span>
+                    </td>
+
+                    <td className="py-1 flex items-center justify-end mr-3 ">
+                      <div className=" flex items-center justify-center max-w-fit">
+                        <Link
+                          to={{
+                            pathname:
+                              "/manage/tournaments/submissions/" +
+                              textToLowerCaseNoSpaces(
+                                tournament.tournament.name
+                              ),
+                            state: {
+                              something: "example",
+                            },
+                          }}
                         >
-                          View Submissions
-                        </button>
-                      </Link>
-                    </div>
-                  </td>
+                          <button
+                            type="button"
+                            class="flex justify-center items-center py-1.5 px-5 text-sm font-medium 
+                            text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200
+                             hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 
+                             dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 
+                             dark:hover:text-white dark:hover:bg-gray-700"
+                          >
+                            View Submissions
+                          </button>
+                        </Link>
+                      </div>
+                    </td>
 
-                  <td className="py-1 pr-6 w-40">
-                    <div className="flex justify-end w-fit">
-                      <Link
-                        to={{
-                          pathname:
-                            "/manage/tournaments/" +
-                            textToLowerCaseNoSpaces(tournament.tournament.name),
-                        }}
-                      >
-                        <button
-                          type="button"
-                          class=" py-1.5 px-4 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
+                    <td className="py-1 pr-6 w-40">
+                      <div className="flex justify-end w-fit">
+                        <Link
+                          to={{
+                            pathname:
+                              "/manage/tournaments/" +
+                              textToLowerCaseNoSpaces(
+                                tournament.tournament.name
+                              ),
+                          }}
                         >
-                          View Problems
-                        </button>
-                      </Link>
-                    </div>
-                  </td>
-                </tr>
-              ))}
+                          <button
+                            type="button"
+                            class=" py-1.5 px-4 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
+                          >
+                            View Problems
+                          </button>
+                        </Link>
+                      </div>
+                    </td>
+                  </tr>
+                ))
+              ) : (
+                <div>Naonaoanoanosdndoandoadoandoa</div>
+              )}
             </tbody>
           </table>
         </div>

@@ -156,10 +156,11 @@ function ListProblems(props) {
       />
       <div>
         <div>
-          {leaderboard.length > 0 ? (
+          {splitUrl(location.pathname)[0] === "compete" ? (
             <div className="px-8 flex my-4 ">
               <div className="bg-blue-100 rounded px-3 py-1 flex">
                 <p className="font-bold">Tournament Score:</p>
+
                 {leaderboard
                   .filter((users) => users.username == parseLocalJwt().username)
                   .map((filteredUsers) => {
@@ -168,6 +169,7 @@ function ListProblems(props) {
               </div>
             </div>
           ) : (
+            // Dont render outside tournaments
             <div></div>
           )}
         </div>

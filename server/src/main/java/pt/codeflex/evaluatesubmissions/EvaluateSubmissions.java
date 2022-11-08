@@ -202,13 +202,24 @@ public class EvaluateSubmissions implements Runnable {
 				// Create file with the code and send it to the server
 				//createFile(new String(Base64.getDecoder().decode(encodedtest)), "Solution");
 				createFile(new String(Base64.getDecoder().decode(encodedtest)), "Solution");
+			
+			
 			}
 
 
 
 			
-		}else{
-
+		}else if((submission.getLanguage().getName()).equals("Prolog")){
+			System.out.println("#############################");
+			System.out.println("SUBMISSAO PROLOG");
+			System.out.println("#############################");
+			String decoded = new String(Base64.getDecoder().decode(submission.getCode()));
+			System.out.println(decoded);
+			// Create file with the code and send it to the server
+			//createFile(new String(Base64.getDecoder().decode(encodedtest)), "Solution");
+			createFile(new String(Base64.getDecoder().decode(submission.getCode())), "Solution");
+			
+		} else {
 			System.out.println("#############################");
 			System.out.println("SUBMISSAO JAVA");
 
