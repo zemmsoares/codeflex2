@@ -354,10 +354,19 @@ public class EvaluateSubmissions implements Runnable {
 				//givenTestCases++;
 			}
 
+/*
 			double score = isRight == 1
 					? ((double) submission.getProblem().getMaxScore()
 							/ ((double) totalTestCasesForProblem - (double) givenTestCases))
 					: 0;
+
+*/
+			double score = isRight == 1
+					? ((double) submission.getProblem().getMaxScore()
+							/ ((double) totalTestCasesForProblem - (double) givenTestCases))
+					: 0;
+
+			System.out.println("teste : "+submission.getProblem());
 
 			System.out.println("isRight" +isRight);
 			System.out.println("submission.getProblem().getMaxScore()" +submission.getProblem().getMaxScore());
@@ -381,6 +390,10 @@ public class EvaluateSubmissions implements Runnable {
 		List<Scoring> scoringBySubmission = scoringRepository.findAllBySubmissions(submission);
 		int amountOfTestCasesScored = scoringBySubmission.size();
 		int countCorrectScoring = 0;
+		// test
+		double testValue = 0;
+		int submissionVal = 0;
+		int subtractVal = 0;
 
 		if (amountOfTestCasesScored == totalTestCasesForProblem) {
 			double totalScore = 0;
@@ -388,7 +401,25 @@ public class EvaluateSubmissions implements Runnable {
 				if (s.getIsRight() == 1) {
 					countCorrectScoring++;
 				}
+
+//test
+				testValue = s.getValue();
+				submissionVal = db.getAllSubmissionsByUsernameAndProblemId(submission.getUsers().getUsername(),submission.getProblem().getId()).size();
+				for(int i=0;i<submissionVal;i++){
+					subtractVal = subtractVal - 10;
+				}
+				totalScore = s.getValue()-subtractVal;
+				System.out.println("totalScore :"+ totalScore);
+
+
+				/*
 				totalScore += s.getValue();
+
+				System.out.println("SCOOOOOOOOOOOOOOORE:" + submission.getUsers().getUsername());
+				System.out.println("SUBMISSIONS BY USER ID "+ db.getAllSubmissionsByUsernameAndProblemId(submission.getUsers().getUsername(),submission.getProblem().getId()).size());
+			
+			*/
+			
 			}
 
 			if (countCorrectScoring == totalTestCasesForProblem) {

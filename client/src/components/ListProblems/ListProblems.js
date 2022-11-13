@@ -12,42 +12,19 @@ import PathLink from "../PathLink/PathLink";
 import ProblemTable from "./ProblemTable";
 
 function ListProblems(props) {
-  const [registered, setRegistered] = useState(false);
-  const [problems, setProblems] = useState([]);
   const [filteredProblems, setFilteredProblems] = useState([]);
-  const [difficulties, setDifficulties] = useState([]);
-
-  const [tournament, setTournament] = useState({});
-
-  const [problemName2, setProblemName2] = useState("");
-
   const [leaderboard, setLeaderboard] = useState([]);
-
   const location = useLocation();
-
   const { tournamentName } = useParams();
-
-  //console.log("AQUI AQUI AQUI" + JSON.stringify(location.state.title));
 
   useEffect(() => {
     const url = splitUrl(location.pathname);
 
     if (url[0] === "practise") {
-      console.log("practise");
       fetchProblemsByCategory();
     } else if (url[0] === "compete") {
-      console.log("compete");
       isUserRegisteredInTournament();
     }
-    fetch(URL + "/api/database/difficulty/view", {
-      headers: {
-        ...getAuthorization(),
-      },
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        setDifficulties(data);
-      });
   }, []);
 
   function isUserRegisteredInTournament() {
@@ -62,12 +39,9 @@ function ListProblems(props) {
       }
     ).then((res) => {
       if (res.status === 200) {
-        console.log("is registered");
-        setRegistered(true);
-        fetchTournament();
         fetchProblemsByTournament();
       } else {
-        setRegistered(false);
+        //setRegistered(false);
       }
     });
 
@@ -82,25 +56,12 @@ function ListProblems(props) {
       .then((res) => res.json())
       .then((data) => setLeaderboard(data))
       .catch((e) => {
-        console.log("error " + e);
+        //console.log("error " + e);
       });
   }
 
-  console.log(leaderboard);
-
-  function fetchTournament() {
-    fetch(URL + "/api/database/Tournament/viewByName/" + tournamentName, {
-      headers: { ...getAuthorization() },
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        setTournament(data);
-        console.log(data);
-      });
-  }
   function fetchProblemsByTournament() {
     const currentTournament = splitUrl(location.pathname)[1];
-    console.log(currentTournament);
     fetch(
       URL +
         "/api/database/tournament/getAllProblemsByName/" +
@@ -115,7 +76,6 @@ function ListProblems(props) {
     )
       .then((res) => res.json())
       .then((data) => {
-        setProblems(data);
         setFilteredProblems(data);
       });
   }
@@ -140,7 +100,6 @@ function ListProblems(props) {
         if (JSON.stringify(newData) === "[]") {
           window.location.href = "/";
         } else {
-          setProblems(newData[0].problem);
           setFilteredProblems(newData[0].problem);
         }
       })
@@ -174,6 +133,7 @@ function ListProblems(props) {
           )}
         </div>
         <ProblemTable problem={filteredProblems} path={location.pathname} />
+        {console.log(filteredProblems)}
       </div>
     </div>
   );

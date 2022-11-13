@@ -52,7 +52,7 @@ export default function ManageTournamentSubmissionsTable(props) {
           <table className="table-auto bg-blue-50 text-left w-full border border-l-0 border-r-0">
             <thead>
               <tr className="border-gray-200 uppercase text-xs text-gray-700 tracking-wider">
-                <th className="p-2 pl-4">ID</th>
+                <th className="p-2 pl-4">Problem</th>
                 <th className="p-2">User</th>
                 <th className="p-2">Language</th>
                 <th className="p-2 pr-4">Date</th>
@@ -64,7 +64,9 @@ export default function ManageTournamentSubmissionsTable(props) {
               {props.submissions.map((submission) => (
                 <tr key={submission.id} className="border-b border-gray-200">
                   <td className="py-1 px-2">
-                    <span className="block text-sm">{submission.id}</span>
+                    <span className="block text-sm">
+                      {submission.problem.name}
+                    </span>
                   </td>
 
                   <td className="py-1 px-2">

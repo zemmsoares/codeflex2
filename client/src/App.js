@@ -69,7 +69,7 @@ export class App extends Component {
   render() {
     if (this.userLoggedIn()) {
       return (
-        <main class="flex">
+        <main className="flex">
           <Router>
             <div>
               <NavBar />
@@ -275,9 +275,9 @@ export class App extends Component {
       );
     } else {
       return (
-        <main class="">
+        <main>
           <Router>
-            <div className=" w-screen">
+            <div className="w-screen">
               <Routes>
                 {/*<Route exact path="/" component={PageWrapper(LandingPage)} />*/}
                 <Route path="/" element={<Login />} />
