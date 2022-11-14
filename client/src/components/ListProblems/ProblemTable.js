@@ -16,22 +16,23 @@ export default function ProblemTable(props) {
 
   // Teste
   function getProblemSubmissions(probName) {
+    let teste = 0;
+    console.log("probId" + probName);
     fetch(
       URL +
-        "/api/database/Submissions/viewByProblemNameByUsername/" +
-        probName +
-        "/" +
+        "/api/database/Submissions/viewByUserIdAndProblemId/" +
         parseLocalJwt().username +
-        {
-          headers: { ...getAuthorization() },
-        }
-    ).then((res) => {
-      if (res.status === 200) {
-        //console.log("BOA");
-      } else {
-        //console.log("merda");
+        "/" +
+        probName,
+      {
+        headers: { ...getAuthorization() },
       }
-    });
+    )
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data.length);
+      });
+    return teste;
   }
   // endTeste
 
@@ -157,10 +158,7 @@ export default function ProblemTable(props) {
             </thead>
             <tbody className="bg-white">
               {props.problem.map((problem, index) => (
-                <tr
-                  key={problem.creationDate}
-                  className="border-b border-gray-200"
-                >
+                <tr key={problem.id} className="border-b border-gray-200">
                   <td className="py-1 pl-6 ">
                     <img
                       src={userAvatar}
@@ -187,7 +185,9 @@ export default function ProblemTable(props) {
                       </span>
                     )}
                   </td>
-                  <td className="py-1 px-2 pr-4">{}</td>
+                  <td className="py-1 px-2 pr-4">
+                    {getProblemSubmissions(problem.id)}
+                  </td>
 
                   <td className="py-1 pr-6 w-64">
                     <div className=" flex justify-end">

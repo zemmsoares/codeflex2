@@ -1506,7 +1506,8 @@ System.out.println("blablablabla"+tournamentLeaderboard.size());
 						solved = true;
 					}
 				}
-				problems2.add(new Problem(p.getId(), p.getName(),p.getDescription(), p.getDifficulty(),1, solved));
+				problems2.add(new Problem(p.getId(), p.getName(),p.getDescription(), p.getTestCases(), p.getDifficulty(),1, solved));
+				//System.out.println(p.getTestCases());
 			}
 
 			//Problem(String name, String description, Difficulty difficulty, int maxScore, boolean solved)

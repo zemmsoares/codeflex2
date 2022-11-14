@@ -97,6 +97,18 @@ public class Problem {
 		this.creationDate = Calendar.getInstance().getTime();
 	}
 
+	//tc
+	public Problem(long id, String name, String description,List testCases, Difficulty difficulty, int maxScore, boolean solved) {
+		this.id = id;
+		this.name = name;
+		this.description = description;
+		this.testCases = testCases;
+		this.difficulty = difficulty;
+		this.solved = solved;
+		this.maxScore = maxScore;
+		this.creationDate = Calendar.getInstance().getTime();
+	}
+
 	public Problem(String name, String description, String inputFormat, String outputFormat, String constraints,
 			int maxScore, Users owner, Difficulty difficulty, boolean solved) {	
 		this.name = name;
