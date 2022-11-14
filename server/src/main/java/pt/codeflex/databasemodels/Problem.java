@@ -87,7 +87,8 @@ public class Problem {
 		this.creationDate = Calendar.getInstance().getTime();
 	}
 
-	public Problem(String name, String description, Difficulty difficulty, int maxScore, boolean solved) {
+	public Problem(long id, String name, String description, Difficulty difficulty, int maxScore, boolean solved) {
+		this.id = id;
 		this.name = name;
 		this.description = description;
 		this.difficulty = difficulty;
@@ -97,7 +98,7 @@ public class Problem {
 	}
 
 	public Problem(String name, String description, String inputFormat, String outputFormat, String constraints,
-			int maxScore, Users owner, Difficulty difficulty, boolean solved) {
+			int maxScore, Users owner, Difficulty difficulty, boolean solved) {	
 		this.name = name;
 		this.description = description;
 		this.inputFormat = inputFormat;
@@ -116,6 +117,7 @@ public class Problem {
 	public void setId(long id) {
 		this.id = id;
 	}
+
 
 	public String getName() {
 		return name;

@@ -1491,10 +1491,6 @@ System.out.println("blablablabla"+tournamentLeaderboard.size());
 	@GetMapping(path = "/Tournament/getAllProblemsByName/{name}/{username}")
 	public List<Problem> getAllProblemsByTournamentName(@PathVariable String name,@PathVariable String username) {
 		Tournament tournament = viewTournamentByName(name);
-		
-		System.out.println("############################################");
-		System.out.println(tournament.toString());
-		System.out.println("############################################");
 		List<Problem> problems2  = new ArrayList<>();
 
 		if (tournament != null){
@@ -1502,7 +1498,6 @@ System.out.println("blablablabla"+tournamentLeaderboard.size());
 			
 			System.out.println(problems);
 			for (Problem p : problems) {
-				System.out.println(p.getName());
 				List<Submissions> submissions = getAllSubmissionsByUsernameAndProblemId(username, p.getId());
 				boolean solved = false;
 				for (Submissions s : submissions) {
@@ -1511,8 +1506,7 @@ System.out.println("blablablabla"+tournamentLeaderboard.size());
 						solved = true;
 					}
 				}
-				problems2.add(new Problem(p.getName(),p.getDescription(), p.getDifficulty(),1, solved));
-				System.out.println(solved);
+				problems2.add(new Problem(p.getId(), p.getName(),p.getDescription(), p.getDifficulty(),1, solved));
 			}
 
 			//Problem(String name, String description, Difficulty difficulty, int maxScore, boolean solved)

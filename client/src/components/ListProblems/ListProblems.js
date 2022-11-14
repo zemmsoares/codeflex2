@@ -76,6 +76,7 @@ function ListProblems(props) {
     )
       .then((res) => res.json())
       .then((data) => {
+        console.log(data);
         setFilteredProblems(data);
       });
   }

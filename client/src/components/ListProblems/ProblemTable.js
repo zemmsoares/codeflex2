@@ -15,7 +15,24 @@ export default function ProblemTable(props) {
   }
 
   // Teste
-
+  function getProblemSubmissions(probName) {
+    fetch(
+      URL +
+        "/api/database/Submissions/viewByProblemNameByUsername/" +
+        probName +
+        "/" +
+        parseLocalJwt().username +
+        {
+          headers: { ...getAuthorization() },
+        }
+    ).then((res) => {
+      if (res.status === 200) {
+        //console.log("BOA");
+      } else {
+        //console.log("merda");
+      }
+    });
+  }
   // endTeste
 
   let title = splitUrl(props.path);
@@ -159,11 +176,6 @@ export default function ProblemTable(props) {
                       {problem.difficulty.name}
                     </span>
                   </td>
-                  {/* 
-                      <td className="py-1 px-2">{
-                        problem.owner.username
-                      }</td>
-                      */}
                   <td className="py-1 px-2 pr-4">
                     {problem.solved === true ? (
                       <span className="bg-green-200 py-1 px-2 text-xs rounded-full text-green-900">

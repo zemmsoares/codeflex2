@@ -22,7 +22,7 @@ function ManageProblems() {
 
   const [filteredData, setFilteredData] = useState();
 
-  const childRef = useRef();
+  //const childRef = useRef();
 
   useEffect(() => {
     if (parseLocalJwt().role != "CONTENT_MANAGER") {
@@ -53,8 +53,6 @@ function ManageProblems() {
   function fetchProblems() {
     const url = splitUrl(location.pathname);
 
-    console.log("#############################################");
-    console.log(url[2]);
     let origin = "";
     if (url[0] === "manage") {
       if (url[1] === "tournaments") {
@@ -68,8 +66,6 @@ function ManageProblems() {
       setOrigin("tournament");
       origin = "tournament";
     }
-
-    console.log(parseLocalJwt().username);
 
     if (origin === "tournament") {
       fetchAllProblemsByTournamentName(url[2]);
@@ -100,6 +96,7 @@ function ManageProblems() {
         .then((res) => res.json())
         .then((data) => {
           setProblems(data);
+          console.log(data);
         });
     }
   }
@@ -192,7 +189,7 @@ function ManageProblems() {
                 <ManageProblemsTable
                   problem={problems}
                   path={location.pathname}
-                  ref={childRef}
+                  // ref={childRef}
                 />
                 {/* 
                                 <ReactTable
@@ -256,7 +253,7 @@ function ManageProblems() {
                   <div className="pl-8">
                     <button
                       type="button"
-                      class="ml-auto m-2 py-1.5 px-8 mr-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
+                      className="ml-auto m-2 py-1.5 px-8 mr-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
                     >
                       Create new problem!
                     </button>
@@ -269,7 +266,7 @@ function ManageProblems() {
                 <Link to={location.pathname + "/add"}>
                   <button
                     type="button"
-                    class="ml-auto m-2 py-1.5 px-8 mr-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
+                    className="ml-auto m-2 py-1.5 px-8 mr-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
                   >
                     Create new problem!
                   </button>

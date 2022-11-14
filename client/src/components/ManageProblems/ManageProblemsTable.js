@@ -11,8 +11,6 @@ export default function ManageProblemsTable(props) {
 
   const location = useLocation();
 
-  console.log(props);
-
   function deleteProblem(problem) {
     fetch(
       URL +
@@ -24,7 +22,7 @@ export default function ManageProblemsTable(props) {
       }
     )
       .then(() => {
-        console.log("Problem deleted");
+        //console.log("Problem deleted");
       })
       .catch((error) => console.log(error));
   }
@@ -68,13 +66,16 @@ export default function ManageProblemsTable(props) {
                 <th className="p-2 pl-4" />
                 <th className="p-2">Id</th>
                 <th className="p-2">Difficulty</th>
-                <th className="p-2 pr-4">Owner</th>
                 <th className="p-2 pr-4">Test Cases</th>
+                <th className="p-2 pr-4"></th>
               </tr>
             </thead>
             <tbody className="bg-white">
               {props.problem.map((problem) => (
-                <tr key={problem.id} className="border-b border-gray-200">
+                <tr
+                  key={problem.creationDate}
+                  className="border-b border-gray-200"
+                >
                   <td className="py-1 px-2">
                     <span className="bg-green-200 py-1 px-2 text-xs rounded-full text-green-900">
                       {problem.id}
@@ -92,6 +93,7 @@ export default function ManageProblemsTable(props) {
                   <td className="py-1 px-2 pr-4">
                     <span className="bg-red-200 py-1 px-2 text-xs rounded-full text-red-900">
                       {problem.testCases.length}
+
                       <Link
                         to={
                           location.pathname +
@@ -109,9 +111,6 @@ export default function ManageProblemsTable(props) {
 
                   <td className="py-1 pr-6 w-64">
                     <div className=" flex justify-end">
-                      <div></div>
-                      {console.log(location)}
-
                       <Link
                         to={{
                           pathname: "",
@@ -123,7 +122,7 @@ export default function ManageProblemsTable(props) {
                       >
                         <button
                           type="button"
-                          class=" py-1.5 px-5 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
+                          className=" py-1.5 px-5 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
                         >
                           View
                         </button>
@@ -139,7 +138,7 @@ export default function ManageProblemsTable(props) {
                       >
                         <button
                           type="button"
-                          class="mx-2 py-1.5 px-5 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
+                          className="mx-2 py-1.5 px-5 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
                         >
                           Edit
                         </button>
@@ -148,7 +147,7 @@ export default function ManageProblemsTable(props) {
                       <button
                         onClick={() => deleteProblem(problem)}
                         type="button"
-                        class=" py-1.5 px-5 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
+                        className=" py-1.5 px-5 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
                       >
                         Delete
                       </button>
