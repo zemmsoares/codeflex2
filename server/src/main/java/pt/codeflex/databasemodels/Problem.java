@@ -51,6 +51,8 @@ public class Problem {
 
 	private boolean solved;
 
+	private int sublength;
+
 	@ManyToOne
 	@NotFound(action = NotFoundAction.IGNORE)
 	private Tournament tournament;
@@ -98,13 +100,14 @@ public class Problem {
 	}
 
 	//tc
-	public Problem(long id, String name, String description,List testCases, Difficulty difficulty, int maxScore, boolean solved) {
+	public Problem(long id, String name, String description,List testCases, Difficulty difficulty, int maxScore, boolean solved, int sublength) {
 		this.id = id;
 		this.name = name;
 		this.description = description;
 		this.testCases = testCases;
 		this.difficulty = difficulty;
 		this.solved = solved;
+		this.sublength = sublength;
 		this.maxScore = maxScore;
 		this.creationDate = Calendar.getInstance().getTime();
 	}
@@ -171,6 +174,16 @@ public class Problem {
 		this.solved = solved;
 	}
 
+
+	public int getSublength() {
+		return sublength;
+	}
+
+	public void setSublength(int sublength) {
+		this.sublength = sublength;
+	}
+
+
 	public int getMaxScore() {
 		return maxScore;
 	}
@@ -232,7 +245,7 @@ public class Problem {
 		return "Problem [id=" + id + ", name=" + name + ", description=" + description + ", inputFormat=" + inputFormat
 				+ ", outputFormat=" + outputFormat + ", constraints=" + constraints + ", creationDate=" + creationDate
 				+ ", maxScore=" + maxScore + ", tournament=" + tournament + ", owner=" + owner + ", testCases="
-				+ testCases + ", difficulty=" + difficulty+ ", solved=" + solved + "]";
+				+ testCases + ", difficulty=" + difficulty+ ", solved=" + solved + ", sublength="+ sublength + "]";
 	}
 
 }

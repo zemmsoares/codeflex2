@@ -63,7 +63,10 @@ export default function ProblemTable(props) {
         </Link>
       );
     } else {
-      if (props.problem[index - 1].solved === true) {
+      if (
+        props.problem[index - 1].solved === true ||
+        props.problem[index - 1].sublength > 4
+      ) {
         return (
           <Link
             to={{
@@ -153,7 +156,12 @@ export default function ProblemTable(props) {
                 <th className="p-2">Difficulty</th>
                 {/* <th className="p-2 pr-4">Owner</th>*/}
                 <th className="p-2 pr-4">Status</th>
-                <th className="p-2 pr-4">SubCOunt</th>
+
+                {url[0] == "compete" ? (
+                  <th className="p-2 pr-4">Submissions</th>
+                ) : (
+                  <th></th>
+                )}
               </tr>
             </thead>
             <tbody className="bg-white">
@@ -185,9 +193,7 @@ export default function ProblemTable(props) {
                       </span>
                     )}
                   </td>
-                  <td className="py-1 px-2 pr-4">
-                    {getProblemSubmissions(problem.id)}
-                  </td>
+                  <td className="py-1 px-2 pr-4">{problem.sublength}</td>
 
                   <td className="py-1 pr-6 w-64">
                     <div className=" flex justify-end">

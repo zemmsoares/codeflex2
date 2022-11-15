@@ -1496,17 +1496,22 @@ System.out.println("blablablabla"+tournamentLeaderboard.size());
 		if (tournament != null){
 			List<Problem> problems = problemRepository.findAllByTournament(tournament);
 			
-			System.out.println(problems);
+			
 			for (Problem p : problems) {
 				List<Submissions> submissions = getAllSubmissionsByUsernameAndProblemId(username, p.getId());
+				
 				boolean solved = false;
+
 				for (Submissions s : submissions) {
 					Result result = s.getResult();
 					if (result != null && result.getName().equals("Correct")) {
 						solved = true;
 					}
+					
 				}
-				problems2.add(new Problem(p.getId(), p.getName(),p.getDescription(), p.getTestCases(), p.getDifficulty(),1, solved));
+				
+				
+				problems2.add(new Problem(p.getId(), p.getName(),p.getDescription(), p.getTestCases(), p.getDifficulty(),1, solved, submissions.size()));
 				//System.out.println(p.getTestCases());
 			}
 
@@ -1515,6 +1520,7 @@ System.out.println("blablablabla"+tournamentLeaderboard.size());
 		return problems2;
 		
 	}
+
 
 	// not sure if this should be here
 	@PostMapping(path = "/Tournament/registerUser")

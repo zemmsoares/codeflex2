@@ -49,6 +49,8 @@ function Problem() {
   const [result, setResult] = useState([]);
   const [error, setError] = useState("");
 
+  const [subSize, setSubSize] = useState();
+
   const [scriptLoaded, setScriptLoaded] = useState(false);
 
   //const [language, setLanguage] = useState({ mode: "java", name: "Java" });
@@ -64,6 +66,23 @@ function Problem() {
   const navigate = useNavigate();
 
   const mounted = useRef();
+
+  useEffect(() => {
+    fetch(
+      URL +
+        "/api/database/Submissions/viewByProblemNameByUsername/" +
+        problemName +
+        "/" +
+        parseLocalJwt().username,
+      {
+        headers: { ...getAuthorization() },
+      }
+    )
+      .then((res) => res.json())
+      .then((data) => {
+        setSubSize(data.length);
+      });
+  }, [result]);
 
   useEffect(() => {
     let url = splitUrl(location.pathname);
@@ -174,6 +193,8 @@ function Problem() {
   }
 
   function submitSubmission() {
+    ////////////
+
     setSubmitting(true);
     setResult([]);
     setError("");
@@ -243,11 +264,6 @@ function Problem() {
           return;
         }
 
-        console.log("data.length :" + data.length);
-        console.log(
-          "data[0].submissions.result :" + data[0].submissions.result
-        );
-
         if (data.length > 0 && data[0].submissions.result != null) {
           /* TODO : corrigir este corner case
                         caso a solução seja válida e faça 
@@ -284,7 +300,7 @@ function Problem() {
 
             clearInterval(window.resultsListener);
           } else if (name === "Runtime Error") {
-            console.log("Runtime Error");
+            //console.log("Runtime Error");
           } else {
             setLoaded(true);
           }
@@ -436,7 +452,7 @@ function Problem() {
             <AceEditor
               style={aceStyle}
               mode={language.mode}
-              theme={theme}
+              //theme={theme}
               name=""
               onChange={onAceChange}
               fontSize={14}
@@ -480,12 +496,22 @@ function Problem() {
             )}
           </div>
           <div className="ml-auto justify-end py-4">
-            <input
-              type="submit"
-              className="m-2 py-1.5 px-5 mr-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
-              value="Submit your code!"
-              onClick={submitSubmission}
-            />
+            <p>Submissions count : {subSize}</p>
+            {subSize < 5 ? (
+              <input
+                type="submit"
+                className="m-2 py-1.5 px-5 mr-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
+                value="Submit your code!"
+                onClick={submitSubmission}
+              />
+            ) : (
+              <input
+                type="submit"
+                className="m-2 py-1.5 px-5 mr-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
+                value="No submissions left"
+                onClick={console.log("no more submissions")}
+              />
+            )}
           </div>
         </div>
       );
@@ -654,8 +680,7 @@ function Problem() {
                         letterSpacing: "1px",
                       }}
                     />
-                    {console.log("loaded: " + loaded)}
-                    {console.log("error: " + error)}
+
                     {loaded
                       ? navigate(location.pathname + "/view-results", {
                           state: { information: scoringResults },
