@@ -360,7 +360,15 @@ public class EvaluateSubmissions implements Runnable {
 							/ ((double) totalTestCasesForProblem - (double) givenTestCases))
 					: 0;
 
-*/
+					
+
+*/			System.out.println("SCOOOOOOOOOOOOOOORE:" + submission.getUsers().getUsername());
+			System.out.println("SUBMISSIONS BY USER ID "+ db.getAllSubmissionsByUsernameAndProblemId(submission.getUsers().getUsername(),submission.getProblem().getId()).size());
+			
+			
+
+
+
 			double score = isRight == 1
 					? ((double) submission.getProblem().getMaxScore()
 							/ ((double) totalTestCasesForProblem - (double) givenTestCases))
@@ -390,10 +398,6 @@ public class EvaluateSubmissions implements Runnable {
 		List<Scoring> scoringBySubmission = scoringRepository.findAllBySubmissions(submission);
 		int amountOfTestCasesScored = scoringBySubmission.size();
 		int countCorrectScoring = 0;
-		// test
-		double testValue = 0;
-		int submissionVal = 0;
-		int subtractVal = 0;
 
 		if (amountOfTestCasesScored == totalTestCasesForProblem) {
 			double totalScore = 0;
@@ -402,28 +406,26 @@ public class EvaluateSubmissions implements Runnable {
 					countCorrectScoring++;
 				}
 
-//test
-				testValue = s.getValue();
-				submissionVal = db.getAllSubmissionsByUsernameAndProblemId(submission.getUsers().getUsername(),submission.getProblem().getId()).size();
-				for(int i=0;i<submissionVal;i++){
-					subtractVal = subtractVal - 10;
-				}
-				totalScore = s.getValue()-subtractVal;
-				System.out.println("totalScore :"+ totalScore);
 
 
-				/*
 				totalScore += s.getValue();
 
-				System.out.println("SCOOOOOOOOOOOOOOORE:" + submission.getUsers().getUsername());
-				System.out.println("SUBMISSIONS BY USER ID "+ db.getAllSubmissionsByUsernameAndProblemId(submission.getUsers().getUsername(),submission.getProblem().getId()).size());
 			
-			*/
+				
+			
 			
 			}
 
 			if (countCorrectScoring == totalTestCasesForProblem) {
 				submission.setResult(resultRepository.findByName("Correct"));
+
+
+int tries = db.getAllSubmissionsByUsernameAndProblemId(submission.getUsers().getUsername(),submission.getProblem().getId()).size();
+			System.out.println(tries);
+
+			for(int i=0; i<tries;i++){
+				totalScore = totalScore -10;
+			}
 
 				// Updates the completion date in order to calculate how much time a user took
 				// to solve the problem

@@ -237,6 +237,7 @@ function Problem() {
           JSON.stringify(data) !== "[]" &&
           teste.problem.testCases.length === data.length
         ) {
+          console.log(data);
           setSubmitting(false);
           setScoringResults(data);
           setWaitingForResults(false);
