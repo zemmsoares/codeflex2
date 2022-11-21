@@ -128,7 +128,7 @@ function ManageContent() {
                   </div>
 
                   <br></br>
-                  <h3 className="font-semibold text-2xl">New Stuff</h3>
+                  <h3 className="font-semibold text-2xl">Plag check</h3>
                   <br></br>
                   <p>
                     Manage the list of problems and to which category they
