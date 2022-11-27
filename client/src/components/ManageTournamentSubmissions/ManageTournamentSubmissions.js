@@ -69,6 +69,30 @@ function ManageTournamentSubmissions() {
   }
 
   function plagCheck() {
+    /*
+    fetch("", {
+      method: "POST",
+      body: JSON.stringify(filteredUsers),
+      headers: new Headers({
+        ...getAuthorization(),
+        "Content-Type": "application/json",
+      }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+      });
+      */
+
+    fetch("http://localhost:3001/data", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(filteredUsers),
+    });
+
+    /*
     var dataStr =
       "data:text/json;charset=utf-8," +
       encodeURIComponent(JSON.stringify(filteredUsers));
@@ -81,6 +105,7 @@ function ManageTournamentSubmissions() {
     document.body.appendChild(downloadAnchorNode); // required for firefox
     downloadAnchorNode.click();
     downloadAnchorNode.remove();
+    */
   }
 
   return (
