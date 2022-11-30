@@ -213,11 +213,49 @@ public class EvaluateSubmissions implements Runnable {
 			System.out.println("#############################");
 			System.out.println("SUBMISSAO PROLOG");
 			System.out.println("#############################");
+			String encodedtest = "";
+			List<TestCases> testCases = submission.getProblem().getTestCases();
+			/*
 			String decoded = new String(Base64.getDecoder().decode(submission.getCode()));
 			System.out.println(decoded);
 			// Create file with the code and send it to the server
 			//createFile(new String(Base64.getDecoder().decode(encodedtest)), "Solution");
 			createFile(new String(Base64.getDecoder().decode(submission.getCode())), "Solution");
+*/
+
+
+
+				System.out.println("TYPE: "+testCases.get(0).getInput());
+				// Problema 3 – Dia de Natal
+				String decoded = new String(Base64.getDecoder().decode(submission.getCode()));
+
+/*
+				String haskell_imports = "\nimport System.Environment\nimport System.IO \nimport Data.List\n\n";
+				String hask_main_method = "\n\nmain :: IO()\nmain = do";
+				String s3 = "\nargs <- getArgs\ncontents <- readFile (head args)\nlet value = read contents::Int\nproblem(value)\n";
+				String hask_main_content = s3.replaceAll("(?m)^", "\t");
+*/
+/*
+				String driver = "print_query_true(Q) :-";
+				String driver2 = "    forall(Q, writeln(true:Q)).";
+				String driver3 = "print_query_false(Q) :-";
+				String driver4 = "forall(\\+ Q, writeln(false:Q)).";
+				String driver5 = "run_opt(1) :-";
+				String driver6 = "    print_query_true(problema4(12, L)),";
+				String driver7 = "    print_query_false(problema4(12, L)),";
+				String driver8 = "    halt.";
+				String driver9 = "main :-";
+				String driver10 = "run_opt(1), main.";
+*/
+				String prolog_driver = "\n\nprint_query_true(Q) :-\n    forall(Q, writeln(true:Q)).\nprint_query_false(Q) :-\nforall(\\+ Q, writeln(false:Q)).\nrun_opt(1) :-\n    print_query_true("+testCases.get(0).getInput()+"),\n    print_query_false("+testCases.get(0).getInput()+"),\n    halt.\nmain :-\nrun_opt(1), main.";
+
+				//String join = driver + driver2 + driver3 + driver4 + driver5 + driver6 + driver7 + driver8 + driver9 + driver10 + decoded ;
+				String join = decoded + prolog_driver;
+				encodedtest = new String(Base64.getEncoder().encode(join.getBytes()));
+				System.out.println(join);
+			
+				createFile(new String(Base64.getDecoder().decode(encodedtest)), "Solution");
+
 			
 		} else {
 			System.out.println("#############################");

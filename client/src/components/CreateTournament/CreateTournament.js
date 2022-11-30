@@ -372,29 +372,26 @@ function CreateTournament() {
                 />
               </div>
             </div>
-            {location2 === "compete" ? (
-              <div className="form-group">
-                <label for="tournamentName" className="col-sm-1 control-label">
-                  <span className="text-sm text-gray-400">Code</span>
-                </label>
-                <div className="col-sm-5">
-                  <input
-                    type="code"
-                    className="form-control bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 mr-5"
-                    id="privateCode"
-                    onChange={(e) => setPrivateCode(e.target.value)}
-                    value={privateCode}
-                    placeholder="Private code"
-                  />
-                  <small className="fill-info">
-                    Add a private code that you can share with your friends to
-                    register on the tournament
-                  </small>
-                </div>
+            <div className="form-group">
+              <label for="tournamentName" className="col-sm-1 control-label">
+                <span className="text-sm text-gray-400">Code</span>
+              </label>
+              <div className="col-sm-5">
+                <input
+                  type="code"
+                  className="form-control bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 mr-5"
+                  id="privateCode"
+                  onChange={(e) => setPrivateCode(e.target.value)}
+                  value={privateCode}
+                  placeholder="Private code"
+                />
+                <small className="fill-info">
+                  Add a private code that you can share with your friends to
+                  register on the tournament
+                </small>
               </div>
-            ) : (
-              ""
-            )}
+            </div>
+
             <div className="form-group">
               <div
                 className="col-sm-offset-1 col-sm-11 col-xs-12 col-md-12"

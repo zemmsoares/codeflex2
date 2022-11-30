@@ -63,7 +63,8 @@ public class CommandGeneration {
 		//	break;
 		case "Prolog":
 			//command += "swipl -s " + CLASS_FILE_NAME + " -g '"+prologExec+"' -t halt. 2> " + compilerError;
-			command += "swipl -q -g '" + prologExec + "' --stand_alone=true -o Solution -c "+ CLASS_FILE_NAME +".pl 2> " + compilerError;
+			//command += "swipl -q -g '" + prologExec + "' --stand_alone=true -o Solution -c "+ CLASS_FILE_NAME +".pl 2> " + compilerError;
+			command += "swipl --goal=main --stand_alone=true -q -o "+CLASS_FILE_NAME+" -c "+ CLASS_FILE_NAME +".pl 2> " + compilerError;
 			suffix = ".pl";
 			System.out.println(command);
 			break;
