@@ -12,6 +12,18 @@ services:
     #networks:
     #  - network_backend
 
+  plagiarism:
+    build: ./plagiarism
+    ports:
+      - 8082:8082
+    tty: true
+    networks:
+      network_backend:
+        ipv4_address: 10.5.0.5
+    # Production:
+    #networks:
+    #  - network_backend
+
   server:
     image: maven:3.6.3-jdk-8
     command: mvn spring-boot:run

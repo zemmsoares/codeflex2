@@ -71,7 +71,7 @@ function ManageTournamentSubmissions() {
   }
 
   function plagCheck() {
-    fetch("http://localhost:3001/data", {
+    fetch("http://10.5.0.5:8082/data", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -81,7 +81,7 @@ function ManageTournamentSubmissions() {
   }
 
   function checkResults() {
-    fetch("http://localhost:3001/test", {
+    fetch("http://10.5.0.5:8082/test", {
       headers: {
         "Content-Type": "application/json",
       },
@@ -89,7 +89,7 @@ function ManageTournamentSubmissions() {
       .then((res) => res.json())
       .then((data) => {
         setPlagResults(data);
-        console.log(plagResults);
+        console.log("plagREsults" + plagResults);
       });
   }
 

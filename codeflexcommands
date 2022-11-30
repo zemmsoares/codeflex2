@@ -1,0 +1,28 @@
+swipl -s 001.pl -g 'likes(john,food)' -t halt. 2> compilerError.txt
+
+**studentcode.pl** (on docker)
+
+    :- initialization main.
+
+    main :-
+      current_prolog_flag(argv, Argv),
+      format('Hello World, argv:~w\n', [Argv]),
+      halt(0).
+
+:-style_check(-singleton).
+
+size([],0).
+size([H|T],N) :- size(T,N1), N is N1+1,
+
+print(N).
+
+// done
+swipl -s 002.pl -g "size([1,2,an,test],N)" -t halt. 2> stderr.txt > output.txt
+
+- Refazer frontend / alterar classes para componentes funcionais
+- Adicionar funcionalidades aos Torneios
+- Possibilitar a compilação de código Haskell
+- Possibilitar a compilação de código Prolog
+- Extensão da ferramenta SIM para a linguagem Prolog.
+- Serviço que permite comparar as submissões para detecção de submissões semelhantes.
+- (Todo?) Criar wiki como how-to para futuras funcionalidades.

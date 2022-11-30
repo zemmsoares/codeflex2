@@ -153,7 +153,6 @@ public class EvaluateSubmissions implements Runnable {
 			//System.out.println("AUSHUAHSUASHUAHUSHAHA "+testCases.get(0).getInput());
 			System.out.println("AUSHUAHSUASHUAHUSHAHA2 "+testCases.get(0).getDescription());
 
-		
 
 			if(testCases.get(0).getDescription().equals("Int,Int")){
 				System.out.println("ENTROU NO PRIMEIRO");
@@ -216,12 +215,10 @@ public class EvaluateSubmissions implements Runnable {
 			String encodedtest = "";
 			List<TestCases> testCases = submission.getProblem().getTestCases();
 
-
 				System.out.println("TYPE: "+testCases.get(0).getInput());
 				String decoded = new String(Base64.getDecoder().decode(submission.getCode()));
 
 				String prolog_driver_header = ":-style_check(-singleton).\n\n";				
-				//String prolog_driver = "\n\nprint_query_true(Q) :-\n    forall(Q, writeln(true:Q)).\nprint_query_false(Q) :-\nforall(\\+ Q, writeln(false:Q)).\nrun_opt(1) :-\n    print_query_true("+testCases.get(0).getInput()+"),\n    print_query_false("+testCases.get(0).getInput()+"),\n    halt.\nmain :-\nrun_opt(1), main.";
 				String prolog_driver = "\nprint_status(F) :-\n    (F)	-> write('true')\n    ;(\\+F) -> write('false').\n\nmain :- \n    print_status("+testCases.get(0).getInput()+"),\n    halt.\n";
 
 				String join = prolog_driver_header + decoded + prolog_driver;
