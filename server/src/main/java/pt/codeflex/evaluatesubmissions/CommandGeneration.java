@@ -27,43 +27,26 @@ public class CommandGeneration {
 				+ " && ";
 		String suffix = "";
 		String compilerError = COMPILER_ERROR;
-		
-		String prologExec = "";
-
-		
-
-		if(submission.getLanguage().getName().equals("Prolog")){
-			List<TestCases> testCases = submission.getProblem().getTestCases();
-			//System.out.println("AUSHUAHSUASHUAHUSHAHA "+testCases.get(0).getInput());
-			System.out.println("PROLOG DESC "+testCases.get(0).getDescription());
-			prologExec = testCases.get(0).getDescription();
-		}
-		
-
-		// TODO : add memory limit
-		// TODO : load compiler commands from files ?!
 
 		switch (submission.getLanguage().getCompilerName()) {
 		case "Java 8":
 			command += "javac " + CLASS_FILE_NAME + ".java 2> " + compilerError;
 			suffix = ".java";
 			break;
-		//case "C++11 (gcc 5.4.0)":
-		//	command += "g++ -std=c++11 -o " + CLASS_FILE_NAME + "_exec_" + uniqueId + " " + CLASS_FILE_NAME + ".cpp 2> "
-		//			+ compilerError;
-		//	suffix = ".cpp";
-		//	break;
-		//case "Python 2.7":
-		//	// TODO : get a compiler for python
-		//	break;
-		//case "C# (mono 4.2.1)":
-		//	command += "mcs -out:" + CLASS_FILE_NAME + "_exec_" + uniqueId + " " + CLASS_FILE_NAME + ".cs 2> "
-		//			+ compilerError;
-		//	suffix = ".cs";
-		//	break;
+		case "C++11 (gcc 5.4.0)":
+			command += "g++ -std=c++11 -o " + CLASS_FILE_NAME + "_exec_" + uniqueId + " " + CLASS_FILE_NAME + ".cpp 2> "
+					+ compilerError;
+			suffix = ".cpp";
+			break;
+		case "Python 2.7":
+			// TODO : get a compiler for python
+			break;
+		case "C# (mono 4.2.1)":
+			command += "mcs -out:" + CLASS_FILE_NAME + "_exec_" + uniqueId + " " + CLASS_FILE_NAME + ".cs 2> "
+					+ compilerError;
+			suffix = ".cs";
+			break;
 		case "Prolog":
-			//command += "swipl -s " + CLASS_FILE_NAME + " -g '"+prologExec+"' -t halt. 2> " + compilerError;
-			//command += "swipl -q -g '" + prologExec + "' --stand_alone=true -o Solution -c "+ CLASS_FILE_NAME +".pl 2> " + compilerError;
 			command += "swipl --goal=main --stand_alone=true -q -o "+CLASS_FILE_NAME+" -c "+ CLASS_FILE_NAME +".pl 2> " + compilerError;
 			suffix = ".pl";
 			System.out.println(command);
@@ -103,16 +86,10 @@ public class CommandGeneration {
 		case "C# (mono 4.2.1)":
 			command += "timeout 3 ./" + CLASS_FILE_NAME + "_exec_" + uniqueId + " 2> " + RUN_ERROR + " > " + runOutput;
 			break;
-			/*
-		case "Prolog":
-			command += "timeout 3s swipl " + CLASS_FILE_NAME + " 2> " + RUN_ERROR + " > " + runOutput;
-			break;
-			*/
 		case "Prolog":
 			command += "timeout 3s ./" + CLASS_FILE_NAME + " 2> " + RUN_ERROR + " > " + runOutput;
 			System.out.println(command);
 			break;
-
 		case "Haskell":
 			command += "timeout 3s ./" + CLASS_FILE_NAME + " ./"+uniqueId+"_Haskell/"+testCase.getId()+ " 2> " + RUN_ERROR + " > " + runOutput;
 			break;
