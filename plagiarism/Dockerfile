@@ -1,4 +1,7 @@
-FROM node:16
+
+FROM frolvlad/alpine-glibc
+
+RUN apk add --update nodejs npm
 
 WORKDIR /usr/src/app
 COPY package*.json ./
