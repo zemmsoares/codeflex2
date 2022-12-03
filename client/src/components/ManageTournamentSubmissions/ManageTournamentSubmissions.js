@@ -5,6 +5,7 @@ import { URL } from "../commons/Constants";
 import { getAuthorization, parseLocalJwt, splitUrl } from "../commons/Utils";
 import ManageTournamentSubmissionsTable from "./ManageTournamentSubmissionsTable";
 import _ from "lodash";
+import Modal from "./Modal.js";
 
 function ManageTournamentSubmissions() {
   const [submissions, setSubmissions] = useState([]);
@@ -16,6 +17,7 @@ function ManageTournamentSubmissions() {
   const [filteredUsers, setFilteredUsers] = useState([]);
 
   const [plagResults, setPlagResults] = useState([]);
+  const [plagModal, setPlagModal] = useState(false);
 
   const location = useLocation();
   const url = splitUrl(location.pathname);
@@ -80,7 +82,18 @@ function ManageTournamentSubmissions() {
     });
   }
 
+  function showModal() {
+    //this.setState({ show: true });
+    setPlagModal(true);
+  }
+
+  function hideModal() {
+    //this.setState({ show: false });
+    setPlagModal(false);
+  }
+
   function checkResults() {
+    showModal();
     fetch("http://10.5.0.5:8082/test", {
       headers: {
         "Content-Type": "application/json",
@@ -89,12 +102,21 @@ function ManageTournamentSubmissions() {
       .then((res) => res.json())
       .then((data) => {
         setPlagResults(data);
-        console.log("plagREsults" + plagResults);
+
+        //console.log("plagREsults" + plagResults);
+        /*
+        setPlagResults([
+          ...new Map(data.map((item) => [item["problem"], item])).values(),
+        ]);
+        */
       });
   }
 
   return (
     <div>
+      <Modal show={plagModal} handleClose={hideModal} data={plagResults}>
+        <p>Modal</p>
+      </Modal>
       <input
         type="submit"
         className="mt-8 ml-8 py-1.5 px-5 mr-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"

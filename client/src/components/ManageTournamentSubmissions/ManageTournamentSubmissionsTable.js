@@ -14,7 +14,7 @@ export default function ManageTournamentSubmissionsTable(props) {
     props.setFilter(e.target.value);
   }
 
-  console.log(props);
+  //console.log(props);
 
   return (
     <div className=" flex justify-center mb-10 px-8 mt-8">

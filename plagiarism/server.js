@@ -152,9 +152,11 @@ function make_tests(array3) {
           //stddout
           //console.log("Problem " + array3[problems].problem + ":");
           console.log(`${stdout}`);
+          //console.log()
 
           let stdoutR = {
             problem: array3[problems].problem,
+            //stdout: `${stdout}`,
             stdout: `${stdout}`,
           };
           resultado.push(stdoutR);
