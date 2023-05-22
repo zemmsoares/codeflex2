@@ -69,11 +69,11 @@ function ManageTournamentSubmissions() {
   //console.log(filteredUsers);
 
   function filterUser() {
-    for (let i = 0; i < filterSubmissions.length; i++) {}
+    for (let i = 0; i < filterSubmissions.length; i++) { }
   }
 
   function plagCheck() {
-    fetch("http://10.5.0.5:8082/data", {
+    fetch("http://plagiarism:8082/data", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -94,7 +94,7 @@ function ManageTournamentSubmissions() {
 
   function checkResults() {
     showModal();
-    fetch("http://10.5.0.5:8082/test", {
+    fetch("http://plagiarism:8082/test", {
       headers: {
         "Content-Type": "application/json",
       },

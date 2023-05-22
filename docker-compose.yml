@@ -9,7 +9,7 @@ services:
       - /usr/src/app/node_modules
     networks:
       network_backend:
-        ipv4_address: 10.5.0.6
+
 
   executor:
     build: ./executor
@@ -18,10 +18,7 @@ services:
     tty: true
     networks:
       network_backend:
-        ipv4_address: 10.5.0.4
-    # Production:
-    #networks:
-    #  - network_backend
+
 
   plagiarism:
     build: ./plagiarism
@@ -30,10 +27,7 @@ services:
     tty: true
     networks:
       network_backend:
-        ipv4_address: 10.5.0.5
-    # Production:
-    #networks:
-    #  - network_backend
+
 
   server:
     image: maven:3.6.3-jdk-8
@@ -42,14 +36,10 @@ services:
       - 8080:8080
     volumes:
       - ./server:/usr/src/mymaven:rw
-      #- ./server:/root/Submissions
     working_dir: /usr/src/mymaven
     networks:
       network_backend:
-        ipv4_address: 10.5.0.3
-    # Production:
-    #networks:
-    #  - network_backend
+
 
   database:
     image: mysql:5.7.31
@@ -65,19 +55,8 @@ services:
     command: mysqld --sql_mode="STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION"
     networks:
       network_backend:
-        ipv4_address: 10.5.0.2
-    # Production
-    #networks:
-    #  - network_backend
+
 
 networks:
   network_backend:
     driver: bridge
-    ipam:
-      config:
-        - subnet: 10.5.0.0/16
-          gateway: 10.5.0.1
-# Production
-#networks:
-#  network_backend:
-#    driver: "bridge"
