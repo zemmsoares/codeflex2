@@ -7,7 +7,7 @@ export default function UserTable(props) {
   }
 
   return (
-    <div className="px-8 flex justify-cente ">
+    <div className="px-8 flex justify-center">
       <div className="inline-block w-full">
         <div className="flex justify-center">
           <table className="table-auto bg-gray-200 shadow-lg rounded text-left w-full">
