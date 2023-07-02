@@ -2,6 +2,9 @@ import React from "react";
 import userAvatar from "../images/user_placeholder.png";
 
 export default function UserTable(props) {
+  function handleChange(e) {
+    props.setFilter(e.target.value);
+  }
 
   return (
     <div className="px-8 flex justify-center">
